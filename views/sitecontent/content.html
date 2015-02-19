@@ -1,0 +1,8 @@
+<div class="page page-table">
+
+  <section class="panel panel-default table-dynamic" ng-controller="TablesCtrl" ng-init="setTableName('content'); setContent(); setAllProperties(['title', 'publish', 'date_modified']); setEditableProperties([{name: 'title', type: 'text'}, {name: 'type', type: 'select', options: ['text', 'html']}, {name: 'content', type: 'html'}, {name: 'template', type: 'select', options: ['basic']}, {name: 'page_title', type: 'text'}, {name: 'meta_description', type: 'textarea'}, {name: 'slug', type: 'slug', options: '/content/'}, {name: 'publish', type: 'checkbox'}]);">
+    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> {{tableName}}</strong></div>
+    <dynamic-table></dynamic-table>
+  </section>
+
+</div>

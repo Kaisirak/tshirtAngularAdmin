@@ -1,0 +1,36 @@
+<div class="page">
+
+  <section class="panel panel-default">
+    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Theme Store</strong></div>
+    <div class="panel-body" ng-controller="ThemeStoreCtrl" ng-init="getThemeStore()">
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th></th>
+            <th>Name</th>
+            <th>Repository</th>
+            <th>Store Type</th>
+            <th>Last Update</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="theme in themeList">
+            <td>{{theme.id}}</td>
+            <td><a class="special-link" href="javascript:;"><i class="fa fa-image" ng-mouseenter="theme.preview = true" ng-mouseleave="theme.preview = false"></i></a> <span ng-show="theme.preview" style="position: absolute; margin-top: -80px ; left: 24%;"><img class="img-thumbnail header-panel-shadow img-loading" style="width: 350px; height:150px;" src="http://placehold.it/350x150"></span></td>
+            <td>{{theme.title}}</td>
+            <td>{{theme.repository}}</td>
+            <td>{{theme.type}}</td>
+            <td>{{theme.date_modified}}</td>
+            <td>
+              <button type="button" class="btn btn-w-xs btn-gap-v btn-danger pull-right" ng-hide="theme.is_downloaded" ng-click="installTheme(theme)"><i class="fa fa-spin fa-spinner" ng-show="theme.loading"></i><i class="fa fa-cloud" ng-hide="theme.loading"></i> <span ng-bind="theme.loading?'Downloading':'Download'"></span></button>
+              <b class="pull-right" ng-show="theme.is_downloaded"> Installed <i class="fa fa-check"></i></b>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

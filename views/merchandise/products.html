@@ -1,0 +1,8 @@
+<div class="page page-table">
+
+  <section class="panel panel-default table-dynamic" ng-controller="TablesCtrl" ng-init="setTableName('product'); setContent(); setAllProperties(['id', 'name', 'brand', 'category', 'status', 'date_modified']); setEditableProperties([{name: 'name', type: 'text'}, {name:'sku', type: 'text'}, {name:'barcode', type: 'text'}, {name:'price', type: 'number'}, {name:'compare_price', type: 'number'}, {name:'cost', type: 'number'}, {name:'inventory_quantity', type: 'number'}, {name:'video', type: 'text'}, {name:'type', type: 'text'}, {name:'description', type: 'textarea'}, {name:'tags', type: 'tags'}, {name:'brand', type: 'text'}, {name:'status', type: 'select', options: ['active', 'disabled', 'removed']}, {name:'group', type:'hidden', value:'product'}]);">
+    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> {{tableName}}</strong></div>
+    <dynamic-table></dynamic-table>
+  </section>
+
+</div>

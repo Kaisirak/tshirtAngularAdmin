@@ -1,0 +1,66 @@
+
+<div id="nav-wrapper">
+    <ul id="nav" data-ng-controller="NavCtrl" data-slim-scroll data-collapse-nav data-highlight-active>
+        <li><a href="#/dashboard"> <i class="fa fa-dashboard"></i><span data-i18n="Dashboard"></span> </a></li>
+        <li>
+            <a href="#/settings"><i class="fa fa-cogs"></i><span data-i18n="Settings"></span></a>
+            <ul>
+                <li><a href="#/settings/sitesettings"><i class="fa fa-caret-right"></i><span data-i18n="Site Settings"></span></a></li>
+                <li><a href="#/settings/users"><i class="fa fa-caret-right"></i><span data-i18n="Users"></span></a></li>
+                <li><a href="#/settings/shippingmethods"><i class="fa fa-caret-right"></i><span data-i18n="Shipping Methods"></span></a></li>
+                <li><a href="#/settings/fraudmanagement"><i class="fa fa-caret-right"></i><span data-i18n="Fraud Management"></span></a></li>
+                <li><a href="#/settings/taxes"><i class="fa fa-caret-right"></i><span data-i18n="Taxes"></span></a></li>
+                <li><a href="#/settings/tasks"><i class="fa fa-caret-right"></i><span data-i18n="Tasks"></span> <span class="badge badge-info main-badge" data-ng-show="taskRemainingCount > 0">{{taskRemainingCount}}</span></a></li>
+                <li><a href="#/settings/files"><i class="fa fa-caret-right"></i><span data-i18n="Files"></span></a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#/themes"><i class="fa fa-file-image-o"></i><span data-i18n="Themes"></span></a>
+            <ul>
+                <li><a href="#/themes/templates"><i class="fa fa-caret-right"></i><span data-i18n="Templates"></span></a></li>
+                <li><a href="#/themes/mythemes"><i class="fa fa-caret-right"></i><span data-i18n="My Themes"></span></a></li>
+                <li><a href="#/themes/themestore"><i class="fa fa-caret-right"></i><span data-i18n="Theme Library"></span></a></li>
+            </ul>
+        </li>
+        <li>
+          <a href="#/plugins"><i class="fa fa-plug"></i><span data-i18n="Plugins"></span></a>
+          <ul>
+            <li><a href="#/plugins/library"><i class="fa fa-caret-right"></i><span data-i18n="Plugins Library"></span></a></li>
+          </ul>
+        </li>
+        <li>
+            <a href="#/sitecontent"><i class="fa fa-newspaper-o"></i><span data-i18n="Site Content"></span></a>
+            <ul>
+                <li><a href="#/sitecontent/import"><i class="fa fa-caret-right"></i><span data-i18n="Import"></span></a></li>
+                <li><a href="#/sitecontent/content"><i class="fa fa-caret-right"></i><span data-i18n="Content"></span></a></li>
+                <li><a href="#/sitecontent/widgets"><i class="fa fa-caret-right"></i><span data-i18n="Widgets"></span></a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#/merchandise"><i class="fa fa-pencil"></i><span data-i18n="Merchandise"></span></a>
+            <ul>
+                <li><a href="#/merchandise/categories"><i class="fa fa-caret-right"></i><span data-i18n="Categories"></span></a></li>
+                <li><a href="#/merchandise/collections"><i class="fa fa-caret-right"></i><span data-i18n="Collections"></span></a></li>
+                <li><a href="#/merchandise/products"><i class="fa fa-caret-right"></i><span data-i18n="Products"></span></a></li>
+            </ul>
+        </li>
+       <li><a href="#/orders"><i class="fa fa-credit-card"></i><span data-i18n="Orders"></span><span class="badge badge-success main-badge" data-ng-show="ordersCount > 0">{{ordersCount}}</span></a></li>
+        <li>
+            <a href="#/marketing"><i class="fa fa-pie-chart"></i><span data-i18n="Marketing"></span></a>
+            <ul>
+                <li><a href="#/marketing/contact"><i class="fa fa-caret-right"></i><span data-i18n="Contact"></span></a></li>
+                <li><a href="#/marketing/emailsubscribers"><i class="fa fa-caret-right"></i><span data-i18n="Email Subscribers"></span></a></li>
+                <li><a href="#/marketing/productreviews"><i class="fa fa-caret-right"></i><span data-i18n="Product Reviews"></span></a></li>
+                <li><a href="#/marketing/coupons"><i class="fa fa-caret-right"></i><span data-i18n="Coupons"></span></a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#/customers"><i class="fa fa-users"></i><span data-i18n="Customers"></span></a>
+            <ul>
+                <li><a href="#/customers/customers"><i class="fa fa-caret-right"></i><span data-i18n="Customers"></span></a></li>
+                <li><a href="#/customers/registries"><i class="fa fa-caret-right"></i><span data-i18n="Registries"></span></a></li>
+            </ul>
+        </li>
+        <li><a href="#/reports"><i class="fa fa-bar-chart"></i><span data-i18n="Reports"></span></a></li>
+    </ul>
+</div>

@@ -1,0 +1,220 @@
+<div class="table-filters">
+  <div class="btn-group pull-right" dropdown is-open="status.isopen">
+    <button type="button" class="btn btn-primary dropdown-toggle" ng-hide="displayOnly"> Export <span class="caret"></span> </button>
+    <ul class="dropdown-menu" role="menu">
+      <li><a href="javascript:;" ng-click="export('json')">To JSON</a></li>
+      <li><a href="javascript:;" ng-click="export('csv')">To CSV</a></li>
+    </ul>
+  </div>
+  <button type="button" class="btn btn-w-sm btn-gap-v btn-primary pull-right" ng-click="openNewElem()" ng-hide="displayOnly"><i class="fa fa-plus"></i> New Item</button>
+  <div class="row">
+    <div class="col-sm-4 col-xs-4">
+      <form>
+        <input type="text" placeholder="search" class="form-control" data-ng-model="searchKeywords" data-ng-keyup="search()">
+      </form>
+    </div>
+    <div class="col-sm-4 col-xs-4 filter-result-info">
+      <span> Showing {{filteredStores.length}}/{{content.length}} entries </span>
+    </div>
+  </div>
+</div>
+
+<table class="table table-bordered table-striped table-responsive">
+  <thead>
+    <tr>
+      <th ng-repeat="property in allProperties"><div class="th">
+        {{property | formatpropertytitle}}
+        <span class="glyphicon glyphicon-chevron-up" data-ng-click="order(property)" data-ng-class="{active: row == property}"></span>
+        <span class="glyphicon glyphicon-chevron-down" data-ng-click="order('-' + property)" data-ng-class="{active: row == '-' + property}"></span>
+      </div></th>
+      <th ng-hide="displayOnly"><div class="th">
+      </div></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-ng-repeat="store in currentPageStores">
+      <!-- HERE TABLE CONTENT IS HANDLED AND DISPLAYED BY displayContent() in app.tables.js -->
+      <td ng-repeat="property in allProperties" ng-bind="displayContent(store, property)"></td>
+      <td ng-hide="displayOnly">
+        <a class="btn btn-w-xs btn-gap-v btn-primary" href="#/orders/{{store.id}}" ng-show="customOrder"><i class="fa fa-eye"></i> View</a>
+        <button type="button" class="btn btn-w-xs btn-gap-v btn-success" ng-click="openEditElem(store)"><i class="fa fa-pencil"></i> Edit</button>
+        <button type="button" class="btn btn-w-xs btn-gap-v btn-danger" ng-really-message="Are you sure you want to delete this item ?" ng-really-click="removeElem(store.id)"><i class="fa fa-remove"></i> Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="table-loading" ng-hide="loaded"></div>
+
+<footer class="table-footer">
+  <div class="row">
+    <div class="col-md-6 page-num-info">
+      <span>
+        Show
+        <select data-ng-model="numPerPage" data-ng-options="num for num in numPerPageOpt" data-ng-change="onNumPerPageChange()"></select>
+        entries per page
+      </span>
+    </div>
+    <div class="col-md-6 text-right pagination-container">
+      <pagination class="pagination-sm" ng-model="currentPage" total-items="filteredStores.length" max-size="4"
+      ng-change="select(currentPage)" items-per-page="numPerPage" rotate="false" boundary-links="true">
+    </pagination>
+  </div>
+</div>
+</footer>
+
+
+<!-- MODAL ADDING ELEMENT -->
+
+<script type="text/ng-template" id="modalNewElem.html">
+  <div class="modal-header">
+    <h3>Adding Element</h3>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal">
+      <div class="form-group" ng-repeat="property in editableProperties">
+        <label for="focus{{property.name}}" class="col-sm-2" ng-if="property.type != 'hidden'">{{property.name | formatpropertytitle}}</label>
+        <div class="col-sm-10" ng-switch on="property.type">
+
+        <input ng-switch-when="text" type="text" class="form-control" id="focus{{property.name}}" ng-model="elemToAdd[property.name]">
+
+        <span ng-switch-when="select" class="ui-select"><select ng-options="option for option in property.options" ng-model="elemToAdd[property.name]"></select></span>
+
+        <div ng-switch-when="date" class="input-group ui-datepicker" ng-controller="DatepickerCtrl">
+        <input type="text" class="form-control" datepicker-popup="MMMM-dd-yyyy" ng-model="elemToAdd[property.name]" is-open="opened" date-disabled="" ng-required="true" close-text="Close">
+        <span class="input-group-addon" ng-click="open($event)"><i class="fa fa-calendar"></i></span>
+        </div>
+
+        <div ng-switch-when="number" class="input-group" data-ui-spinner>
+        <input type="text" class="form-control" ng-model="elemToAdd[property.name]" ng-init="elemToAdd[property.name] = 1">
+        <div class="input-group-btn btn-group-vertical">
+        <button type="button" class="btn btn-xs btn-default" ng-click="addFrom(property.name)"><i class="fa fa-angle-up"></i></button>
+        <button type="button" class="btn spinner-down btn-xs btn-default" ng-click="subFrom(property.name)"><i class="fa fa-angle-down"></i></button>
+        </div>
+        </div>
+
+        <label ng-switch-when="checkbox" class="ui-checkbox"><input name="checkbox1" ng-model="elemToAdd[property.name]" type="checkbox" ng-true-value="1" ng-false-value="0" value="1"><span></span></label>
+
+        <textarea ng-switch-when="textarea" ng-model="elemToAdd[property.name]" class="form-control" rows="4"></textarea>
+
+        <div ng-switch-when="slug" class="input-group">
+          <span class="input-group-addon">{{property.options}}</span><input type="text" class="form-control" id="focus{{property.name}}" ng-model="elemToAdd[property.name]">
+        </div>
+
+        <div ng-switch-when="tags" class="panel-body">
+          <tags-input ng-model="elemToAdd[property.name]" class="ui-tags-input"></tags-input>
+        </div>
+
+        <div ng-switch-when="rating" ng-controller="RatingDemoCtrl">
+          <rating class="ui-rating size-h3" style="outline-width: 0;" ng-model="elemToAdd[property.name]" max="max" readonly="false" on-hover="hoveringOver(value)" on-leave="overStar = null" state-on="'fa fa-star'" state-off="'fa fa-star-o'"></rating>
+          <span class="label" ng-class="{'label-danger': elemToAdd[property.name]<3, 'label-warning': elemToAdd[property.name]>=3 && elemToAdd[property.name]<6, 'label-info': elemToAdd[property.name]>=6 && elemToAdd[property.name]<8, 'label-success': elemToAdd[property.name]>=8}">{{elemToAdd[property.name]}}</span>
+        </div>
+
+        <div ng-switch-when="html" text-angular ng-model="elemToAdd[property.name]" class="ui-editor"></div>
+
+        <input ng-switch-when="hidden" type="text" class="form-control" id="focus{{property.name}}" ng-model="elemToAdd[property.name]" ng-init="elemToAdd[property.name] = property.value" style="display: none">
+
+        <input ng-switch-default="text" type="text" class="form-control" id="focus{{property.name}}" ng-model="elemToAdd[property.name]">
+
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer" data-ng-controller="NotifyCtrl">
+    <button class="btn btn-primary" ng-click="addNewElem(); notify('addedelem');">Add</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+  </div>
+</script>
+
+
+<!-- MODAL EDITING ELEMENT -->
+
+<script type="text/ng-template" id="modalEditElem.html">
+  <div class="modal-header">
+    <h3>Editing Element</h3>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal">
+      <div class="form-group" ng-repeat="property in editableProperties">
+        <label for="focus{{property.name}}" class="col-sm-2" ng-if="property.type != 'hidden'">{{property.name | formatpropertytitle}}</label>
+
+        <!-- SWITCH FOR INPUT TYPE -->
+
+        <div class="col-sm-10" ng-switch on="property.type">
+
+          <input ng-switch-when="text" type="text" class="form-control" id="focus{{property.name}}" ng-model="newEditedElem[property.name]">
+
+          <span ng-switch-when="select" class="ui-select"><select ng-options="option for option in property.options" ng-model="newEditedElem[property.name]"></select></span>
+
+          <div ng-switch-when="date" class="input-group ui-datepicker" ng-controller="DatepickerCtrl">
+            <input type="text" class="form-control" datepicker-popup="MMMM-dd-yyyy" ng-model="newEditedElem[property.name]" is-open="opened" date-disabled="" ng-required="true" close-text="Close">
+            <span class="input-group-addon" ng-click="open($event)"><i class="fa fa-calendar"></i></span>
+          </div>
+
+          <div ng-switch-when="number" class="input-group" data-ui-spinner>
+            <input type="text" class="form-control" ng-model="newEditedElem[property.name]">
+            <div class="input-group-btn btn-group-vertical">
+              <button type="button" class="btn btn-xs btn-default" ng-click="addFrom(property.name)"><i class="fa fa-angle-up"></i></button>
+              <button type="button" class="btn spinner-down btn-xs btn-default" ng-click="subFrom(property.name)"><i class="fa fa-angle-down"></i></button>
+            </div>
+          </div>
+
+          <label ng-switch-when="checkbox" class="ui-checkbox"><input name="checkbox1" ng-model="newEditedElem[property.name]" type="checkbox" value="property.name" ng-true-value="1" ng-false-value="0"><span></span></label>
+
+          <textarea ng-switch-when="textarea" ng-model="newEditedElem[property.name]" class="form-control" rows="4"></textarea>
+
+          <div ng-switch-when="slug" class="input-group">
+            <span class="input-group-addon">{{property.options}}</span><input type="text" class="form-control" id="focus{{property.name}}" ng-model="newEditedElem[property.name]">
+          </div>
+
+          <div ng-switch-when="tags" class="panel-body">
+            <tags-input ng-model="newEditedElem[property.name]" class="ui-tags-input"></tags-input>
+          </div>
+
+          <div ng-switch-when="rating" ng-controller="RatingDemoCtrl">
+            <rating class="ui-rating size-h3" style="outline-width: 0;" ng-model="newEditedElem[property.name]" max="max" readonly="false" on-hover="hoveringOver(value)" on-leave="overStar = null" state-on="'fa fa-star'" state-off="'fa fa-star-o'"></rating>
+            <span class="label" ng-class="{'label-danger': newEditedElem[property.name]<max / 4, 'label-warning': newEditedElem[property.name]>=max / 4 && newEditedElem[property.name]<max / 2, 'label-info': newEditedElem[property.name]>=max / 2 && newEditedElem[property.name]<max / 1.333, 'label-success': newEditedElem[property.name]>=max / 1.333}">{{newEditedElem[property.name]}}</span>
+          </div>
+
+          <div ng-switch-when="html" text-angular ng-model="newEditedElem[property.name]" class="ui-editor"></div>
+
+          <input ng-switch-when="hidden" type="text" class="form-control" id="focus{{property.name}}" ng-model="newEditedElem[property.name]" ng-init="newEditedElem[property.name] = property.value" style="display: none">
+
+          <!-- CUSTOM TAXES TYPE -->
+
+          <div ng-switch-when="taxes">
+            <button type="button" class="btn btn-w-sm btn-gap-v btn-primary"><i class="fa fa-plus"></i> Create a New Address</button>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th><label class="ui-checkbox"><input name="selected" type="checkbox" value="isselected" ><span></span></label></th>
+                  <th>Address</th>
+                  <th>Default</th>
+                  <th>Date Modified</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="address in property.addressList">
+                  <td><label class="ui-checkbox"><input name="selected" type="checkbox" value="isselected" ><span></span></label></td>
+                  <td>{{address.address}}</td>
+                  <td>{{address.default}}</td>
+                  <td>{{address.date_modified}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- END CUSTOM TAXES TYPE -->
+
+          <input ng-switch-default="text" type="text" class="form-control" id="focus{{property.name}}" ng-model="newEditedElem[property.name]">
+          <!-- END SWITCH FOR INPUT TYPE -->
+
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer" data-ng-controller="NotifyCtrl">
+    <button class="btn btn-primary" ng-click="saveElem(); notify('editedelem');">Modify</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+  </div>
+</script>

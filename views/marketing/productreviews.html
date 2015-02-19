@@ -1,0 +1,8 @@
+<div class="page page-table">
+
+  <section class="panel panel-default table-dynamic" ng-controller="TablesCtrl" ng-init="setTableName('productreview'); setContent(); setAllProperties(['product_id', 'product_name', 'status', 'date_created']); setEditableProperties([{name: 'product_id', type: 'number'}, {name: 'product_name', type: 'text'}, {name: 'status', type: 'select', options: ['active', 'disabled', 'pending']}, {name: 'score', type: 'rating'}, {name: 'title', type: 'text'}, {name: 'comment', type: 'textarea'}, {name: 'city', type: 'text'}, {name: 'state', type: 'text'}, {name: 'first_name', type: 'text'}, {name: 'email', type: 'text'}]);">
+    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> {{tableName}}</strong></div>
+    <dynamic-table></dynamic-table>
+  </section>
+
+</div>

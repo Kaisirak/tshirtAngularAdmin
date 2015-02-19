@@ -1,0 +1,45 @@
+<div class="page">
+
+  <section class="panel panel-default">
+    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Plugins Library</strong></div>
+    <div class="panel-body" ng-controller="PluginsCtrl" ng-init="getPluginList()">
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="plugin in pluginList">
+            <td><b>{{plugin.name}}</b></td>
+            <td>{{plugin.description}}</td>
+            <td><button type="button" class="btn btn-w-xs btn-gap-v btn-info pull-right" ng-click="openPluginModal(plugin)"><i class="fa fa-cloud"></i> Download</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<script type="text/ng-template" id="modalPlugins.html">
+  <div class="modal-header">
+    <h3>Plugin Summary</h3>
+  </div>
+  <div class="modal-body">
+    <h4>{{currentPlugin.name}}</h4>
+    <p>{{currentPlugin.description}}</p>
+    <h4>External Links</h4>
+    <p>{{currentPlugin.link}}</p>
+    <hr>
+    <div ng-bind-html="currentPlugin.full_description">
+    </div>
+  </div>
+  <div class="modal-footer" data-ng-controller="NotifyCtrl">
+    <button class="btn btn-info" ng-click="downloadPlugin();"><i class="fa fa-file-archive-o"></i> Download Zip</button>
+    <button class="btn btn-success" ng-click="installPlugin();"><i class="fa fa-cloud-download"></i> Install Plugin</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+  </div>
+</script>

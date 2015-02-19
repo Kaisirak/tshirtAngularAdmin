@@ -1,0 +1,8 @@
+<div class="page page-table">
+
+  <section class="panel panel-default table-dynamic" data-ng-controller="TablesCtrl" ng-init="setTableName('shippingmethod'); setContent(); setAllProperties(['id', 'name', 'carrier_method', 'date_modified']); setEditableProperties([{name:'status', type: 'select', options: ['active', 'disabled']}, {name:'name', type: 'text'}, {name:'bottom_days_range', type: 'date'}, {name:'top_days_range', type: 'date'}, {name:'carrier_method', type: 'text'}]);">
+    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> {{tableName}}</strong></div>
+    <dynamic-table></dynamic-table>
+  </section>
+
+</div>

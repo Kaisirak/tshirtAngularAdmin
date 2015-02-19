@@ -1,0 +1,8 @@
+<div class="page page-table">
+
+  <section class="panel panel-default table-dynamic" ng-controller="TablesCtrl" ng-init="setTableName('collection'); setContent(); setAllProperties(['name', 'category', 'status', 'date_modified']); setEditableProperties([{name: 'name', type: 'text'}, {name:'video', type: 'text'}, {name:'description', type: 'textarea'}, {name:'tags', type: 'text'}, {name:'categories', type: 'text'}, {name:'brand', type: 'text'}]);">
+    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> {{tableName}}</strong></div>
+    <dynamic-table></dynamic-table>
+  </section>
+
+</div>

@@ -1,0 +1,171 @@
+<div class="page">
+
+  <section class="panel panel-default">
+    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Users</strong></div>
+    <div class="panel-body" data-ng-controller="RoleCtrl">
+
+      <h1 class="text-thin">Administrators :</h1>
+      <hr>
+      <table class="table table-hover table-bordered" ng-init="getUserListPending()">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in userList">
+            <td>pic</td>
+            <td>{{user.email}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h1 class="text-thin">Pending (Invited) :</h1>
+      <hr>
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Sent On</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in userListPending">
+            <td>{{user.email}}</td>
+            <td>{{user.date_created}}</td>
+            <td><button type="button" class="btn btn-w-xs btn-gap-v btn-danger" ng-really-message="Are you sure you want to delete this invite ?" ng-really-click="removePendingUser(user.id)"><i class="fa fa-remove"></i> Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <tabset class="ui-tab" data-ng-controller="TabsDemoCtrl">
+
+        <!-- ROLE -->
+
+        <tab heading="Roles">
+          <form class="form-horizontal">
+
+            <button type="button" class="btn btn-w-sm btn-gap-v btn-info" ng-click="openNewRole()"><i class="fa fa-plus"></i> Add Role</button>
+
+            <table class="table table-hover table-bordered" ng-init="getRoleList()">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Date</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="role in roleList">
+                  <td>{{role.id}}</td>
+                  <td>{{role.name}}</td>
+                  <td>{{role.date_modified}}</td>
+                  <td><button type="button" class="btn btn-w-xs btn-gap-v btn-success" ng-click="openRights(role)"><i class="fa fa-eye"></i> Rights</button>
+                  <button type="button" class="btn btn-w-xs btn-gap-v btn-danger" ng-really-message="Are you sure you want to delete this role ?" ng-really-click="deleteRole(role)"><i class="fa fa-remove"></i> Delete</button></td>
+                </tr>
+              </tbody>
+            </table>
+
+          </form>
+        </tab>
+
+        <script type="text/ng-template" id="modalNewRole.html">
+        <div class="modal-header">
+          <h3>Adding New Role</h3>
+        </div>
+        <div class="modal-body">
+          <form ng-submit="addRole(newName)" class="form-horizontal">
+            <div class="form-group">
+              <label for="newrolename" class="col-sm-2">Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="newrolename" ng-model="newName">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer" data-ng-controller="NotifyCtrl">
+          <button class="btn btn-primary" ng-click="addRole(newName); notify('addedrole');">Add Role</button>
+          <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+        </script>
+
+        <script type="text/ng-template" id="modalUserRights.html">
+          <div class="modal-header">
+            <h3>Changing access rights of <b>{{role.name}}</b></h3>
+          </div>
+          <div class="modal-body">
+
+          <a href="javascript:;" ng-repeat="(key, module) in modules" class="btn btn-metro" ng-click="toggleAccess(key)" ng-class="module.toggledOnAccess ? module.iconcolor : 'btn-default'"><i class="fa" ng-class="module.icon"></i><span><i class="fa" ng-class="module.toggledOnAccess ? 'fa-check-square-o' : 'fa-square-o'" style="line-height: 22px;font-size: 22px;"></i> {{module.name}}</span></a>
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">Save Changes</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+          </div>
+        </script>
+
+        <!-- USERS -->
+
+        <tab heading="Users">
+          <form class="form-horizontal">
+
+            <table class="table table-hover table-bordered" ng-init="getUserList()">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Email</th>
+                  <th>Permissions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="user in userList">
+                  <td>pic</td>
+                  <td>{{user.email}}</td>
+                  <td><a href="javascript:;" class="text-info" ng-click="openUserRole(user)"><span ng-bind="findRole(user.role_id)"></span></a></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <script type="text/ng-template" id="modalUserRole.html">
+              <div class="modal-header">
+                <h3>Changing role of <b>{{modalUser.email}}</b></h3>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label class="col-xs-2">Role</label>
+                  <div class="col-xs-10">
+                    <span class="ui-select">
+                      <select ng-model="newRole" ng-options="role.id as role.name for role in modalRoleList">
+                      </select>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="saveRole(newRole);">Save Changes</button>
+                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+              </div>
+            </script>
+
+            <div class="form-group">
+              <label for="emailuser-focus" class="col-sm-2">Email</label>
+              <div class="col-sm-10">
+                <div class="input-group">
+                  <input type="text" class="form-control" id="emailuser-focus" placeholder="Email" ng-model="newUserEmail.mail">
+                  <span class="input-group-btn">
+                    <button class="btn btn-success" type="button" ng-click="addUser(newUserEmail.mail);";>Invite User</button>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+          </form>
+        </tab>
+      </tabset>
+    </div>
+  </section>
+
+</div>

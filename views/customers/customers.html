@@ -1,0 +1,8 @@
+<div class="page page-table">
+
+  <section class="panel panel-default table-dynamic" ng-controller="TablesCtrl" ng-init="setTableName('customer'); setContent(); setAllProperties(['id', 'email', 'first_name', 'last_name', 'date_modified']); setEditableProperties([{name:'first_name', type:'text'}, {name:'last_name', type:'text'}, {name:'email', type:'text'}, {name:'phone_number', type:'text'}, {name: 'addresses', type: 'taxes', addressList: [{address:'fdsfsfw', default: true, date_modified: '12-12-12'}, {address:'dddddd', default: false, date_modified: '12-11-12'}]}]);">
+    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> {{tableName}}</strong></div>
+    <dynamic-table></dynamic-table>
+  </section>
+
+</div>

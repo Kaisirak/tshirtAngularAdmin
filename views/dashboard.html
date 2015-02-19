@@ -1,0 +1,94 @@
+<div class="page page-dashboard">
+
+    <!-- stats -->
+    <div class="row">
+        <div class="col-lg-3 col-xsm-6">
+            <div class="panel mini-box">
+                <p><a href="#/orders" class="text-muted" data-i18n="Manage Revenue"></a></p>
+                <span class="box-icon bg-success">
+                    <i class="fa fa-money"></i>
+                </span>
+                <div class="box-info">
+                    <p class="size-h2">{{weeklyrevenue | currency}}</p>
+                </div>
+                <p class="text-muted">dollars since last week</p>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xsm-6">
+            <div class="panel mini-box">
+                <p><a href="#/orders" class="text-muted" data-i18n="Manage Orders"></a></p>
+                <span class="box-icon bg-info">
+                    <i class="fa fa-credit-card"></i>
+                </span>
+                <div class="box-info">
+                    <p class="size-h2">{{weeklyorders}}</p>
+                </div>
+                <p class="text-muted">orders pending</p>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xsm-6">
+            <div class="panel mini-box">
+                <p><a href="#/orders" class="text-muted" data-i18n="Manage Returns"></a></p>
+                <span class="box-icon bg-danger">
+                    <i class="fa fa-reply"></i>
+                </span>
+                <div class="box-info">
+                    <p class="size-h2">{{weeklyreturns}}</p>
+                </div>
+                <p class="text-muted">returns since last week</p>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xsm-6">
+            <div class="panel mini-box">
+                <p><a href="#/customers/customers" class="text-muted" data-i18n="Manage Customers"></a></p>
+                <span class="box-icon bg-warning">
+                    <i class="fa fa-users"></i>
+                </span>
+                <div class="box-info">
+                    <p class="size-h2">{{weeklysignups}}</p>
+                </div>
+                <p class="text-muted">signups since last week</p>
+            </div>
+        </div>
+
+    </div>
+    <!-- end stats -->
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Stores</strong></div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Store</th>
+                    <th>Status</th>
+                    <th>Progress</th>
+                    <th>%</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="store in main.stores">
+                    <td>{{$index + 1}}</td>
+                    <td><span class="color-success"></span>{{store.name}}</td>
+                    <td><span class="label label-{{store.status}}">{{store.status}}</span></td>
+                    <td><progressbar class="progressbar-xs progress-striped active no-margin" value="store.percentwiz" type="{{store.status}}"></progressbar></td>
+                    <td>{{store.percentwiz}}%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Checklist for {{main.stores[main.currentsite].name}}</strong></div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
+            <div class="btn-group-vertical btn-group-lg" style="width:100%">
+              <button ng-repeat="(key, val) in storesteps" ng-click="goToWizard(key)" class="btn" style="text-align: left;" ng-class="{'btn-success': val.completed, 'btn-info': !val.completed}">{{$index + 1}} - <b>{{key | wizardstep}}</b> <span class="badge badge-success pull-right" ng-show="val.completed"><i class="fa fa-check"></i> Completed</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>

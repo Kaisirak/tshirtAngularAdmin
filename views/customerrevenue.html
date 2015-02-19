@@ -1,0 +1,32 @@
+<div class="page">
+
+  <section class="panel panel-default">
+    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Revenue per Customer</strong></div>
+    <div class="panel-body">
+      <h2 class="text-thin" style="margin-top:0;">Revenue per Customer <a class="btn btn-primary btn-direction btn-left pull-right" href="#/reports">BACK</a></h2>
+
+      <div class="panel" data-ng-controller="customerRevenueCtrl">
+      </div>
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Data Settings</h3>
+        </div>
+        <div class="panel-body">
+          <div class="form-group" id="QuerySettings">
+            <div class="input-group" style="max-width: 300px;"><input date-range-picker class="form-control date-picker" type="text" ng-model="date" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
+          </div>
+          <div><a class="btn btn-info">Launch Report</a> <a class="btn btn-success">Download Report</a></div>
+        </div>
+      </div>
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">Data Table</h3>
+        </div>
+        <div class="panel-body table-dynamic" ng-controller="TablesCtrl" ng-init="setTableName('customer'); setDisplayOnly(); setContent(); setAllProperties(['first_name', 'last_name', 'email', 'date_modified']);">
+          <dynamic-table></dynamic-table>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

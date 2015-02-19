@@ -1,0 +1,472 @@
+<div class="page">
+  <section class="panel panel-default" ng-controller="SiteSettingsCtrl">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Site Settings</strong></div>
+        <div class="panel-body" data-ng-controller="TabsDemoCtrl">
+          <tabset class="ui-tab">
+
+            <!-- GENERAL TAB -->
+
+              <tab heading="General">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="title-focus" class="col-sm-2">Store Title</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="title-focus" placeholder="Store Title" ng-model="main.stores[main.currentsite].config.params.site.title">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="meta-focus" class="col-sm-2">Meta Description</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="meta-focus" placeholder="Meta Description" data-toggle="tooltip" tooltip="Description used by search engines (Google, Bing, ...)" data-placement="top" tooltip-trigger="focus" ng-model="main.stores[main.currentsite].config.params.seo.description"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="keywords-focus" class="col-sm-2">SEO Keywords</label>
+                          <div class="col-sm-10">
+                            <tags-input ng-model="main.stores[main.currentsite].config.params.seo.keywords" class="ui-tags-input" id="keywords-focus"></tags-input>
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                          <label for="seoimg-focus" class="col-sm-2">SEO Image</label>
+                          <div class="col-sm-10">
+                              <input type="text" class="form-control" id="seoimg-focus" placeholder="SEO Image" data-toggle="tooltip" tooltip="Default image used by most social media websites" data-placement="top" tooltip-trigger="focus" ng-model="main.stores[main.currentsite].config.params.seo.img">
+                          </div>
+                      </div>
+
+                    <div class="form-group">
+                        <label for="contact-focus" class="col-sm-2">Contact-Us Email</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="contact-focus" placeholder="Contact-Us Email" data-toggle="tooltip" tooltip="Email address where you will receive messages sent through the contact us page. Please add an email to activate this feature" data-placement="top" tooltip-trigger="focus" ng-model="main.stores[main.currentsite].config.params['contact-us'].to">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="contact-focus" class="col-sm-2">Store Password</label>
+                      <div class="col-sm-10">
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                          <input type="text" class="form-control" placeholder="Password" ng-model="main.stores[main.currentsite].config.params.password">
+                        </div>
+                      </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-lg pull-right" ng-click="setConfig()"><i class="fa fa-spin fa-spinner" ng-show="loading"></i> Save Settings</button>
+                  </form>
+                </tab>
+
+                <!-- DNS AND CACHING -->
+
+                <tab heading="DNS and Caching">
+                  <form class="form-horizontal">
+
+                    <h1 class="text-thin">Domain Names</h1>
+                    <hr>
+                    <div class="form-group">
+                      <label for="newdomain-focus" class="col-sm-2">New Domain</label>
+                      <div class="col-sm-10">
+                        <div class="input-group">
+                          <input type="text" class="form-control" id="newdomain-focus" placeholder="New Domain" ng-model="newdomain">
+                          <span class="input-group-btn">
+                            <button class="btn btn-success" type="button">Add Domain</button>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </tab>
+
+                <!-- SOCIAL MEDIA TAB -->
+
+                <tab heading="Social Media">
+                  <form class="form-horizontal">
+
+                    <h1 class="text-thin">Facebook <i class="fa fa-question-circle" tooltip-placement="right" tooltip="You can easily interface your store with your Facebook Page. The 'Like Button' will be displayed on every product page" tooltip-append-to-body="true"></i></h1>
+                    <hr>
+                    <div class="form-group">
+                      <label for="facebookpage-focus" class="col-sm-2">Facebook Page</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="facebookpage-focus" placeholder="Facebook Page" ng-model="main.stores[main.currentsite].config.params.social_settings.facebook.facebook_page">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-sm-2">Like Type</label>
+                      <div class="col-sm-10">
+                        <span class="ui-select" style="margin: 0 0 15px 0px;">
+                          <select ng-model="main.stores[main.currentsite].config.params.social_settings.facebook.like_type">
+                            <option value="like">Like</option>
+                            <option value="recommend">Recommend</option>
+                          </select>
+                        </span>
+                        <p><label class="ui-checkbox"><input ng-model="main.stores[main.currentsite].config.params.social_settings.facebook.active_like" type="checkbox"><span>Enable Likes</span></label></p>
+                        <p><label class="ui-checkbox"><input ng-model="main.stores[main.currentsite].config.params.social_settings.facebook.active_share" type="checkbox"><span>Enable Shares</span></label></p>
+                        <p><label class="ui-checkbox"><input ng-model="main.stores[main.currentsite].config.params.social_settings.facebook.active_follow_page_button" type="checkbox"><span>Enable Follow Page</span></label></p>
+                        <p><label class="ui-checkbox"><input ng-model="main.stores[main.currentsite].config.params.social_settings.facebook.active_metatags" type="checkbox"><span>Enable Meta-tags</span></label></p>
+                        <p><label class="ui-checkbox"><input ng-model="main.stores[main.currentsite].config.params.social_settings.facebook.show_count" type="checkbox"><span>Show Counter</span></label></p>
+                      </div>
+                    </div>
+
+                    <h1 class="text-thin">Twitter <i class="fa fa-question-circle" tooltip-placement="right" tooltip="Twitter is an information network made up of 140-character messages called Tweets. It's an easy way to discover the latest news related to subjects you care about." tooltip-append-to-body="true"></i></h1>
+                    <hr>
+                    <div class="form-group">
+                      <label for="twitterpage-focus" class="col-sm-2">Twitter Page</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="twitterpage-focus" placeholder="Twitter Page" ng-model="main.stores[main.currentsite].config.params.social_settings.twitter.twitter_page">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="twittername-focus" class="col-sm-2">Account Name</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="twittername-focus" placeholder="Account Name" ng-model="main.stores[main.currentsite].config.params.social_settings.twitter.twitter_account"><br>
+                        <p><label class="ui-checkbox"><input ng-model="main.stores[main.currentsite].config.params.social_settings.twitter.active_tweet" type="checkbox"><span>Enable</span></label></p>
+                        <p><label class="ui-checkbox"><input ng-model="main.stores[main.currentsite].config.params.social_settings.twitter.add_acct_to_tweet" type="checkbox"><span>Add Account Text</span></label><span class="text-muted"> (Tags your twitter account name to the customer's tweet. IE: " via @YOUR_NAME")</span></p>
+                        <p><label class="ui-checkbox"><input ng-model="main.stores[main.currentsite].config.params.social_settings.twitter.active_metatags" type="checkbox"><span>Enable Meta-tags</span></label></p>
+                        <p><label class="ui-checkbox"><input ng-model="main.stores[main.currentsite].config.params.social_settings.twitter.active_follow_page_button" type="checkbox"><span>Enable Follow Page</span></label></p>
+                      </div>
+                    </div>
+
+                    <h1 class="text-thin">Pinterest <i class="fa fa-question-circle" tooltip-placement="right" tooltip="Pinterest is a place to discover ideas for all your projects and interests, hand-picked by people like you." tooltip-append-to-body="true"></i></h1>
+                    <hr>
+                    <div class="form-group">
+                      <label for="pinterestpage-focus" class="col-sm-2">Pinterest Page</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="pinterestpage-focus" placeholder="Pinterest Page" ng-model="main.stores[main.currentsite].config.params.social_settings.pinterest.pinterest_page">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="pinterestname-focus" class="col-sm-2">Full Name</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="pinterestname-focus" placeholder="Full Name" ng-model="main.stores[main.currentsite].config.params.social_settings.pinterest.full_page_name"><br>
+                        <p><label class="ui-checkbox"><input ng-model="main.stores[main.currentsite].config.params.social_settings.pinterest.active_pin_it" type="checkbox"><span>Enable</span></label></p>
+                        <p><label class="ui-checkbox"><input ng-model="main.stores[main.currentsite].config.params.social_settings.pinterest.show_count" type="checkbox"><span>Show Counter</span></label></p>
+                        <p><label class="ui-checkbox"><input ng-model="main.stores[main.currentsite].config.params.social_settings.pinterest.active_follow_page_button" type="checkbox"><span>Enable Follow Page</span></label></p>
+                      </div>
+                    </div>
+
+                    <h1 class="text-thin">Google Plus <i class="fa fa-question-circle" tooltip-placement="right" tooltip="Google Plus is a social networking platform for discovering and sharing digital content with friends, family and coworkers." tooltip-append-to-body="true"></i></h1>
+                    <hr>
+                    <div class="form-group">
+                      <label for="googlepluspage-focus" class="col-sm-2">Google Plus Page</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="googlepluspage-focus" placeholder="Google Plus Page" ng-model="main.stores[main.currentsite].config.params.social_settings.google.google_page">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="googleplusname-focus" class="col-sm-2">Full Name</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="googleplusname-focus" placeholder="Full Name" ng-model="main.stores[main.currentsite].config.params.social_settings.google.full_page_name"><br>
+                        <p><label class="ui-checkbox"><input ng-model="main.stores[main.currentsite].config.params.social_settings.google.active_plus_one" type="checkbox"><span>Enable</span></label></p>
+                        <p><label class="ui-checkbox"><input ng-model="main.stores[main.currentsite].config.params.social_settings.google.active_follow_page_button" type="checkbox"><span>Enable Follow Page</span></label></p>
+                      </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-lg pull-right" ng-click="setConfig()"><i class="fa fa-spin fa-spinner" ng-show="loading"></i> Save Settings</button>
+                  </form>
+                </tab>
+
+                <tab heading="Payment Platforms">
+                  <form class="form-horizontal">
+
+                    <h1 class="text-thin">Amazon API <i class="fa fa-question-circle" tooltip-placement="right" tooltip="Amazon Marketplace Web Service (Amazon MWS) is an integrated Web service API that helps Amazon sellers to programmatically exchange data on listings, orders, payments, reports, and more." tooltip-append-to-body="true"></i></h1>
+                    <hr>
+
+                    <div class="form-group">
+                      <label for="amazonid-focus" class="col-sm-2">Merchant ID</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="amazonid-focus" placeholder="Merchant ID" ng-model="main.stores[main.currentsite].config.components.amazon.merchantid">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="amazonacckey-focus" class="col-sm-2">Access Key</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="amazonacckey-focus" placeholder="Access Key" ng-model="main.stores[main.currentsite].config.components.amazon.accesskey">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="amazonseckey-focus" class="col-sm-2">Secret Key</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="amazonseckey-focus" placeholder="Secret Key" ng-model="main.stores[main.currentsite].config.components.amazon.secretkey">
+                      </div>
+                    </div>
+
+                    <h1 class="text-thin">Paypal API <i class="fa fa-question-circle" tooltip-placement="right" tooltip="Millions of customers use Paypal for one simple reason: it’s simple. Just an email and password will get you through to checkout before you can reach for your wallet." tooltip-append-to-body="true"></i></h1>
+                    <hr>
+
+                    <div class="form-group">
+                      <label for="paypaluser-focus" class="col-sm-2">User</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="paypaluser-focus" placeholder="User" ng-model="main.stores[main.currentsite].config.components.nvp.user">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="paypalpwd-focus" class="col-sm-2">Password</label>
+                      <div class="col-sm-10">
+                        <input type="password" class="form-control" id="paypalpwd-focus" placeholder="Password" ng-model="main.stores[main.currentsite].config.components.nvp.pwd">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="paypalsig-focus" class="col-sm-2">Signature</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="paypalsig-focus" placeholder="Signature" ng-model="main.stores[main.currentsite].config.components.nvp.signature">
+                      </div>
+                    </div>
+
+                    <h1 class="text-thin">Paypal PayflowPro <i class="fa fa-question-circle" tooltip-placement="right" tooltip="Millions of customers use Paypal for one simple reason: it’s simple. Just an email and password will get you through to checkout before you can reach for your wallet. Payflo Pro offers a fully customizable gateway that gives you complete control of the checkout experience." tooltip-append-to-body="true"></i></h1>
+                    <hr>
+
+                    <div class="form-group">
+                      <label for="paypalprouser-focus" class="col-sm-2">User</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="paypalprouser-focus" placeholder="User" ng-model="main.stores[main.currentsite].config.components.payflowpro.user">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="paypalprovdr-focus" class="col-sm-2">Vendor</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="paypalprovdr-focus" placeholder="Vendor" ng-model="main.stores[main.currentsite].config.components.payflowpro.vendor">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="paypalpropwd-focus" class="col-sm-2">Password</label>
+                      <div class="col-sm-10">
+                        <input type="password" class="form-control" id="paypalpropwd-focus" placeholder="Password" ng-model="main.stores[main.currentsite].config.components.payflowpro.pwd"><br>
+                        <p><label class="ui-checkbox"><input ng-model="main.stores[main.currentsite].config.components.payflowpro.sandbox" type="checkbox"><span>Sandbox</span></label></p>
+                      </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-lg pull-right" ng-click="setConfig()"><i class="fa fa-spin fa-spinner" ng-show="loading"></i> Save Settings</button>
+                  </form>
+                </tab>
+
+                <tab heading="Notifications">
+                  <form class="form-horizontal">
+
+                    <h1 class="text-thin">Customer Email Notifications</h1>
+                    <hr>
+                    <div class="form-group">
+                      <label for="notifmail-focus" class="col-sm-2">Account Email</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="notifmail-focus" placeholder="Account Email" ng-model="main.stores[main.currentsite].config.params.notifications.from">
+                      </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group">
+                      <label for="notifmailsubjpla-focus" class="col-sm-2">Order Placed Subject</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="notifmailsubjpla-focus" placeholder="Order Placed Subject" ng-model="main.stores[main.currentsite].config.params.notifications.order.placed.subject">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="notifmailsubjshi-focus" class="col-sm-2">Order Shipped Subject</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="notifmailsubjshi-focus" placeholder="Order Shipped Subject" ng-model="main.stores[main.currentsite].config.params.notifications.order.shipped.subject">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="notifmailsubjupd-focus" class="col-sm-2">Order Shipped Update Subject</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="notifmailsubjupd-focus" placeholder="Order Update Shipped Subject" ng-model="main.stores[main.currentsite].config.params.notifications.order['shipping-update'].subject">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="notifmailsubjcan-focus" class="col-sm-2">Order Cancelled Subject</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="notifmailsubjcan-focus" placeholder="Order Cancelled Subject" ng-model="main.stores[main.currentsite].config.params.notifications.order.cancelled.subject">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="notifmailsubjret-focus" class="col-sm-2">Order Returned Subject</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="notifmailsubjret-focus" placeholder="Order Returned Subject" ng-model="main.stores[main.currentsite].config.params.notifications.order.return.subject">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="notifmailsubjretupd-focus" class="col-sm-2">Order Returned Update Subject</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="notifmailsubjretupd-focus" placeholder="Order Returned Update Subject" ng-model="main.stores[main.currentsite].config.params.notifications.order.returnupdate.subject">
+                      </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group">
+                      <label for="notifmailsubjpwdrst-focus" class="col-sm-2">Reset Password Subject</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="notifmailsubjpwdrst-focus" placeholder="Reset Password Subject" ng-model="main.stores[main.currentsite].config.params.notifications.order['customer-reset-password'].subject">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="notifmailsubjadminv-focus" class="col-sm-2">Admin Invitation Subject</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="notifmailsubjpwdrst-focus" placeholder="Admin Invitation Subject" ng-model="main.stores[main.currentsite].config.params.notifications.order['administrator-invitation'].subject">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="notifmailsubjfgtpwd-focus" class="col-sm-2">Admin Forgot-Password Subject </label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="notifmailsubjfgtpwd-focus" placeholder="Admin Forgot-Password Subject" ng-model="main.stores[main.currentsite].config.params.notifications.order['administrator-forgot-password'].subject">
+                      </div>
+                    </div>
+
+
+                    <button type="button" class="btn btn-primary btn-lg pull-right" ng-click="setConfig()"><i class="fa fa-spin fa-spinner" ng-show="loading"></i> Save Settings</button>
+                  </form>
+                </tab>
+
+                <tab heading="Emails">
+                  <form class="form-horizontal">
+
+                    <h1 class="text-thin">Amazon SES <i class="fa fa-question-circle" tooltip-placement="right" tooltip="Amazon Simple Email Service (Amazon SES) is a cost-effective outbound-only email-sending service built on the reliable and scalable infrastructure that Amazon.com has developed to serve its own customer base." tooltip-append-to-body="true"></i></h1>
+                    <hr>
+
+                    <div class="form-group">
+                      <label class="col-sm-2"></label>
+                      <div class="col-sm-10">
+                        <label class="ui-checkbox col-offset-sm-2"><input ng-model="main.stores[main.currentsite].config.params.email.useses" type="checkbox"><span>Enable</span></label>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="amazonsesacckey-focus" class="col-sm-2">Access Key</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="amazonsesacckey-focus" placeholder="Access Key" ng-model="main.stores[main.currentsite].config.components.ses.access_key">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="amazonsesseckey-focus" class="col-sm-2">Secret Key</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="amazonsesseckey-focus" placeholder="Secret Key" ng-model="main.stores[main.currentsite].config.components.ses.secret_key">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="amazonseshost-focus" class="col-sm-2">Host</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="amazonseshost-focus" placeholder="Host" ng-model="main.stores[main.currentsite].config.components.ses.host">
+                      </div>
+                    </div>
+
+                    <div style="min-height: 45px"><button type="button" class="btn btn-primary btn-lg pull-right" ng-click="setConfig()"><i class="fa fa-spin fa-spinner" ng-show="loading"></i> Save Settings</button></div>
+
+
+                    <h5>In order to use Amazon SES, you will need to validate your sending emails</h5>
+
+                    <hr>
+
+                    <div class="form-group">
+                      <label for="amazonsesmailvalid-focus" class="col-sm-2">Email Validation</label>
+                      <div class="col-sm-10">
+                        <div class="input-group">
+                          <input type="text" class="form-control" id="amazonsesmailvalid-focus" placeholder="Email Validation">
+                          <span class="input-group-btn">
+                            <button class="btn btn-success" type="button">Send Validation</button>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                  </form>
+                </tab>
+
+                <tab heading="Misc">
+                  <form class="form-horizontal">
+
+                    <a href="http://www.livechatinc.com/"><h1 class="text-thin text-info">Live Chat <i class="fa fa-question-circle" tooltip-placement="right" tooltip="Live Chat is an easy  way to get in touch with people on your website and point them in the right direction." tooltip-append-to-body="true"></i></h1></a>
+                    <hr>
+
+                    <div class="form-group">
+                      <label class="col-sm-2"></label>
+                      <div class="col-sm-10">
+                        <label class="ui-checkbox col-offset-sm-2"><input ng-model="main.stores[main.currentsite].config.params.live_chat.active_chat" type="checkbox"><span>Enable</span></label>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="liveckey-focus" class="col-sm-2">License Key</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="liveckey-focus" placeholder="License Key" ng-model="main.stores[main.currentsite].config.params.live_chat.chat_license">
+                      </div>
+                    </div>
+
+                    <h1 class="text-thin">Address <i class="fa fa-question-circle" tooltip-placement="right" tooltip="Provide to your customers an address to return their products." tooltip-append-to-body="true"></i></h1>
+                    <hr>
+
+                    <div class="form-group">
+                      <label for="addrstr-focus" class="col-sm-2">Street Line</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="addrstr-focus" placeholder="Street Line" ng-model="main.stores[main.currentsite].config.params.return_address.street_line1">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="addrcomp-focus" class="col-sm-2">Complement Address</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="addrcomp-focus" placeholder="Complement Address" ng-model="main.stores[main.currentsite].config.params.return_address.street_line2">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="addrcity-focus" class="col-sm-2">City</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="addrcity-focus" placeholder="City" ng-model="main.stores[main.currentsite].config.params.return_address.city">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="addrzip-focus" class="col-sm-2">Zip</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="addrzip-focus" placeholder="Zip" ng-model="main.stores[main.currentsite].config.params.return_address.zip">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="addrstate-focus" class="col-sm-2">State</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="addrstate-focus" placeholder="State" ng-model="main.stores[main.currentsite].config.params.return_address.state">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="addrcountry-focus" class="col-sm-2">Country</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="addrcountry-focus" placeholder="Country" ng-model="main.stores[main.currentsite].config.params.return_address.country">
+                      </div>
+                    </div>
+
+                    <h1 class="text-thin">Company Information</h1>
+                    <hr>
+
+                    <div class="form-group">
+                      <label for="compphne-focus" class="col-sm-2">Phone Number</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="compphne-focus" placeholder="Phone Number" ng-model="main.stores[main.currentsite].config.params.information.phone_number">
+                      </div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-lg pull-right" ng-click="setConfig()"><i class="fa fa-spin fa-spinner" ng-show="loading"></i> Save Settings</button>
+                </tab>
+              </tabset>
+        </div>
+    </section>
+</div>
