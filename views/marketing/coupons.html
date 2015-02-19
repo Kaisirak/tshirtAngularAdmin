@@ -1,8 +1,0 @@
-<div class="page page-table">
-
-  <section class="panel panel-default table-dynamic" ng-controller="TablesCtrl" ng-init="setTableName('coupon'); setContent(); setAllProperties(['id', 'status', 'code', 'date_modified']); setEditableProperties([{name: 'status', type: 'select', options: ['active', 'disabled']}, {name: 'code', type: 'text'}, {name: 'date_begins', type: 'date'}, {name: 'codes', type: 'text'}, {name: 'number_uses', type: 'number'}, {name:'single', type: 'number'}]);">
-    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> {{tableName}}</strong></div>
-    <dynamic-table></dynamic-table>
-  </section>
-
-</div>

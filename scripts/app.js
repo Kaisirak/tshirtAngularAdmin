@@ -1,46 +1,22 @@
 angular.module("app", ["ngRoute", "ngAnimate", "ngCookies", "ui.bootstrap", "easypiechart", "mgo-angular-wizard", "textAngular", "ui.tree", "ngMap", "ngTagsInput",
 "app.ui.ctrls", "app.ui.services", "app.controllers", "app.directives", "app.form.validation", "app.ui.form.ctrls",
-  "app.map", "app.tables", "app.task", "app.localization", "app.chart.ctrls", "app.page.ctrls", "app.filters", "daterangepicker"])
+  "app.map", "app.tables", "app.task", "app.chart.ctrls", "app.page.ctrls", "app.filters"])
 .config(["$routeProvider", "$httpProvider", function($routeProvider, $httpProvider) {
   /* ROUTING IS DONE HERE */
   $routeProvider.when("/", {redirectTo: "/dashboard"})
     .when("/dashboard", {templateUrl: "views/dashboard.html"})
-    .when("/404", {templateUrl: "views/misc/404.html"})
-    .when("/settings/sitesettings", {templateUrl: "views/settings/sitesettings.html"})
-    .when("/settings/users", {templateUrl: "views/settings/users.html"})
-    .when("/settings/shippingmethods", {templateUrl: "views/settings/shippingmethods.html"})
-    .when("/settings/fraudmanagement", {templateUrl: "views/settings/fraudmanagement.html"})
-    .when("/settings/taxes", {templateUrl: "views/settings/taxes.html"})
-    .when("/settings/tasks", {templateUrl: "views/settings/tasks.html"})
-    .when("/settings/files", {templateUrl: "views/settings/files.html"})
-    .when("/themes/templates", {templateUrl: "views/themes/templates.html"})
-    .when("/themes/mythemes", {templateUrl: "views/themes/mythemes.html"})
-    .when("/themes/mythemes/edit/:themeid", {templateUrl: "views/themes/edittheme.html"})
-    .when("/themes/themestore", {templateUrl: "views/themes/themestore.html"})
-    .when("/plugins/library", {templateUrl: "views/plugins/pluginslibrary.html"})
-    .when("/sitecontent/import", {templateUrl: "views/sitecontent/import.html"})
-    .when("/sitecontent/content", {templateUrl: "views/sitecontent/content.html"})
-    .when("/sitecontent/widgets", {templateUrl: "views/sitecontent/widgets.html"})
-    .when("/merchandise/categories", {templateUrl: "views/merchandise/categories.html"})
-    .when("/merchandise/collections", {templateUrl: "views/merchandise/collections.html"})
-    .when("/merchandise/products", {templateUrl: "views/merchandise/products.html"})
     .when("/orders", {templateUrl: "views/orders.html"})
+    .when("/artworks", {templateUrl: "views/artworks.html"})
+    .when("/sitesettings", {templateUrl: "views/sitesettings.html"})
+    .when("/customers", {templateUrl: "views/customers.html"})
+    .when("/reviews", {templateUrl: "views/reviews.html"})
+    .when("/files", {templateUrl: "views/files.html"})
+    .when("/products", {templateUrl: "views/products.html"})
     .when("/reports", {templateUrl: "views/reports.html"})
-    .when("/orders/:orderid", {templateUrl: "views/orders/view.html"})
-    .when("/orders/:orderid/snapshot/:snapid", {templateUrl: "views/orders/view.html"})
-    .when("/marketing/contact", {templateUrl: "views/marketing/contact.html"})
-    .when("/reports/item-sold", {templateUrl: "views/itemsold.html"})
-    .when("/reports/order-revenue", {templateUrl: "views/orderrevenue.html"})
-    .when("/reports/customer-revenue", {templateUrl: "views/customerrevenue.html"})
-    .when("/marketing/emailsubscribers", {templateUrl: "views/marketing/emailsubscribers.html"})
-    .when("/marketing/productreviews", {templateUrl: "views/marketing/productreviews.html"})
-    .when("/marketing/coupons", {templateUrl: "views/marketing/coupons.html"})
-    .when("/customers/customers", {templateUrl: "views/customers/customers.html"})
-    .when("/customers/registries", {templateUrl: "views/customers/registries.html"})
-    .when("/profile", {templateUrl: "views/misc/profile.html"})
-    .when("/signin", {templateUrl: "views/misc/signin.html"})
-    .when("/lock-screen", {templateUrl: "views/misc/lock-screen.html"})
-    .when("/forgot-password", {templateUrl: "views/misc/forgot-password.html"})
+    .when("/profile", {templateUrl: "views/profile.html"})
+    .when("/signin", {templateUrl: "views/signin.html"})
+    .when("/forgot-password", {templateUrl: "views/forgot-password.html"})
+    .when("/404", {templateUrl: "views/404.html"})
     .otherwise({redirectTo: "/404"});
 
     $httpProvider.interceptors.push(function($q, $rootScope, $location, $injector) {
@@ -48,8 +24,6 @@ angular.module("app", ["ngRoute", "ngAnimate", "ngCookies", "ui.bootstrap", "eas
         'request': function(config) {
           if ((config.method === 'GET' || config.method === 'POST' || config.method === 'PUT' || config.method === 'DELETE') && config.url.indexOf("/api/") > -1 && config.url.indexOf("access_token=") == -1)
           {
-              if ($rootScope.storePath == undefined)
-                  $location.path('/signin');
             config.url = "http://admin.acendev/preview/" + $rootScope.storePath + config.url;
             if ($rootScope.oauth)
             {
@@ -63,30 +37,11 @@ angular.module("app", ["ngRoute", "ngAnimate", "ngCookies", "ui.bootstrap", "eas
           return config;
         },
         'responseError': function(rejection) {
-            switch(rejection.status){
+          /*  switch(rejection.status){
                 case 401:
                     $location.path('/signin');
                     break;
-            }
-            /*
-                return $injector.get("$http").post('http://admin.acendev/preview/' + $rootScope.storePath + '/oauth/token', {username: "julesg@torreycommerce.com", password: "torreytorrey", grant_type: "password"}).then(
-                function(success){
-                  $rootScope.oauth = success.data.access_token;
-                  $
-                  var newReq = rejection.config;
-                  var testRes = rejection.config.url.match(/[^?]+/g);
-                  if (testRes && testRes[0])
-                    newReq.url = testRes[0];
-                //  rejection.config.headers['Authorization'] = 'Bearer ' + $rootScope.oauth;
-                  newReq.url += '?access_token=' + $rootScope.oauth;
-                  return $injector.get("$http")(newReq);
-                //  $rootScope.$broadcast('newtoken', rejection.config);
-                },
-                function(fail){
-                  console.log(fail);
-                }
-              );
-             */
+            } */
           return $q.reject(rejection);
         }
       }
@@ -110,164 +65,10 @@ angular.module("app", ["ngRoute", "ngAnimate", "ngCookies", "ui.bootstrap", "eas
   }
 }])
 
-/*/ OAUTH AUTOMATIC ACCESS TOKEN INJECTOR FOR $HTTP
-
-$httpProvider.interceptors.push(['$rootScope', '$q', '$injector','$location', function ($rootScope, $q, $injector, $location) {
-return function(promise) {
-return promise.then(
-function(response){ // SUCCESS
-return response;
-},
-function (response) { // IF ERROR -> CHECK IF ERROR 401 OR 403 UNAUTHORIZED
-if ((response.status === 401 || response.status === 403) && response.data.error)
-{
-var deferred = $q.defer(); // QUEUE DEFER TO WAIT WHEN ABLE TO REAUTH
-$injector.get("$http").post('http://admin.acendev/preview/" + $scope.storePath + "/oauth/token', {client_id: "testadmin@acenda.com", client_secret: "ab440de6e970afadff53830ca27ec14a", grant_type: "client_credentials"}).then(
-function(loginResponse) {
-if (loginResponse.data)
-{
-console.log("SETTING NEW TOKEN TO ROOT");
-$rootScope.oauth = angular.copy(loginResponse.data.access_token); // SET NEW TOKEN THEN RETRY
-console.log($rootScope.oauth);
-$injector.get("$http")(response.config).then(
-function(response) {
-deferred.resolve(response);
-},
-function(response) {
-deferred.reject(); // INJECTOR ERROR
-}
-);
-}
-else
-deferred.reject();
-},
-function(response) {
-deferred.reject(); // TOKEN RETRY FAILED
-$location.path('/signin');
-return;
-}
-);
-return deferred.promise;
-}
-return $q.reject(response); // QUEUE ERROR
-}
-);
-};
-}]
-);
-
-.run(['$rootScope', '$injector', function($rootScope, $injector) {
-  $injector.get("$http").defaults.transformRequest = function(data, headersGetter) {
-    if ($rootScope.oauth)
-    {
-      headersGetter()['Authorization'] = 'Bearer ' + $rootScope.oauth.access_token;
-    }
-    if (data)
-      return angular.toJson(data);
-  };
-}]);
-
-*/
-
-angular.module("app.localization", [])
-.factory("localize", ["$http", "$rootScope", "$window",
-  function($http, $rootScope, $window) {
-    var localize;
-    return localize = {
-    language: "",
-    url: void 0,
-    resourceFileLoaded: !1,
-    successCallback: function(data) {
-      return localize.dictionary = data, localize.resourceFileLoaded = !0, $rootScope.$broadcast("localizeResourcesUpdated")
-    },
-    setLanguage: function(value) {
-      return localize.language = value.toLowerCase()
-      .split("-")[0], localize.initLocalizedResources()
-    },
-    setUrl: function(value) {
-      return localize.url = value, localize.initLocalizedResources()
-    },
-    buildUrl: function() {
-      return localize.language || (localize.language = ($window.navigator.userLanguage || $window.navigator.language)
-      .toLowerCase(), localize.language = localize.language.split("-")[0]), "i18n/resources-locale_" + localize.language + ".js"
-    },
-    initLocalizedResources: function() {
-      var url;
-      return url = localize.url || localize.buildUrl(), $http({
-        method: "GET",
-        url: url,
-        cache: !1
-      })
-      .success(localize.successCallback)
-      .error(function() {
-        return $rootScope.$broadcast("localizeResourcesUpdated")
-      })
-    },
-    getLocalizedString: function(value) {
-      var result, valueLowerCase;
-      return result = void 0, localize.dictionary && value ? (valueLowerCase = value.toLowerCase(), result = "" === localize.dictionary[
-      valueLowerCase] ? value : localize.dictionary[valueLowerCase]) : result = value, result
-    }
-  }
-}])
-
-.controller("LangCtrl", ["$scope", "localize", function($scope, localize) {
-  return $scope.lang = "English", $scope.setLang = function(lang) {
-    switch (lang) {
-      case "English": localize.setLanguage("EN-US");
-        break;
-      case "Español": localize.setLanguage("ES-ES");
-        break;
-      case "日本語": localize.setLanguage("JA-JP");
-        break;
-      case "中文": localize.setLanguage("ZH-TW");
-        break;
-      case "Deutsch": localize.setLanguage("DE-DE");
-        break;
-      case "français": localize.setLanguage("FR-FR");
-        break;
-      case "Italiano": localize.setLanguage("IT-IT");
-        break;
-      case "Portugal": localize.setLanguage("PT-BR");
-        break;
-      case "Русский язык": localize.setLanguage("RU-RU");
-        break;
-      case "한국어": localize.setLanguage("KO-KR")
-      }
-      return $scope.lang = lang
-    },
-    $scope.getFlag = function() {
-      var lang;
-      switch (lang = $scope.lang) {
-        case "English": return "flags-american";
-        case "Español": return "flags-spain";
-        case "日本語": return "flags-japan";
-        case "中文": return "flags-china";
-        case "Deutsch": return "flags-germany";
-        case "français": return "flags-france";
-        case "Italiano": return "flags-italy";
-        case "Portugal": return "flags-portugal";
-        case "Русский язык": return "flags-russia";
-        case "한국어": return "flags-korea"
-      }
-    }
-}]);
-
 angular.module("app.controllers", [])
 .controller("AppCtrl", ["$rootScope", "$scope", "$location", "$http", "$rootScope", "$route", "$cookieStore","$modal", "$filter", "$window", "taskStorage", "filterFilter",
 function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore, $modal, $filter, $window, taskStorage, filterFilter) {
   var tasks;
-  $scope.mySites = [];
-  $scope.weeklyrevenue = 0.00;
-  $scope.weeklyreturns = 0;
-  $scope.weeklysignups = 0;
-  $scope.weeklyorders = 0;
-  $scope.storereadysteps = [];
-  $scope.storesteps = [];
-
-  $scope.messageList = [{author: "Test", text: "fsf fs fds fsdfdsfs", date_created: Date.now()},
-                        {author: "Test2", text: "fsf fsgggfd fsdfdsfs", date_created: Date.now()},
-                        {author: "Test3", text: "fsssaaaaaa  a a fs", date_created: Date.now()}];
 
   $scope.main = {
       brand: "Acenda",

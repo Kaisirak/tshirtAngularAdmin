@@ -1,8 +1,0 @@
-<div class="page page-table">
-
-  <section class="panel panel-default table-dynamic" ng-controller="TablesCtrl" ng-init="setTableName('registry'); setContent(); setAllProperties(['registry_name', 'first_name', 'last_name', 'event_date', 'privacy', 'item_count', 'date_created', 'date_modified']); setEditableProperties([{name:'name', type:'text'}, {name:'privacy', type:'checkbox'}, {name:'first_name', type:'text'}, {name:'event_date', type:'date'}, {name:'address_id', type:'number'}, {name:'customer_id', type:'number'}]);">
-    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> {{tableName}}</strong></div>
-    <dynamic-table></dynamic-table>
-  </section>
-
-</div>
