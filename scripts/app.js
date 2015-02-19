@@ -24,7 +24,7 @@ angular.module("app", ["ngRoute", "ngAnimate", "ngCookies", "ui.bootstrap", "eas
         'request': function(config) {
           if ((config.method === 'GET' || config.method === 'POST' || config.method === 'PUT' || config.method === 'DELETE') && config.url.indexOf("/api/") > -1 && config.url.indexOf("access_token=") == -1)
           {
-            config.url = "http://admin.acendev/preview/" + $rootScope.storePath + config.url;
+            config.url = "http://admin.acendev/preview/4bc4537e810d6daf5a84c19479139b59" + config.url;
             if ($rootScope.oauth)
             {
               if (config.url.indexOf("?") == -1)
@@ -81,76 +81,6 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       lastname: ""
   };
 
-  $scope.getDashboardData = function(){
-
-    var lastWeek = new Date();
-    lastWeek.setDate(lastWeek.getDate() - 7);
-
-    $http.get("/api/order?query=" + "{'status': 'shipped', 'date_created':{'$gt':'" + $filter('date')(lastWeek, "MM-dd-yyyy", 'UTC') + "'}}").then(
-      function(response){
-        var sum = 0;
-        for(var i = 0; i < response.data.result.length; i++)
-          sum += parseFloat(response.data.result[i].total);
-        $scope.weeklyrevenue = sum;
-      }, function(error){
-        console.log(error);
-      }
-    );
-
-    $http.get("/api/order?query=" + "'{'status':'pending'}'").then(
-      function(response){
-        $scope.weeklyorders = response.data.result.length;
-      }, function(error){
-        console.log(error);
-      }
-    );
-
-    $http.get("/api/orderreturn?query=" + "'{'status':'pending'}'").then(
-      function(response){
-        $scope.weeklyreturns = response.data.result.length;
-      }, function(error){
-        console.log(error);
-      }
-    );
-
-    $http.get("/api/customer?query=" + "{'date_created':{'$gt':'" + $filter('date')(lastWeek, "MM-dd-yyyy", 'UTC') + "'}}").then(
-      function(response){
-        $scope.weeklysignups = response.data.result.length;
-      }, function(error){
-        console.log(error);
-      }
-    );
-
-    $http.get("/api/setupprogress/getsteps").then(
-      function(response){
-        $scope.storesteps = response.data.result;
-        $http.get("/api/setupprogress/getreadysteps").then(
-          function(responseReady){
-            responseReady.data.result;
-            for(var i = 0; i < responseReady.data.result.length; i++)
-            {
-              $scope.storesteps[responseReady.data.result[i]].completed = true;
-            }
-            var size = 0;
-            for (var key in $scope.storesteps)
-            {
-              if ($scope.storesteps.hasOwnProperty(key))
-                size++;
-            }
-            $scope.main.stores[$scope.main.currentsite].percentwiz = (responseReady.data.result.length / size) * 100;
-          }, function(error){
-            console.log(error);
-          }
-        );
-      }, function(error){
-        console.log(error);
-      }
-    );
-
-  };
-
-  $scope.getDashboardData();
-
   $scope.goToWizard = function(index){
     console.log('/wizard/' + index);
 
@@ -166,27 +96,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
   }
 
   $scope.getUserData = function(callback){
-      $http.get('/api/clientaccount/me').then(
-          function(response){
-              angular.extend($scope.main, response.data.result);
-              $http.get('/api/site').success(function(sites){
-                  var length = 0;
-                  for(s in sites.result){
-                      $scope.main.stores[sites.result[s].name] = sites.result[s];
-                      if (sites.result[s].name == response.data.result.currentsite){ $scope.getConfig(); }
-                      length++;
-                  }
-                  $rootScope.storePath = md5($scope.main.stores[$scope.main.currentsite].name);
-                  $scope.main.stores_count = length;
-
-                  if (callback)
-                    callback();
-              });
-          },
-          function(error){
-              $rootScope.errorHandling()
-          }
-      );
+      angular.extend($scope.main, {lastname: "User", firstname: "Mein"});
   };
 
   $scope.getConfig = function(){

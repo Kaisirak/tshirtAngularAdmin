@@ -9,7 +9,7 @@
                     <i class="fa fa-money"></i>
                 </span>
                 <div class="box-info">
-                    <p class="size-h2">{{weeklyrevenue | currency}}</p>
+                    <p class="size-h2">23</p>
                 </div>
                 <p class="text-muted">dollars since last week</p>
             </div>
@@ -21,7 +21,7 @@
                     <i class="fa fa-credit-card"></i>
                 </span>
                 <div class="box-info">
-                    <p class="size-h2">{{weeklyorders}}</p>
+                    <p class="size-h2">34</p>
                 </div>
                 <p class="text-muted">orders pending</p>
             </div>
@@ -33,7 +33,7 @@
                     <i class="fa fa-reply"></i>
                 </span>
                 <div class="box-info">
-                    <p class="size-h2">{{weeklyreturns}}</p>
+                    <p class="size-h2">45</p>
                 </div>
                 <p class="text-muted">returns since last week</p>
             </div>
@@ -45,7 +45,7 @@
                     <i class="fa fa-users"></i>
                 </span>
                 <div class="box-info">
-                    <p class="size-h2">{{weeklysignups}}</p>
+                    <p class="size-h2">56</p>
                 </div>
                 <p class="text-muted">signups since last week</p>
             </div>
@@ -79,12 +79,12 @@
     </div>
 
     <div class="panel panel-default">
-      <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Checklist for {{main.stores[main.currentsite].name}}</strong></div>
+      <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Checklist for</strong></div>
       <div class="panel-body">
         <div class="row">
           <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
             <div class="btn-group-vertical btn-group-lg" style="width:100%">
-              <button ng-repeat="(key, val) in storesteps" ng-click="goToWizard(key)" class="btn" style="text-align: left;" ng-class="{'btn-success': val.completed, 'btn-info': !val.completed}">{{$index + 1}} - <b>{{key | wizardstep}}</b> <span class="badge badge-success pull-right" ng-show="val.completed"><i class="fa fa-check"></i> Completed</span></button>
+              
             </div>
           </div>
         </div>
