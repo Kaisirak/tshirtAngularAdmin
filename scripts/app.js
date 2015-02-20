@@ -24,7 +24,7 @@ angular.module("app", ["ngRoute", "ngAnimate", "ngCookies", "ui.bootstrap", "eas
         'request': function(config) {
           if ((config.method === 'GET' || config.method === 'POST' || config.method === 'PUT' || config.method === 'DELETE') && config.url.indexOf("/api/") > -1 && config.url.indexOf("access_token=") == -1)
           {
-            config.url = "http://admin.acendev/preview/4bc4537e810d6daf5a84c19479139b59" + config.url;
+            config.url = "http://api.shirtfull.com" + config.url;
             if ($rootScope.oauth)
             {
               if (config.url.indexOf("?") == -1)
@@ -37,11 +37,11 @@ angular.module("app", ["ngRoute", "ngAnimate", "ngCookies", "ui.bootstrap", "eas
           return config;
         },
         'responseError': function(rejection) {
-          /*  switch(rejection.status){
+            switch(rejection.status){
                 case 401:
                     $location.path('/signin');
                     break;
-            } */
+            } 
           return $q.reject(rejection);
         }
       }
@@ -71,7 +71,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
   var tasks;
 
   $scope.main = {
-      brand: "Acenda",
+      brand: "ShirtNexus",
       email: "",
       phone: "",
       stores: {},
@@ -81,24 +81,28 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       lastname: ""
   };
 
+  /*
   $scope.goToWizard = function(index){
     console.log('/wizard/' + index);
 
   // IMPLEMENT THE LOCATION RELOAD
   };
-
+  */
+  /*
   $scope.displaySiteLinks = function(){
       $("#view_site_").slideDown("fast");
   }
-
+  */
+  /*
   $scope.hideSiteLinks = function(){
       $("#view_site_").slideUp("fast");
   }
-
+  */
   $scope.getUserData = function(callback){
       angular.extend($scope.main, {lastname: "User", firstname: "Mein"});
   };
 
+/*
   $scope.getConfig = function(){
     $http.get('/api/config').then(
       function(response){
@@ -112,7 +116,8 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       }
     );
   };
-
+*/
+/*
   $scope.setConfig = function(){
     var tmp = angular.copy($scope.config);
     if (tmp.params.seo.keywords)
@@ -127,18 +132,19 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       }
     );
   };
-
+*/
   $scope.isSpecificPage = function() {
     var path;
     return path = $location.path(), _.contains(["/404", "/500", "/login", "/signin", "/signin1", "/signin2",
     "/signup", "/signup1", "/signup2", "/forgot-password", "/lock-screen"
     ], path)
   };
-
+/*
   tasks = $scope.tasks = taskStorage.get();
   $scope.taskRemainingCount = filterFilter(tasks, {completed: !1}).length;
   $scope.storesCount = 0;
-
+*/
+/*
   $scope.selectStore = function(newCurStore){
     $scope.main.currentsite = newCurStore;
 
@@ -151,7 +157,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
     $rootScope.storePath = md5(newCurStore);
     $location.path('/');
   };
-
+*/
   $scope.openProfileEdit = function() {
     var modalInstance = $modal.open({
       templateUrl: "modalEditProfile.html",
@@ -164,6 +170,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
     });
     modalInstance.result.then(
       function(newProfileInfo) {
+        /*
         $http.put('/api/clientaccount/' + $scope.main.id, {
             lastname:newProfileInfo.lastname,
             firstname: newProfileInfo.firstname,
@@ -176,7 +183,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
           function(error){
             console.log(error);
           }
-        );
+        );*/
       },
       function() {
         console.log("Cancelled Editing Info");
@@ -185,16 +192,19 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
   };
 
   $scope.tryLogin = function(testLogin, testPassword){
-    $http.post('http://acenda.acendev/oauth/token', {username: testLogin, password: testPassword, grant_type: "password"}).then(
+    $http.post('http://api.shirtfull.com/login', {username: testLogin, password: testPassword}).then(
       function(success){
         if (success)
         {
-          $rootScope.oauth = success.data.access_token;
-          $rootScope.refresh_oauth = success.data.refresh_token;
-          $cookieStore.put('myaccess_token', success.data.access_token);
-          $cookieStore.put('myrefresh_token', success.data.refresh_token);
-          $rootScope.storePath = success.data.site; // Already encrypted
-          $cookieStore.put('store_path', success.data.site);
+          console.log(success);
+          $rootScope.oauth = success.data._token;
+          $rootScope.client_id = success.data._client_id;
+          $rootScope.roles = success.data._roles;
+          //$rootScope.refresh_oauth = success.data.refresh_token;
+          $cookieStore.put('myaccess_token', success.data._token);
+          //$cookieStore.put('myrefresh_token', success.data.refresh_token);
+          //$rootScope.storePath = success.data.site; // Already encrypted
+          //$cookieStore.put('store_path', success.data.site);
           $scope.getUserData(function(){
               $location.path('/dashboard');
               $window.location.reload();
@@ -250,7 +260,7 @@ function($scope, taskStorage, filterFilter) {
   $scope.$on("order:changed", function(event, count) {return $scope.ordersCount = count })
 }
 ])
-
+/*
 .controller("SiteSettingsCtrl", ["$scope", "$http",
 function($scope, $http) {
   //GENERAL
@@ -376,3 +386,4 @@ function($scope, $http) {
   };
 
 }])
+*/
