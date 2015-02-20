@@ -115,7 +115,7 @@ angular.module("app.tables", [])
   };
 
   $scope.setContent = function(){
-    $http.get('/api/' + $scope.tableName).then(
+    $http.get('/' + 'categories').then(//$scope.tableName
       function(response) {
         // SET CONTENT
         //console.log(response);
