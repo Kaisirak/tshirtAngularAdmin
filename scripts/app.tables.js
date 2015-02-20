@@ -115,15 +115,15 @@ angular.module("app.tables", [])
   };
 
   $scope.setContent = function(){
-    $http.get('/' + 'categories').then(//$scope.tableName
+    $http.get("http://api.shirtnexus.com/" + $scope.tableName).then(
       function(response) {
         // SET CONTENT
         //console.log(response);
-        if (response.data.code == 400 && response.data.status == "Bad Request")
+        if (response.status == 400 && response.statusText == "Bad Request")
           console.log(response.data.error);
-        else if (response.data.code == 200)
+        else if (response.status == 200)
         {
-          $scope.content = angular.copy(response.data.result);
+          $scope.content = angular.copy(response.data);
           $scope.loaded = true;
         }
         //REFRESH TABLE
