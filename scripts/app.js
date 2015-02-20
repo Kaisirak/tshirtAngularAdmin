@@ -1,8 +1,9 @@
 angular.module("app", ["ngRoute", "ngAnimate", "ngCookies", "ui.bootstrap", "easypiechart", "mgo-angular-wizard", "textAngular", "ui.tree", "ngMap", "ngTagsInput",
 "app.ui.ctrls", "app.ui.services", "app.controllers", "app.directives", "app.form.validation", "app.ui.form.ctrls",
   "app.map", "app.tables", "app.task", "app.chart.ctrls", "app.page.ctrls", "app.filters"])
-.config(["$routeProvider", "$httpProvider", function($routeProvider, $httpProvider) {
+.config(["$routeProvider", "$httpProvider", "$locationProvider", function($routeProvider, $httpProvider, $locationProvider) {
   /* ROUTING IS DONE HERE */
+
   $routeProvider.when("/", {redirectTo: "/dashboard"})
     .when("/dashboard", {templateUrl: "views/dashboard.html"})
     .when("/orders", {templateUrl: "views/orders.html"})
@@ -19,10 +20,12 @@ angular.module("app", ["ngRoute", "ngAnimate", "ngCookies", "ui.bootstrap", "eas
     .when("/404", {templateUrl: "views/404.html"})
     .otherwise({redirectTo: "/404"});
 
+    $locationProvider.html5Mode(true);
+
     $httpProvider.interceptors.push(function($q, $rootScope, $location, $injector) {
       return {
         'request': function(config) {
-          if ((config.method === 'GET' || config.method === 'POST' || config.method === 'PUT' || config.method === 'DELETE') && config.url.indexOf("/api/") > -1 && config.url.indexOf("access_token=") == -1)
+          if ((config.method === 'GET' || config.method === 'POST' || config.method === 'PUT' || config.method === 'DELETE') && config.url.indexOf("api.") > -1 && config.url.indexOf("access_token=") == -1)
           {
             config.url = "http://api.shirtfull.com" + config.url;
             if ($rootScope.oauth)
@@ -41,7 +44,7 @@ angular.module("app", ["ngRoute", "ngAnimate", "ngCookies", "ui.bootstrap", "eas
                 case 401:
                     $location.path('/signin');
                     break;
-            } 
+            }
           return $q.reject(rejection);
         }
       }
