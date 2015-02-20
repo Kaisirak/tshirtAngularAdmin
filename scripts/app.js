@@ -25,9 +25,11 @@ angular.module("app", ["ngRoute", "ngAnimate", "ngCookies", "ui.bootstrap", "eas
     $httpProvider.interceptors.push(function($q, $rootScope, $location, $injector) {
       return {
         'request': function(config) {
+          if (!$rootScope.oauth)
+              $location.path('/signin');
           if ((config.method === 'GET' || config.method === 'POST' || config.method === 'PUT' || config.method === 'DELETE') && config.url.indexOf("api.") > -1 && config.url.indexOf("access_token=") == -1)
           {
-            config.url = "http://api.shirtfull.com" + config.url;
+            //config.url = "http://api.shirtfull.com" + config.url;
             if ($rootScope.oauth)
             {
               if (config.url.indexOf("?") == -1)
@@ -208,10 +210,13 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
           //$cookieStore.put('myrefresh_token', success.data.refresh_token);
           //$rootScope.storePath = success.data.site; // Already encrypted
           //$cookieStore.put('store_path', success.data.site);
+          $location.path('/dashboard');
+          /*
           $scope.getUserData(function(){
               $location.path('/dashboard');
               $window.location.reload();
           });
+          */
         }
         else
         {
