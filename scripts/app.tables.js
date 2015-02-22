@@ -115,10 +115,10 @@ angular.module("app.tables", [])
   };
 
   $scope.setContent = function(){
-    $http.get("http://api.shirtnexus.com/" + $scope.tableName).then(
+    $http.get($scope.main.api_url+"/"+$scope.tableName).then(
       function(response) {
         // SET CONTENT
-        //console.log(response);
+        console.log(response);
         if (response.status == 400 && response.statusText == "Bad Request")
           console.log(response.data.error);
         else if (response.status == 200)

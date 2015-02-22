@@ -74,6 +74,12 @@ angular.module("app.controllers", [])
 .controller("AppCtrl", ["$rootScope", "$scope", "$location", "$http", "$rootScope", "$route", "$cookieStore","$modal", "$filter", "$window", "taskStorage", "filterFilter",
 function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore, $modal, $filter, $window, taskStorage, filterFilter) {
   var tasks;
+  var apiurl = '';
+
+  if ($location.host() == 'tshirtadmin.local')
+      apiurl = 'tshirt.local';
+  else
+      apiurl = 'api.shirtnexus.com';
 
   $scope.main = {
       brand: "ShirtNexus",
@@ -83,7 +89,8 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       stores_count: 0,
       currentsite: "",
       firstname: "",
-      lastname: ""
+      lastname: "",
+      api_url: apiurl
   };
 
   /*
@@ -197,7 +204,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
   };
 
   $scope.tryLogin = function(testLogin, testPassword){
-    $http.post('http://api.shirtfull.com/login', {username: testLogin, password: testPassword}).then(
+    $http.post($scope.main.api_url+'/login', {username: testLogin, password: testPassword}).then(
       function(success){
         if (success)
         {
