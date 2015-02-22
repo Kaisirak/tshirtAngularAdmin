@@ -77,9 +77,9 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
   var apiurl = '';
 
   if ($location.host() == 'tshirtadmin.local')
-      apiurl = 'tshirt.local';
+      apiurl = 'http://tshirt.local';
   else
-      apiurl = 'api.shirtnexus.com';
+      apiurl = 'http://api.shirtnexus.com';
 
   $scope.main = {
       brand: "ShirtNexus",
