@@ -1,6 +1,6 @@
 <div class="page page-table">
 
-  <section class="panel panel-default table-dynamic" ng-controller="TablesCtrl" ng-init="setTableName('products'); setContent(); setAllProperties(['categoryId', 'family', 'name','type','url', 'image']); setDisplayOnly();">
+  <section class="panel panel-default table-dynamic" ng-controller="TablesCtrl" ng-init="setTableName('categories'); setContent('categories'); setAllProperties(['type', 'name']); setDisplayOnly();">
     <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> {{tableName}}</strong></div>
     <dynamic-table></dynamic-table>
   </section>

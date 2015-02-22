@@ -4,8 +4,8 @@ angular.module("app.tables", [])
 /* MODULAR TABLES DYNAMIC TEST  */
 /********************************/
 
-.controller("TablesCtrl", ["$scope", "$filter", "$http", "$modal", "$sce", "$rootScope",
-  function($scope, $filter, $http, $modal, $sce, $rootScope) {
+.controller("TablesCtrl", ["$scope", "$filter", "$http", "$modal", "$sce", "$rootScope", "$routeParams",
+  function($scope, $filter, $http, $modal, $sce, $rootScope,$routeParams) {
   var init;
 
   $scope.loaded = false;
@@ -114,8 +114,15 @@ angular.module("app.tables", [])
     $scope.customOrder = true;
   };
 
-  $scope.setContent = function(){
-    $http.get($scope.main.api_url+"/"+$scope.tableName).then(
+  $scope.setContent = function(ApiRoute){
+    ApiRoute = typeof ApiRoute !== 'undefined' && ApiRoute !== '' ? ApiRoute : $scope.tableName;
+    var url = "";
+    if ($routeParams.param)
+        url = $scope.main.api_url+"/"+ApiRoute+"/"+$routeParams.param;
+    else
+        url = $scope.main.api_url+"/"+ApiRoute;
+      console.log('uRl : '+url);
+    $http.get(url).then(
       function(response) {
         // SET CONTENT
         console.log(response);
