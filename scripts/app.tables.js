@@ -120,7 +120,7 @@ angular.module("app.tables", [])
     $scope.customOrder = true;
   };
 
-  $scope.setContent = function(ApiRoute){
+  $scope.setContent = function(ApiRoute,SubContent){
     ApiRoute = typeof ApiRoute !== 'undefined' && ApiRoute !== '' ? ApiRoute : $scope.tableName;
     var url = "";
     if ($routeParams.param)
@@ -136,7 +136,10 @@ angular.module("app.tables", [])
           console.log(response.data.error);
         else if (response.status == 200)
         {
-          $scope.content = angular.copy(response.data);
+          if (typeof SubContent !== 'undefined' && SubContent !== '')
+            $scope.content = angular.copy(response.data[SubContent]);
+          else
+            $scope.content = angular.copy(response.data);
           $scope.loaded = true;
         }
         //REFRESH TABLE
