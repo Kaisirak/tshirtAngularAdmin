@@ -106,7 +106,9 @@ angular.module("app.tables", [])
     else if (myproperty == 'url')
       return("<a href='" + mystore[myproperty] + "'>" + mystore[myproperty] + "</a>");
     else if (myproperty == 'image')
-      return("<img class='img-responsive' src='" + mystore[myproperty].url + "'>"); 
+      return("<img class='img-responsive' src='" + mystore[myproperty].url + "'>");
+    else if (myproperty == 'internal_link')
+      return ("<a href='category/" + mystore[categoryId] + "'>" + mystore[categoryId] + "</a>");
     else
       return (mystore[myproperty]);
   };
