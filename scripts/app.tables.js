@@ -103,6 +103,8 @@ angular.module("app.tables", [])
       return ($filter('date')(mystore[myproperty], "MM-dd-yyyy 'at' h:mma", 'UTC'));
     else if (myproperty == 'returnsPending')
       return ($filter('date')(mystore[myproperty], "MMMM-dd-yyyy", 'UTC'));
+    else if (myproperty == 'name')
+      return("<a href='" + mystore[myproperty] + "'>LINKU</a>");  
     else
       return (mystore[myproperty]);
   };
