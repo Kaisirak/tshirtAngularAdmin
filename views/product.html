@@ -16,6 +16,28 @@
         		<div class="form-group">
         			<button class="btn btn-lg btn-primary" type="button" id="delBtn" style="width:100%"><i class="fa fa-trash"></i> Remove</button>
         		</div>
+
+            <div class="form-group">
+		<label>Color</label>
+		<ul class="color-container">
+			<li ng-repeat="color in designerCtrl.colors | orderBy:'hsl.l'" ng-click="designerCtrl.setColor(color.id)" class="color-preview" title="{{color.name}}" style="background-color:{{color.value}};"></li>
+		</ul>
+		</div>
+
+		<div class="form-group">
+			<label>Size</label>
+			<select class="form-control" ng-model="designerCtrl.curSelectedSize">
+				<option ng-repeat="value in designerCtrl.possibleSizes" value="value">{{value}}</option>
+			</select>
+		</div>
+		<div class="checkbox">
+			<label><input id="btnBack" type="checkbox" name="back" value="back" ng-model="designerCtrl.isBackDesign" ng-click="designerCtrl.showFront()"> <b>Design Back</b></label>
+		</div>
+
+		<div class="form-group">
+			<label>Description</label>
+			<p>{{ designerCtrl.selectedDescription }}</p>
+		</div>
         	</div>
         </div>
         <div class="col-sm-6">
