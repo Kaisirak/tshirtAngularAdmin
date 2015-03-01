@@ -257,6 +257,118 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 }
 ])
 
+.controller('designerCtrl', ["$http", "$routeParams", "$scope", function($http,$routeParams,$scope) {
+
+		this.productsSameCategory = [];
+		this.selectedDescription = "";
+		this.colors = [];
+		this.images = [];
+		this.sizes = [];
+		this.selectedColor = 0;
+		this.possibleSizes = [];
+		//var mainProductList = [ 'Hoodies','Short Sleeve Shirts','Long Sleeve Shirts','Mugs','Phone cases','Sweatshirts' ];
+		//console.log('Params: '+$routeParams.product);
+		var myThis = this;
+
+		$http.get($scope.main.api_url+'/products/'+$routeParams.product).
+			success(function(data, status, headers, config) {
+				console.log(data);
+				angular.forEach(data.colors, function(color, key) {
+					myThis.colors.push( { name : color.name, id : color.hex, value: '#'+color.hex, hsl : rgbToHsl(color.hex) } );
+					myThis.images[color.hex] = [];
+					myThis.sizes[color.hex] = color.sizes;
+					angular.forEach(color.images, function(image, key) {
+						myThis.images[color.hex][angular.lowercase(image.label)] = image.url;
+					});
+					if (!myThis.selectedColor)
+						myThis.setColor(color.hex);
+					if (!myThis.possibleSizes.length)
+						myThis.possibleSizes = color.sizes;
+				});
+				myThis.selectedDescription = data.description;
+				console.log(myThis.sizes);
+				console.log(myThis.possibleSizes);
+			}).
+			error(function(data, status, headers, config) {
+			 	console.log(data);
+	  	});
+
+		this.types = [
+			{name: 'Short Sleeve', id: 1, price: 10, sizes: ['SM', 'LG', 'XL'], img_path: ['crew_front.png', 'crew_back.png']},
+			{name: 'Long Sleeve', id: 0, price: 15, sizes: ['SM', 'MED', 'LG'], img_path: ['long_front.png', 'long_back.png']} ,
+			{name: 'Hoodie', id: 2, price: 19, sizes: ['SM','MED', 'XL','XXL'], img_path: ['hoodie_front.png', 'hoodie_back.png']},
+			{name: 'Tank Top', id: 3, price: 14, sizes: ['XS','SM', 'MED'], img_path: ['tank_front.png', 'tank_back.png']}
+		];
+
+
+		/*this.frontPrice = 5;
+		this.backPrice = 5;
+		this.curSelectedId = 0;
+		this.isBackDesign = false;
+		this.curSelected = this.types[0];
+		this.curSelectedSize = this.curSelected.sizes[0];
+		this.selectedColor = 2;*/
+
+		this.designerImgUrl = "";
+
+		this.setColor = function(hex) {
+			this.selectedColor = hex;
+			this.setImage(hex, 'front');
+			this.setSizes(hex, 'front');
+		};
+
+		this.showFront = function() {
+			$(".behind-product").css("background-image", "url('img/" + this.curSelected.img_path[0] + "')");
+		};
+
+		this.showBack = function() {
+			$(".behind-product").css("background-image", "url('img/" + this.curSelected.img_path[1] + "')");
+		};
+
+		this.completeName = function() {
+			return (this.curSelectedSize + " " + this.colors[this.selectedColor].name + " " + this.curSelected.name);
+		};
+
+		this.setImage = function(hex, position) {
+			this.designerImgUrl = this.images[hex][position];
+			$(".behind-product").css("background-image", "url('" + this.designerImgUrl + "')");
+		};
+
+		this.setSizes = function(hex) {
+
+		}
+
+		this.update = function() {
+			console.log(this.selectedProduct);
+			/*
+			this.curSelected = queryProd(this.types, this.curSelectedId);
+			if ($("#versoBtn").hasClass('active') == false) {
+				$("#preloadFront").one('load', function() {
+					$(".behind-product").css("background-image", "url('" + $(this).attr('src') + "')");
+					$("#preloadBack").attr('src', $(this).attr('src').replace('_front', '_back'));
+		       	})
+		    	.attr('src', "img/" + this.curSelected.img_path[0]) //Set the source so it caches
+		        .each(function() {
+		        	if(this.complete)
+		        		$(this).trigger('load');
+				});
+			}
+			else {
+				$("#preloadFront").one('load', function() {
+					$(".behind-product").css("background-image", "url('" + $(this).attr('src') + "')");
+					$("#preloadFront").attr('src', $(this).attr('src').replace('_back', '_front'));
+		        })
+		        .attr('src', "img/" + this.curSelected.img_path[1]) //Set the source so it caches
+		        .each(function() {
+		        if(this.complete)
+		        	$(this).trigger('load');
+				});
+			}
+			//$(".behind-product").css("background-image", "url('img/" + this.curSelected.img_path[($("#versoBtn").hasClass('active') == true?1:0)] + "')");
+			this.curSelectedSize = this.curSelected.sizes[0];*/
+		};
+	}])
+
 .controller("ModalEditProfileCtrl", ["$scope", "$modalInstance", "profileInfo",
 function($scope, $modalInstance, profileInfo) {
   $scope.infoToAdd = angular.copy(profileInfo);
