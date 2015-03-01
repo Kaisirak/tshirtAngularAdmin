@@ -1,7 +1,7 @@
 <div class="page page-table">
 
   <section class="panel panel-default" id="onlinedesigner" ng-controller="designerCtrl">
-    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> {{tableName}}</strong></div>
+    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> ONLINE DESIGNER</strong></div>
 
     <div class="panel-body">
       <div class="row">
@@ -45,8 +45,8 @@
               <div class="btn-group">
                 <span class="input-group" style="max-width: 190px;">
                   <span class="input-group-addon"><i class="fa fa-font"></i></span>
-                  <div class="btn-group" style="width: 100%; max-width: 160px;">
-                    <button id="txtFamily" class="btn btn-default dropdown-toggle font-dropdown" data-toggle="dropdown" disabled>
+                  <div class="btn-group" style="width: 100%; max-width: 160px;" dropdown="" is-open="status.isopen">
+                    <button id="txtFamily" class="btn btn-default dropdown-toggle font-dropdown" aria-haspopup="true" aria-expanded="false" disabled>
                       <span class="caret" style="position: relative; left: 97%;"></span><span id="txtFont">Times New Roman</span>
                     </button>
                     <ul id="fontSelector" class="dropdown-menu" role="menu">
