@@ -4,42 +4,56 @@
     <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> {{tableName}}</strong></div>
 
     <div class="panel-body">
-    <div class="col-sm-6">
-        <div class="edit-text-box">
-          <div class="btn-group">
-            <span class="input-group" style="max-width: 190px;">
-              <span class="input-group-addon"><i class="fa fa-font"></i></span>
-              <div class="btn-group" style="width: 100%; max-width: 160px;">
-                <button id="txtFamily" class="btn btn-default dropdown-toggle font-dropdown" data-toggle="dropdown" disabled>
-                  <span class="caret" style="position: relative; left: 97%;"></span><span id="txtFont">Times New Roman</span>
-                </button>
-                <ul id="fontSelector" class="dropdown-menu" role="menu">
-                </ul>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="well well-lg">
+        		<div class="form-group">
+        			<div class="input-file-container btn btn-lg btn-primary" style="width:100%"><i class="fa fa-file-picture-o"></i> Add Image<input id="imgLoader" type="file"/></div>
+        		</div>
+        		<div class="form-group">
+        			<button class="btn btn-lg btn-primary" type="button" id="crtBtn" style="width:100%"><i class="fa fa-pencil"></i> Add Text</button>
+        		</div>
+        		<div class="form-group">
+        			<button class="btn btn-lg btn-primary" type="button" id="delBtn" style="width:100%"><i class="fa fa-trash"></i> Remove</button>
+        		</div>
+        	</div>
+        </div>
+        <div class="col-sm-6">
+            <div class="edit-text-box">
+              <div class="btn-group">
+                <span class="input-group" style="max-width: 190px;">
+                  <span class="input-group-addon"><i class="fa fa-font"></i></span>
+                  <div class="btn-group" style="width: 100%; max-width: 160px;">
+                    <button id="txtFamily" class="btn btn-default dropdown-toggle font-dropdown" data-toggle="dropdown" disabled>
+                      <span class="caret" style="position: relative; left: 97%;"></span><span id="txtFont">Times New Roman</span>
+                    </button>
+                    <ul id="fontSelector" class="dropdown-menu" role="menu">
+                    </ul>
+                  </div>
+                </span>
               </div>
-            </span>
+              <div class="btn-group btn-group-mar">
+                <button type="button" id="txtWeight" data-toggle="tooltip" title="Bold" class="btn btn-default btn-tooltip" disabled><i class="fa fa-bold"></i></button>
+                <button type="button" id="txtDeco" data-toggle="tooltip" title="Underline" class="btn btn-default btn-tooltip" disabled><i class="fa fa-underline"></i></button>
+                <button type="button" id="txtStyle" data-toggle="tooltip" title="Italic" class="btn btn-default btn-tooltip" disabled><i class="fa fa-italic"></i></button>
+                <button type="button" id="txtColor" class="btn btn-default" style="padding: 5px 8px;"><div id="colorpick-outer" disabled><span id="colorpick-inner"></span></div></button>
+              </div>
+              <div class="btn-group btn-group-mar">
+                <button type="button" id="stbBtn" data-toggle="tooltip" title="Send Backward" class="btn btn-default btn-tooltip" disabled><i class="fa fa-angle-double-up"></i></button>
+                <button type="button" id="stfBtn" data-toggle="tooltip" title="Bring Forward" class="btn btn-default btn-tooltip" disabled><i class="fa fa-angle-double-down"></i></button>
+                <button type="button" id="mkCpy" data-toggle="tooltip" title="Clone Object" class="btn btn-default btn-tooltip" disabled><i class="fa fa-copy"></i></button>
+              </div>
+            </div>
+            <div class="behind-product">
+              <img id="preloadFront" src="" width="1" height="1"/>
+              <img id="preloadBack" src="" width="1" height="1"/>
+              <canvas id="c" width="225" height="430" fabric-canvas></canvas>
+            </div>
+            <div class="btn-group btn-side">
+              <button type="button" id="rectoBtn" ng-click="designerCtrl.showFront()" class="btn btn-info active">FRONT</button>
+              <button ng-show="designerCtrl.isBackDesign" ng-click="designerCtrl.showBack()" type="button" id="versoBtn" class="btn btn-info">BACK</button>
+            </div>
           </div>
-          <div class="btn-group btn-group-mar">
-            <button type="button" id="txtWeight" data-toggle="tooltip" title="Bold" class="btn btn-default btn-tooltip" disabled><i class="fa fa-bold"></i></button>
-            <button type="button" id="txtDeco" data-toggle="tooltip" title="Underline" class="btn btn-default btn-tooltip" disabled><i class="fa fa-underline"></i></button>
-            <button type="button" id="txtStyle" data-toggle="tooltip" title="Italic" class="btn btn-default btn-tooltip" disabled><i class="fa fa-italic"></i></button>
-            <button type="button" id="txtColor" class="btn btn-default" style="padding: 5px 8px;"><div id="colorpick-outer" disabled><span id="colorpick-inner"></span></div></button>
-          </div>
-          <div class="btn-group btn-group-mar">
-            <button type="button" id="stbBtn" data-toggle="tooltip" title="Send Backward" class="btn btn-default btn-tooltip" disabled><i class="fa fa-angle-double-up"></i></button>
-            <button type="button" id="stfBtn" data-toggle="tooltip" title="Bring Forward" class="btn btn-default btn-tooltip" disabled><i class="fa fa-angle-double-down"></i></button>
-            <button type="button" id="mkCpy" data-toggle="tooltip" title="Clone Object" class="btn btn-default btn-tooltip" disabled><i class="fa fa-copy"></i></button>
-          </div>
-        </div>
-        <div class="behind-product">
-          <img id="preloadFront" src="" width="1" height="1"/>
-          <img id="preloadBack" src="" width="1" height="1"/>
-          <canvas id="c" width="225" height="430" fabric-canvas></canvas>
-        </div>
-        <div class="btn-group btn-side">
-          <button type="button" id="rectoBtn" ng-click="designerCtrl.showFront()" class="btn btn-info active">FRONT</button>
-          <button ng-show="designerCtrl.isBackDesign" ng-click="designerCtrl.showBack()" type="button" id="versoBtn" class="btn btn-info">BACK</button>
-        </div>
-      </div>
     </div>
 
   </section>
