@@ -905,6 +905,17 @@ angular.module("app.directives", [])
         }
         ])
 
+        .directive('toggleClass', function() {
+            return {
+              restrict: 'A',
+              link: function(scope, element, attrs) {
+                element.bind('click', function() {
+                  element.toggleClass(attrs.toggleClass);
+                });
+              }
+            };
+          })
+
         .directive('customChart', function(){
           return{
             restrict: 'A',
