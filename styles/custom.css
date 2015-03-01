@@ -80,3 +80,190 @@ legend.item-border {
   background-repeat: no-repeat;
   background-position: center center;
 }
+
+/* DESIGNER */
+
+a {
+	transition: color 0.5s, background-color 0.5s;
+}
+
+.angular-smooth-anim {
+	opacity: 1 !important;
+}
+
+.angular-smooth-anim.ng-hide {
+	opacity: 0 !important;
+}
+
+.angular-smooth-anim.ng-hide-remove.ng-hide-remove-active {
+	display:none !important;
+}
+
+.angular-smooth-anim {
+	transition: all 0.25s ease-in-out;
+}
+
+.header-title {
+	font-weight: bold;
+	color: #1b82b4;
+}
+
+.edit-text-box {
+	min-height:36px;
+	padding:5px;
+}
+
+.cart-title {
+	color: #25a7cd;
+	font-weight: bold;
+	padding-left: calc(50% - 40px);
+	margin: 0 0 25px 0;
+}
+
+.color-preview {
+	border: 2px solid #FFF;
+	box-shadow: 0px 0px 5px #888;
+	margin: 2px;
+	vertical-align: top;
+	display: inline-block;
+	cursor: pointer;
+	overflow: hidden;
+	width: 27px;
+	height: 27px;
+}
+
+.color-container {
+	/*margin: 10px 3px;*/
+	padding: 0;
+	display: inline-block;
+}
+
+.btn-addcart {
+	color: #fff;
+	background-color: #39ce79;
+	border-bottom-color: #308B5F;
+	border-top-color: #A4F6CE;
+	width: 100%;
+}
+
+.btn-addcart:hover, .btn-addcart:focus {
+	color: #fff;
+	background-color: #4edc8a;
+}
+
+.input-file-container input {
+	position: relative;
+	margin-left: -16px;
+	margin-top: -33px;
+	padding-bottom: 16px;
+	margin-bottom: -8px;
+	width: calc(100% + 32px);
+	opacity: 0;
+	cursor: pointer;
+}
+
+.input-file-container input:hover{
+	cursor: pointer;
+}
+
+#colorpick-outer {
+	background-color: #000;
+}
+
+#colorpick-inner {
+	width: 22px;
+	height: 22px;
+	margin: 0;
+	padding: 0;
+	display: block;
+	background-image: url('../img/colorPickOver.png');
+}
+
+.behind-product {
+	background-color: #ffffff;
+	/*background-image: url('../img/crew_front.png');*/
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 95px 160px;
+}
+
+.btn-group-mar {
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+.btn-side {
+	margin-left: calc(50% - 90px);
+	margin-top: -75px;
+}
+
+.upper-canvas:hover {
+	border: 1px solid #333;
+}
+
+.navbar-inverse {
+	background-color: #222;
+	border-color: #FFFFFF;
+	box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+	border-radius: 0px;
+}
+
+.font-dropdown {
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	text-align: left;
+	cursor: initial;
+	width: 100%;
+	background-color: #fff !important;
+	border-color: #ccc !important;
+	padding-left: 3px;
+	padding-top: 9px;
+	padding-bottom: 9px;
+	font-size: 10px;
+}
+
+#fontSelector {
+	overflow-y: scroll;
+	max-height: 320px;
+	margin-top: 0;
+	width: calc(100% + 40px);
+	margin-left: -40px;
+}
+
+.show-cart {
+	margin-top: 8px;
+	padding: 5px 10px;
+	float: right;
+}
+
+.select-font {
+	cursor: pointer;
+}
+
+.tr-header > td {
+	color: #bababa;
+}
+
+.product-homepage{
+	padding-left: 0px;
+}
+
+.product-homepage li{
+	font-size: 24px;
+	margin-right: 10px;
+}
+
+.over-title{
+	display: block;
+	position:relative;
+	text-align: center;
+	top: -10px;
+	opacity: 0.0;
+
+	transition: all 0.4s ease-in-out;
+}
+
+.thumbnail:hover .over-title{
+	opacity: 1.0;
+	top: 0px;
+}
