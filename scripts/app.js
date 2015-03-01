@@ -259,6 +259,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 
 .controller('designerCtrl', ["$http", "$routeParams", "$scope", function($http,$routeParams,$scope) {
 
+    this.status = {isopen: true};
 		this.productsSameCategory = [];
 		this.selectedDescription = "";
 		this.colors = [];
