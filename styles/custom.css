@@ -263,6 +263,10 @@ a {
 	transition: all 0.4s ease-in-out;
 }
 
+.lower-canvas:hover{
+  border: 2px solid #FFF;
+}
+
 .thumbnail:hover .over-title{
 	opacity: 1.0;
 	top: 0px;
