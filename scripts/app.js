@@ -1,3 +1,28 @@
+function rgbToHsl(rgb){
+  var r = parseInt(rgb.slice(0,2), 16);
+  var g = parseInt(rgb.slice(2,4), 16);
+  var b = parseInt(rgb.slice(4,6), 16);
+    r /= 255, g /= 255, b /= 255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var h, s, l = (max + min) / 2;
+
+    if(max == min){
+        h = s = 0; // achromatic
+    }else{
+        var d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch(max){
+            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+
+    }
+
+    return { 'h' : h , 's' : s, 'l' : l};
+}
+
 angular.module("app", ["ngRoute", "ngAnimate", "ngCookies", "ui.bootstrap", "easypiechart", "mgo-angular-wizard", "textAngular", "ui.tree", "ngMap", "ngTagsInput",
 "app.ui.ctrls", "app.ui.services", "app.controllers", "app.directives", "app.form.validation", "app.ui.form.ctrls",
   "app.map", "app.tables", "app.task", "app.chart.ctrls", "app.page.ctrls", "app.filters"])
@@ -6,7 +31,7 @@ angular.module("app", ["ngRoute", "ngAnimate", "ngCookies", "ui.bootstrap", "eas
 
   $routeProvider.when("/", {redirectTo: "/dashboard"})
     .when("/dashboard", {templateUrl: "views/dashboard.html"})
-    .when("/orders", {templateUrl: "views/orders.html"})
+    .when("/orders", {templateUrl: "views/orders/index.html"})
     .when("/artworks", {templateUrl: "views/artworks.html"})
     .when("/sitesettings", {templateUrl: "views/sitesettings.html"})
     .when("/users/customers", {templateUrl: "views/users/customers/index.html"})
@@ -262,8 +287,9 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 }
 ])
 
-.controller('designerCtrl', ["$http", "$routeParams", "$scope", function($http,$routeParams,$scope) {
+.controller('DesignerController', ["$http", "$routeParams", "$scope", function($http,$routeParams,$scope) {
 
+    this.selectedProduct = "american-apparel-50-50-t-shirt";
     this.status = {isopen: true};
 		this.productsSameCategory = [];
 		this.selectedDescription = "";
@@ -276,7 +302,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 		//console.log('Params: '+$routeParams.product);
 		var myThis = this;
 
-		$http.get($scope.main.api_url+'/products/'+$routeParams.product).
+		$http.get($scope.main.api_url+'/products/'+this.selectedProduct).
 			success(function(data, status, headers, config) {
 				console.log(data);
 				angular.forEach(data.colors, function(color, key) {
@@ -319,7 +345,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 
 		this.setColor = function(hex) {
 			this.selectedColor = hex;
-			this.setImage(hex, 'front');
+			//this.setImage(hex, 'front');
 			this.setSizes(hex, 'front');
 		};
 
@@ -396,130 +422,4 @@ function($scope, taskStorage, filterFilter) {
   $scope.$on("order:changed", function(event, count) {return $scope.ordersCount = count })
 }
 ])
-/*
-.controller("SiteSettingsCtrl", ["$scope", "$http",
-function($scope, $http) {
-  //GENERAL
-  $scope.config = {params:{
-                      site:{
-                        title:""
-                      },
-                      seo:{
-                        description: "",
-                        keywords: [],
-                        img: ""
-                      },
-                      "contact-us":{
-                        to: ""
-                      },
-                      password: "",
-                      social_settings:{
-                        facebook:{
-                          facebook_page: "",
-                          like_type: "like",
-                          active_like: false,
-                          active_share: false,
-                          active_follow_page_button: false,
-                          active_metatags: false,
-                          show_count: false
-                        },
-                        twitter:{
-                          twitter_page: "",
-                          twitter_account: "",
-                          active_tweet: false,
-                          add_acct_to_tweet: false,
-                          active_metatags: false,
-                          active_follow_page_button: false
-                        },
-                        pinterest:{
-                          pinterest_page: "",
-                          full_page_name: "",
-                          active_pin_it: false,
-                          show_count: false,
-                          active_follow_page_button: false
-                        },
-                        google:{
-                          google_page: "",
-                          full_page_name: "",
-                          active_plus_one: false,
-                          active_follow_page_button: false
-                        }
-                      },
-                      notifications: {
-                        from: "",
-                        order: {
-                          placed: {
-                            subject: ""
-                          },
-                          shipped: {
-                            subject: ""
-                          },
-                          "shipping-update": {
-                            subject: ""
-                          },
-                          cancelled: {
-                            subject: ""
-                          },
-                          return: {
-                            subject: ""
-                          },
-                          returnupdate: {
-                            subject: ""
-                          },
-                          "customer-reset-password": {
-                            subject: ""
-                          },
-                          "administrator-invitation": {
-                            subject: ""
-                          },
-                          "administrator-forgot-password": {
-                            subject: ""
-                          }
-                        }
-                      },
-                      email: {
-                        useses: false
-                      },
-                      live_chat: {
-                        chat_license: "",
-                        active_chat: false
-                      },
-                      return_address:{
-                        street_line1: "",
-                        street_line2: "",
-                        city: "",
-                        zip: "",
-                        state: "",
-                        country: ""
-                      },
-                      information: {
-                        phone_number: ""
-                      }
-                  },
-                  components:{
-                    amazon:{
-                      merchantid: "",
-                      accesskey: "",
-                      secretkey: ""
-                    },
-                    nvp:{
-                      user: "",
-                      pwd: "",
-                      signature: ""
-                    },
-                    payflowpro:{
-                      user: "",
-                      vendor: "",
-                      pwd: "",
-                      sandbox: false
-                    },
-                    ses:{
-                      access_key: "",
-                      secret_key: "",
-                      host: ""
-                    }
-                  }
-  };
 
-}])
-*/

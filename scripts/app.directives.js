@@ -613,9 +613,9 @@ angular.module("app.directives", [])
 																		});
 																	};
 
-																	/*$("#onlinedesigner").on('click', '.color-preview', function() {
+																	$("#onlinedesigner").on('click', '.color-preview', function() {
 																		$(".behind-product").css('background-color', $(this).css('background-color'));
-																	});*/
+																	});
 				}
 			});
 	})

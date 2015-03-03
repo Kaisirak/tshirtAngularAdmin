@@ -2,62 +2,108 @@
   <section class="panel panel-default">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Create a design</strong></div>
         <div class="panel-body">
-          <tabset class="ui-tab">
 
             <!-- GENERAL TAB -->
 
-              <tab heading="General">
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <label for="title-focus" class="col-sm-2">Store Title</label>
+                        <label for="title-focus" class="col-sm-2">Design Name</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="title-focus" placeholder="Store Title" ng-model="main.stores[main.currentsite].config.params.site.title">
                         </div>
                     </div>
-
                     <div class="form-group">
-                        <label for="meta-focus" class="col-sm-2">Meta Description</label>
+                        <label for="title-focus" class="col-sm-2">Garment</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="meta-focus" placeholder="Meta Description" data-toggle="tooltip" tooltip="Description used by search engines (Google, Bing, ...)" data-placement="top" tooltip-trigger="focus" ng-model="main.stores[main.currentsite].config.params.seo.description"></textarea>
+                            <select class="form-control" id="title-focus">
+                              <option value="1">tshirt Gildan</option>
+                              <option value="2">tshirt American Aparel</option>
+                            </select>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="keywords-focus" class="col-sm-2">SEO Keywords</label>
-                          <div class="col-sm-10">
-                            <tags-input ng-model="main.stores[main.currentsite].config.params.seo.keywords" class="ui-tags-input" id="keywords-focus"></tags-input>
-                          </div>
-                      </div>
 
-                      <div class="form-group">
-                          <label for="seoimg-focus" class="col-sm-2">SEO Image</label>
-                          <div class="col-sm-10">
-                              <input type="text" class="form-control" id="seoimg-focus" placeholder="SEO Image" data-toggle="tooltip" tooltip="Default image used by most social media websites" data-placement="top" tooltip-trigger="focus" ng-model="main.stores[main.currentsite].config.params.seo.img">
-                          </div>
-                      </div>
+  <section class="panel panel-default" id="onlinedesigner" ng-controller="DesignerController as designerCtrl">
+    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> ONLINE DESIGNER</strong></div>
 
-                    <div class="form-group">
-                        <label for="contact-focus" class="col-sm-2">Contact-Us Email</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="contact-focus" placeholder="Contact-Us Email" data-toggle="tooltip" tooltip="Email address where you will receive messages sent through the contact us page. Please add an email to activate this feature" data-placement="top" tooltip-trigger="focus" ng-model="main.stores[main.currentsite].config.params['contact-us'].to">
-                        </div>
-                    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="well well-lg">
+            <div class="form-group">
+              <div class="input-file-container btn btn-lg btn-primary" style="width:100%"><i class="fa fa-file-picture-o"></i> Add Image<input id="imgLoader" type="file"/></div>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-lg btn-primary" type="button" id="crtBtn" style="width:100%"><i class="fa fa-pencil"></i> Add Text</button>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-lg btn-primary" type="button" id="delBtn" style="width:100%"><i class="fa fa-trash"></i> Remove</button>
+            </div>
 
-                    <div class="form-group">
-                      <label for="contact-focus" class="col-sm-2">Store Password</label>
-                      <div class="col-sm-10">
-                        <div class="input-group">
-                          <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                          <input type="text" class="form-control" placeholder="Password" ng-model="main.stores[main.currentsite].config.params.password">
-                        </div>
-                      </div>
-                    </div>
+            <div class="form-group">
+    <label>Color</label>
+    <ul class="color-container">
+      <li ng-repeat="color in designerCtrl.colors | orderBy:'hsl.l'" ng-click="designerCtrl.setColor(color.id)" class="color-preview" title="{{color.name}}" style="background-color:{{color.value}};"></li>
+    </ul>
+    </div>
 
-                    <button type="button" class="btn btn-primary btn-lg pull-right" ><i class="fa fa-spin fa-spinner" ng-show="loading"></i> Save Settings</button>
+    <div class="form-group">
+      <label>Size</label>
+      <select class="form-control" ng-model="designerCtrl.curSelectedSize">
+        <option ng-repeat="value in designerCtrl.possibleSizes" value="value">{{value}}</option>
+      </select>
+    </div>
+    <div class="checkbox">
+      <label><input id="btnBack" type="checkbox" name="back" value="back" ng-model="designerCtrl.isBackDesign" ng-click="designerCtrl.showFront()"> <b>Design Back</b></label>
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <p>{{ designerCtrl.selectedDescription }}</p>
+    </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="edit-text-box">
+              <div class="btn-group">
+                <span class="input-group" style="max-width: 190px;">
+                  <span class="input-group-addon"><i class="fa fa-font"></i></span>
+                  <div class="btn-group" style="width: 100%; max-width: 160px;" dropdown="" is-open="status.isopen" toggle-class="open">
+                    <button id="txtFamily" class="btn btn-default dropdown-toggle font-dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+                      <span class="caret" style="position: relative; left: 97%;"></span><span id="txtFont">Times New Roman</span>
+                    </button>
+                    <ul id="fontSelector" class="dropdown-menu" role="menu">
+                    </ul>
+                  </div>
+                </span>
+              </div>
+              <div class="btn-group btn-group-mar">
+                <button type="button" id="txtWeight" data-toggle="tooltip" tooltip-append-to-body="true" title="Bold" class="btn btn-default btn-tooltip" disabled><i class="fa fa-bold"></i></button>
+                <button type="button" id="txtDeco" data-toggle="tooltip" tooltip-append-to-body="true" title="Underline" class="btn btn-default btn-tooltip" disabled><i class="fa fa-underline"></i></button>
+                <button type="button" id="txtStyle" data-toggle="tooltip" tooltip-append-to-body="true" title="Italic" class="btn btn-default btn-tooltip" disabled><i class="fa fa-italic"></i></button>
+                <button type="button" id="txtColor" class="btn btn-default" style="padding: 5px 8px;"><div id="colorpick-outer" disabled><span id="colorpick-inner"></span></div></button>
+              </div>
+              <div class="btn-group btn-group-mar">
+                <button type="button" id="stbBtn" data-toggle="tooltip" tooltip-append-to-body="true" title="Send Backward" class="btn btn-default btn-tooltip" disabled><i class="fa fa-angle-double-up"></i></button>
+                <button type="button" id="stfBtn" data-toggle="tooltip" tooltip-append-to-body="true" title="Bring Forward" class="btn btn-default btn-tooltip" disabled><i class="fa fa-angle-double-down"></i></button>
+                <button type="button" id="mkCpy" data-toggle="tooltip" tooltip-append-to-body="true" title="Clone Object" class="btn btn-default btn-tooltip" disabled><i class="fa fa-copy"></i></button>
+              </div>
+            </div>
+            <div class="behind-product">
+              <img id="preloadFront" src="" width="1" height="1"/>
+              <img id="preloadBack" src="" width="1" height="1"/>
+              <canvas id="c" width="225" height="430" fabric-canvas></canvas>
+            </div>
+            <div class="btn-group btn-side">
+              <button type="button" id="rectoBtn" ng-click="designerCtrl.showFront()" class="btn btn-info active">FRONT</button>
+              <button ng-show="designerCtrl.isBackDesign" ng-click="designerCtrl.showBack()" type="button" id="versoBtn" class="btn btn-info">BACK</button>
+            </div>
+          </div>
+    </div>
+
+                    <button type="button" class="btn btn-primary btn-lg pull-right" ><i class="fa fa-spin fa-spinner" ng-show="loading"></i> Save Design</button>
                   </form>
-                </tab>
-
-              </tabset>
+                
         </div>
     </section>
 </div>

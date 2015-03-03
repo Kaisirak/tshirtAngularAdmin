@@ -181,7 +181,7 @@ a {
 
 .behind-product {
 	background-color: #ffffff;
-	/*background-image: url('../img/crew_front.png');*/
+	background-image: url('../images/crew_front.png');
 	background-repeat: no-repeat;
 	background-size: cover;
 	padding: 95px 160px;
