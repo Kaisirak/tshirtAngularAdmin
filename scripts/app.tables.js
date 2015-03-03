@@ -107,6 +107,8 @@ angular.module("app.tables", [])
       return("<a href='" + mystore[myproperty] + "'>" + mystore[myproperty] + "</a>");
     else if (myproperty == 'image')
       return("<img class='img-responsive' src='" + mystore[myproperty].url + "'>");
+    else if (myproperty == 'image_url')
+      return("<img class='img-responsive' src='" + mystore[myproperty] + "'>");
     else if (myproperty == 'internal_link')
       return ("<a href='category/" + mystore['categoryId'] + "'>" + mystore['categoryId'] + "</a>");
     else
@@ -120,14 +122,16 @@ angular.module("app.tables", [])
     $scope.customOrder = true;
   };
 
-  $scope.setContent = function(ApiRoute,SubContent){
+  $scope.setContent = function(ApiRoute,SubContent,WithToken){
     ApiRoute = typeof ApiRoute !== 'undefined' && ApiRoute !== '' ? ApiRoute : $scope.tableName;
     var url = "";
     if ($routeParams.param)
         url = $scope.main.api_url+"/"+ApiRoute+"/"+$routeParams.param;
     else
         url = $scope.main.api_url+"/"+ApiRoute;
-      console.log('uRl : '+url);
+    if (typeof WithToken !== 'undefined' && WithToken == 'yes')
+      url = url + '?access_token='+$rootScope.oauth;
+      console.log('uRl : '+url );
     $http.get(url).then(
       function(response) {
         // SET CONTENT
