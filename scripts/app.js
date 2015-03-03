@@ -20,6 +20,7 @@ angular.module("app", ["ngRoute", "ngAnimate", "ngCookies", "ui.bootstrap", "eas
     .when("/profile", {templateUrl: "views/profile.html"})
     .when("/signin", {templateUrl: "views/signin.html"})
     .when("/image-library", {templateUrl: "views/image-library.html"})
+    .when("/designs", {templateUrl: "views/designs.html"})
     .when("/forgot-password", {templateUrl: "views/forgot-password.html"})
     .when("/404", {templateUrl: "views/404.html"})
     .otherwise({redirectTo: "/404"});
