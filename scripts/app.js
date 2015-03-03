@@ -23,6 +23,7 @@ angular.module("app", ["ngRoute", "ngAnimate", "ngCookies", "ui.bootstrap", "eas
     .when("/product", {templateUrl: "views/product.html"})
     .when("/artworks/image-library", {templateUrl: "views/artworks/image-library/index.html"})
     .when("/artworks/designs", {templateUrl: "views/artworks/designs/index.html"})
+    .when("/artworks/designs/add", {templateUrl: "views/artworks/designs/add.html"})
     .when("/forgot-password", {templateUrl: "views/forgot-password.html"})
     .when("/404", {templateUrl: "views/404.html"})
     .otherwise({redirectTo: "/404"});

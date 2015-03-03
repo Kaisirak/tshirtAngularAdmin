@@ -1,0 +1,63 @@
+<div class="page">
+  <section class="panel panel-default">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Create a design</strong></div>
+        <div class="panel-body">
+          <tabset class="ui-tab">
+
+            <!-- GENERAL TAB -->
+
+              <tab heading="General">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="title-focus" class="col-sm-2">Store Title</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="title-focus" placeholder="Store Title" ng-model="main.stores[main.currentsite].config.params.site.title">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="meta-focus" class="col-sm-2">Meta Description</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="meta-focus" placeholder="Meta Description" data-toggle="tooltip" tooltip="Description used by search engines (Google, Bing, ...)" data-placement="top" tooltip-trigger="focus" ng-model="main.stores[main.currentsite].config.params.seo.description"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="keywords-focus" class="col-sm-2">SEO Keywords</label>
+                          <div class="col-sm-10">
+                            <tags-input ng-model="main.stores[main.currentsite].config.params.seo.keywords" class="ui-tags-input" id="keywords-focus"></tags-input>
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                          <label for="seoimg-focus" class="col-sm-2">SEO Image</label>
+                          <div class="col-sm-10">
+                              <input type="text" class="form-control" id="seoimg-focus" placeholder="SEO Image" data-toggle="tooltip" tooltip="Default image used by most social media websites" data-placement="top" tooltip-trigger="focus" ng-model="main.stores[main.currentsite].config.params.seo.img">
+                          </div>
+                      </div>
+
+                    <div class="form-group">
+                        <label for="contact-focus" class="col-sm-2">Contact-Us Email</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="contact-focus" placeholder="Contact-Us Email" data-toggle="tooltip" tooltip="Email address where you will receive messages sent through the contact us page. Please add an email to activate this feature" data-placement="top" tooltip-trigger="focus" ng-model="main.stores[main.currentsite].config.params['contact-us'].to">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="contact-focus" class="col-sm-2">Store Password</label>
+                      <div class="col-sm-10">
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                          <input type="text" class="form-control" placeholder="Password" ng-model="main.stores[main.currentsite].config.params.password">
+                        </div>
+                      </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-lg pull-right" ><i class="fa fa-spin fa-spinner" ng-show="loading"></i> Save Settings</button>
+                  </form>
+                </tab>
+
+              </tabset>
+        </div>
+    </section>
+</div>
