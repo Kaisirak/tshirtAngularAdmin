@@ -298,9 +298,28 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 		this.sizes = [];
 		this.selectedColor = 0;
 		this.possibleSizes = [];
+    this.productCompleteList = [];
 		//var mainProductList = [ 'Hoodies','Short Sleeve Shirts','Long Sleeve Shirts','Mugs','Phone cases','Sweatshirts' ];
 		//console.log('Params: '+$routeParams.product);
 		var myThis = this;
+    $http.get($scope.main.api_url+'/products').
+      success(function(data, status, headers, config) {
+          var products = angular.fromJson(data);
+          angular.forEach(products, function(product, key) {
+            angular.forEach(product, function(value, key2) {
+              if (typeof value['image'] !== 'undefined' && typeof value['image'].url !== 'undefined')
+                console.log('Url undefined');
+              myThis.productCompleteList.push( { category: key, name: value['name'], path : value['productId'],
+                'image' : (typeof value['image'] !== 'undefined')? value['image']:'http://placehold.it/180' } );
+            });
+            console.log(myThis.productCompleteList);
+        });
+      }).
+      error(function(data, status, headers, config) {
+        console.log(data);
+    });
+
+
 
 		$http.get($scope.main.api_url+'/products/'+this.selectedProduct).
 			success(function(data, status, headers, config) {
