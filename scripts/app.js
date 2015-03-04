@@ -374,25 +374,15 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 		}
 
 		this.update = function() {
+      this.colors = [];
 			console.log(this.selectedProduct);
       $http.get($scope.main.api_url+'/products/'+this.selectedProduct).
       success(function(data, status, headers, config) {
-        console.log(data);
         angular.forEach(data.colors, function(color, key) {
           myThis.colors.push( { name : color.name, id : color.hex, value: '#'+color.hex, hsl : rgbToHsl(color.hex) } );
-          myThis.images[color.hex] = [];
-          myThis.sizes[color.hex] = color.sizes;
-          angular.forEach(color.images, function(image, key) {
-            myThis.images[color.hex][angular.lowercase(image.label)] = image.url;
-          });
           if (!myThis.selectedColor)
             myThis.setColor(color.hex);
-          if (!myThis.possibleSizes.length)
-            myThis.possibleSizes = color.sizes;
         });
-        myThis.selectedDescription = data.description;
-        console.log(myThis.sizes);
-        console.log(myThis.possibleSizes);
       }).
       error(function(data, status, headers, config) {
         console.log(data);
