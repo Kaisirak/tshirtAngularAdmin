@@ -60,7 +60,7 @@ angular.module("app", ["ngRoute", "ngAnimate", "ngCookies", "ui.bootstrap", "eas
         'request': function(config) {
           if (!$rootScope.oauth)
               $location.path('/signin');
-          if ((config.method === 'GET' || config.method === 'POST' || config.method === 'PUT' || config.method === 'DELETE') && config.url.indexOf("api.") > -1 && config.url.indexOf("access_token=") == -1)
+          if ((config.method === 'GET' || config.method === 'POST' || config.method === 'PUT' || config.method === 'DELETE') && (config.url.indexOf("api.") > -1 || config.url.indexOf("tshirt.") > -1 ) && config.url.indexOf("access_token=") == -1)
           {
             //config.url = "http://api.shirtfull.com" + config.url;
             if ($rootScope.oauth)
@@ -109,7 +109,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
   var tasks;
   var apiurl = '';
 
-  if ($location.host() == 'tshirtadmin.local')
+  if ($location.host() == 'admin.local')
       apiurl = 'http://tshirt.local';
   else
       apiurl = 'http://api.shirtnexus.com';
@@ -421,9 +421,16 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
     this.addDesign = function() {
       console.log('addDesign'+this.design_name+this.selectedColor+this.selectedProduct);
       angular.element(document.querySelector("#canvas"));
-      console.log($scope.getJSON());
-      console.log($scope.canvas__getThumbnail());
-    };
+      //console.log($scope.getJSON());
+      //console.log($scope.canvas__getThumbnail());
+      $http.post($scope.main.api_url+'/admin/designs', {'data' : $scope.getJSON(), 'thumbnail': $scope.canvas__getThumbnail()}).
+        success(function(data, status, headers, config) {
+          console.log(data);
+        }).
+        error(function(data, status, headers, config) {
+          console.log(data);
+        });
+      };
 
 	}])
 
