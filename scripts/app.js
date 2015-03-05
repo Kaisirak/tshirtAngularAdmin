@@ -303,6 +303,8 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 		//console.log('Params: '+$routeParams.product);
 		var myThis = this;
 
+
+
     $http.get($scope.main.api_url+'/products').
       success(function(data, status, headers, config) {
           var products = angular.fromJson(data);
@@ -312,7 +314,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
                 console.log('Url undefined');
               myThis.productCompleteList.push( { category: key, name: value['name'], path : value['productId'] } );
             });
-            console.log(myThis.productCompleteList);
+            //console.log(myThis.productCompleteList);
         });
       }).
       error(function(data, status, headers, config) {
@@ -322,7 +324,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 
 		$http.get($scope.main.api_url+'/products/'+this.selectedProduct).
 			success(function(data, status, headers, config) {
-				console.log(data);
+				//console.log(data);
 				angular.forEach(data.colors, function(color, key) {
 					myThis.colors.push( { name : color.name, id : color.hex, value: '#'+color.hex, hsl : rgbToHsl(color.hex) } );
 					myThis.images[color.hex] = [];
@@ -336,8 +338,8 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 						myThis.possibleSizes = color.sizes;
 				});
 				myThis.selectedDescription = data.description;
-				console.log(myThis.sizes);
-				console.log(myThis.possibleSizes);
+				//console.log(myThis.sizes);
+				//console.log(myThis.possibleSizes);
 			}).
 			error(function(data, status, headers, config) {
 			 	console.log(data);
@@ -346,6 +348,8 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 		this.designerImgUrl = "";
 
 		this.setColor = function(hex) {
+      $scope.canvas_setBackgroundImage('http://admin.local/images/crew_front.png');
+      $scope.canvas_setBackgroundColor(hex);
 			this.selectedColor = hex;
 			//this.setImage(hex, 'front');
 			this.setSizes(hex, 'front');
@@ -374,7 +378,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 
 		this.update = function() {
       this.colors = [];
-			console.log(this.selectedProduct);
+			//console.log(this.selectedProduct);
       $http.get($scope.main.api_url+'/products/'+this.selectedProduct).
       success(function(data, status, headers, config) {
         angular.forEach(data.colors, function(color, key) {
@@ -416,6 +420,9 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 
     this.addDesign = function() {
       console.log('addDesign'+this.design_name+this.selectedColor+this.selectedProduct);
+      angular.element(document.querySelector("#canvas"));
+      console.log($scope.getJSON());
+
     };
 
 	}])
@@ -441,4 +448,5 @@ function($scope, taskStorage, filterFilter) {
   $scope.$on("order:changed", function(event, count) {return $scope.ordersCount = count })
 }
 ])
+
 

@@ -194,8 +194,11 @@ angular.module("app.directives", [])
 			return ({
 				restrict: 'A',
 				link: function(scope, element, attrs){
+
 						var timer = 0;
 						var canvas = this.__canvas = new fabric.Canvas('c');
+						canvas.setHeight(630);
+						canvas.setWidth(530);
 						var rectoJSON = -1;
 						var versoJSON = -1;
 						var imgArray = new Array();
@@ -207,6 +210,24 @@ angular.module("app.directives", [])
 						"Utopia", "Verdana", "Verona", "Webdings"];
 
 						d = new Detector();			// Font checker
+						
+						scope.getJSON = function() {
+							return JSON.stringify(canvas.toJSON());
+						};
+
+						scope.canvas_setBackgroundColor = function(hex) {
+							canvas.setBackgroundColor('#'+hex, canvas.renderAll.bind(canvas));
+						};
+						scope.canvas_setBackgroundImage = function(url) {
+							canvas.setBackgroundImage(url, canvas.renderAll.bind(canvas), {
+							  // Needed to position backgroundImage at 0/0
+							  originX: 'left',
+							  originY: 'top'
+							});
+							
+						};
+
+
 						for (var i = 0; i < fontList.length; i++)
 						{
 							if (d.detect(fontList[i]))
@@ -284,6 +305,7 @@ angular.module("app.directives", [])
 								$("#onlinedesigner").on('click', '#delBtn', function() {
 									canvas.remove(canvas.getActiveObject());
 								});
+
 
 								$("#txtColor").colpick({
 									layout:'hex',
