@@ -215,6 +215,10 @@ angular.module("app.directives", [])
 							return JSON.stringify(canvas.toJSON());
 						};
 
+						scope.canvas_setJSON = function(json) {
+							    canvas.loadFromJSON(json, canvas.renderAll.bind(canvas));	
+						}
+
 						scope.canvas_setBackgroundColor = function(hex) {
 							canvas.setBackgroundColor('#'+hex, canvas.renderAll.bind(canvas));
 						};

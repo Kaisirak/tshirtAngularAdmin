@@ -49,6 +49,7 @@ angular.module("app", ["ngRoute", "ngAnimate", "ngCookies", "ui.bootstrap", "eas
     .when("/artworks/image-library", {templateUrl: "views/artworks/image-library/index.html"})
     .when("/artworks/designs", {templateUrl: "views/artworks/designs/index.html"})
     .when("/artworks/designs/add", {templateUrl: "views/artworks/designs/add.html"})
+    .when("/artworks/designs/edit/:id", {templateUrl: "views/artworks/designs/edit.html"})
     .when("/forgot-password", {templateUrl: "views/forgot-password.html"})
     .when("/404", {templateUrl: "views/404.html"})
     .otherwise({redirectTo: "/404"});
@@ -303,6 +304,18 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 		//console.log('Params: '+$routeParams.product);
 		var myThis = this;
 
+    if (typeof $routeParams.id !== 'undefined') {
+      $http.get($scope.main.api_url+'/admin/designs/'+$routeParams.id).
+      success(function(data, status, headers, config) {
+        console.log(data);
+        myThis.setColor(data.color);
+        myThis.selectedProduct = data.garment;
+        myThis.setJson(data.json);
+      }).
+      error(function(data, status, headers, config) {
+        console.log(data);
+      });
+    }
 
 
     $http.get($scope.main.api_url+'/products').
@@ -354,6 +367,10 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 			//this.setImage(hex, 'front');
 			this.setSizes(hex, 'front');
 		};
+
+    this.setJson = function(json) {
+      $scope.canvas_setJSON(json);
+    }
 
 		this.showFront = function() {
 			$(".behind-product").css("background-image", "url('img/" + this.curSelected.img_path[0] + "')");

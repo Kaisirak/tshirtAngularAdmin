@@ -98,7 +98,9 @@ angular.module("app.tables", [])
   $scope.setTableName = function(name) {
     $scope.tableName = name;
   };
-  $scope.displayContent = function(mystore, myproperty){
+  $scope.displayContent = function(mystore, myproperty){  
+    if (typeof mystore[myproperty] !== 'undefined')
+      mystore[myproperty] = mystore[myproperty].toString();
     if (myproperty == 'date_modified' || myproperty == 'date_created')
       return ($filter('date')(mystore[myproperty], "MM-dd-yyyy 'at' h:mma", 'UTC'));
     else if (myproperty == 'returnsPending')
@@ -110,9 +112,11 @@ angular.module("app.tables", [])
     else if (myproperty == 'image_url')
       return("<img class='img-responsive' src='" + mystore[myproperty] + "'>");
     else if (myproperty == 'thumbnail')
-      return("<img class='img-responsive' src='" + mystore[myproperty] + "'>");
+      return("<img class='img-responsive' src='" + mystore[myproperty] + "' width='200'>");
     else if (myproperty == 'internal_link')
       return ("<a href='category/" + mystore['categoryId'] + "'>" + mystore['categoryId'] + "</a>");
+    else if (myproperty == 'edit')
+      return ("<a class='btn btn-info' href='/artworks/designs/edit/"+ mystore['id']+"'>Edit</a> <a class='btn btn-warning'>Delete</a>");
     else
       return (mystore[myproperty]);
   };

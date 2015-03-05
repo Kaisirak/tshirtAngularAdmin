@@ -1,6 +1,6 @@
 <div class="page page-table">
 	<a class="btn btn-success" href="/artworks/designs/add">Create a new design</a>
-  <section class="panel panel-default table-dynamic" ng-controller="TablesCtrl" ng-init="setTableName('designs'); setContent('admin/designs','','yes'); setAllProperties([ 'name','thumbnail','date_created','date_modified']); setDisplayOnly();">
+  <section class="panel panel-default table-dynamic" ng-controller="TablesCtrl" ng-init="setTableName('designs'); setContent('admin/designs','','yes'); setAllProperties(['id', 'name','thumbnail','date_created','date_modified','edit']); setDisplayOnly();">
     <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> {{tableName}}</strong></div>
     <dynamic-table></dynamic-table>
   </section>
