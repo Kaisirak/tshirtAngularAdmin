@@ -227,6 +227,16 @@ angular.module("app.directives", [])
 							
 						};
 
+						scope.canvas__getThumbnail = function () {
+							return canvas.toDataURL({ 
+								format: 'png',
+							    left: 0,
+							    top: 0,
+							    width: 530,
+							    height: 320
+							});
+						}
+
 
 						for (var i = 0; i < fontList.length; i++)
 						{

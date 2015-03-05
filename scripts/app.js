@@ -422,7 +422,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       console.log('addDesign'+this.design_name+this.selectedColor+this.selectedProduct);
       angular.element(document.querySelector("#canvas"));
       console.log($scope.getJSON());
-
+      console.log($scope.canvas__getThumbnail());
     };
 
 	}])
