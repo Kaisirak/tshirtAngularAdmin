@@ -423,7 +423,8 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       angular.element(document.querySelector("#canvas"));
       //console.log($scope.getJSON());
       //console.log($scope.canvas__getThumbnail());
-      $http.post($scope.main.api_url+'/admin/designs', {'data' : $scope.getJSON(), 'thumbnail': $scope.canvas__getThumbnail()}).
+      $http.post($scope.main.api_url+'/admin/designs', {'name' : this.design_name, 'color' : this.selectedColor, 'garment' : this.selectedProduct,
+       'json' : $scope.getJSON(), 'thumbnail': $scope.canvas__getThumbnail() } ).
         success(function(data, status, headers, config) {
           console.log(data);
         }).
