@@ -348,7 +348,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 		this.designerImgUrl = "";
 
 		this.setColor = function(hex) {
-      $scope.canvas_setBackgroundImage('http://admin.local/images/crew_front.png');
+      $scope.canvas_setBackgroundImage('images/crew_front.png');
       $scope.canvas_setBackgroundColor(hex);
 			this.selectedColor = hex;
 			//this.setImage(hex, 'front');
