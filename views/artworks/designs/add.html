@@ -1,71 +1,67 @@
 <div class="page">
-  
-
-            <!-- GENERAL TAB -->
-
-
-
   <section class="panel panel-default" id="onlinedesigner" ng-controller="DesignerController as designerCtrl">
-    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> ONLINE DESIGNER</strong></div>
+    <form ng-submit="designerCtrl.addDesign()" class="form-horizontal">
+      <div class="panel-heading">
+        <strong>
+          <span class="glyphicon glyphicon-th"></span> New Design
+        </strong>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="well well-lg">
 
-    <div class="panel-body">
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well well-lg">
-                <form class="form-horizontal">
-                    <div class="form-group">
-                   
-                        <div class="col-sm-12">
-                            <input type="text" class="form-control" id="title-focus" placeholder="Design Name" ng-model="main.stores[main.currentsite].config.params.site.title">
-                        </div>
-                    </div>
-                                            <label for="title-focus" class="col-sm-2">Garment</label>
-                    <div class="form-group">
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <input type="text" class="form-control" id="title-focus" placeholder="Design Name" ng-model="designerCtrl.design_name" required>
+                </div>
+              </div>
+              
+              <label for="title-focus" class="col-sm-2">Garment</label>
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <select class="form-control" ng-model="designerCtrl.selectedProduct" ng-change="designerCtrl.update()">
+                    <option ng-repeat="product in designerCtrl.productCompleteList" value="{{product.path}}">{{product.name}}</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <div class="input-file-container btn btn-lg btn-primary" style="width:100%"><i class="fa fa-file-picture-o"></i> Add Image<input id="imgLoader" type="file"/></div>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-lg btn-primary" type="button" id="crtBtn" style="width:100%"><i class="fa fa-pencil"></i> Add Text</button>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-lg btn-primary" type="button" id="delBtn" style="width:100%"><i class="fa fa-trash"></i> Remove</button>
+              </div>
 
-                        <div class="col-sm-12">
-                            <select class="form-control" ng-model="designerCtrl.selectedProduct" ng-change="designerCtrl.update()">
-                            <option ng-repeat="product in designerCtrl.productCompleteList" value="{{product.path}}">{{product.name}}</option>
-                          </select>
-                        </div>
-                    </div>
-            <div class="form-group">
-              <div class="input-file-container btn btn-lg btn-primary" style="width:100%"><i class="fa fa-file-picture-o"></i> Add Image<input id="imgLoader" type="file"/></div>
+              <div class="form-group">
+                <label>Color</label>
+                  <ul class="color-container">
+                    <li ng-repeat="color in designerCtrl.colors | orderBy:'hsl.l'" ng-click="designerCtrl.setColor(color.id)" class="color-preview" title="{{color.name}}" style="background-color:{{color.value}};"></li>
+                  </ul>
+              </div>
+              
+              <div class="checkbox">
+                <label><input id="btnBack" type="checkbox" name="back" value="back" ng-model="designerCtrl.isBackDesign" ng-click="designerCtrl.showFront()"> <b>Design Back</b></label>
+              </div>
             </div>
-            <div class="form-group">
-              <button class="btn btn-lg btn-primary" type="button" id="crtBtn" style="width:100%"><i class="fa fa-pencil"></i> Add Text</button>
-            </div>
-            <div class="form-group">
-              <button class="btn btn-lg btn-primary" type="button" id="delBtn" style="width:100%"><i class="fa fa-trash"></i> Remove</button>
-            </div>
-
-            <div class="form-group">
-    <label>Color</label>
-    <ul class="color-container">
-      <li ng-repeat="color in designerCtrl.colors | orderBy:'hsl.l'" ng-click="designerCtrl.setColor(color.id)" class="color-preview" title="{{color.name}}" style="background-color:{{color.value}};"></li>
-    </ul>
-    </div>
-
-    <div class="checkbox">
-      <label><input id="btnBack" type="checkbox" name="back" value="back" ng-model="designerCtrl.isBackDesign" ng-click="designerCtrl.showFront()"> <b>Design Back</b></label>
-    </div>
-
-    </div>
         </div>
         <div class="col-sm-6">
-            <div class="edit-text-box">
-              <div class="btn-group">
-                <span class="input-group" style="max-width: 190px;">
-                  <span class="input-group-addon"><i class="fa fa-font"></i></span>
-                  <div class="btn-group" style="width: 100%; max-width: 160px;" dropdown="" is-open="status.isopen" toggle-class="open">
-                    <button id="txtFamily" class="btn btn-default dropdown-toggle font-dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                      <span class="caret" style="position: relative; left: 97%;"></span><span id="txtFont">Times New Roman</span>
-                    </button>
-                    <ul id="fontSelector" class="dropdown-menu" role="menu">
-                    </ul>
-                  </div>
-                </span>
-              </div>
-              <div class="btn-group btn-group-mar">
+          <div class="edit-text-box">
+            <div class="btn-group">
+              <span class="input-group" style="max-width: 190px;">
+                <span class="input-group-addon"><i class="fa fa-font"></i></span>
+                <div class="btn-group" style="width: 100%; max-width: 160px;" dropdown="" is-open="status.isopen" toggle-class="open">
+                  <button id="txtFamily" class="btn btn-default dropdown-toggle font-dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+                    <span class="caret" style="position: relative; left: 97%;"></span><span id="txtFont">Times New Roman</span>
+                  </button>
+                  <ul id="fontSelector" class="dropdown-menu" role="menu"></ul>
+                </div>
+              </span>
+            </div>
+            <div class="btn-group btn-group-mar">
                 <button type="button" id="txtWeight" data-toggle="tooltip" tooltip-append-to-body="true" title="Bold" class="btn btn-default btn-tooltip" disabled><i class="fa fa-bold"></i></button>
                 <button type="button" id="txtDeco" data-toggle="tooltip" tooltip-append-to-body="true" title="Underline" class="btn btn-default btn-tooltip" disabled><i class="fa fa-underline"></i></button>
                 <button type="button" id="txtStyle" data-toggle="tooltip" tooltip-append-to-body="true" title="Italic" class="btn btn-default btn-tooltip" disabled><i class="fa fa-italic"></i></button>
@@ -88,9 +84,9 @@
             </div>
           </div>
     </div>
-
-                    <button type="button" class="btn btn-primary btn-lg pull-right" ><i class="fa fa-spin fa-spinner" ng-show="loading"></i> Save Design</button>
-                  </form>
+    <button type="submit" class="btn btn-primary btn-lg pull-right" ><i class="fa fa-spin fa-spinner" ng-show="loading"></i> Save Design</button>
+  </form>
+  </section>
                 
         
 </div>

@@ -310,8 +310,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
             angular.forEach(product, function(value, key2) {
               if (typeof value['image'] !== 'undefined' && typeof value['image'].url !== 'undefined')
                 console.log('Url undefined');
-              myThis.productCompleteList.push( { category: key, name: value['name'], path : value['productId'],
-                'image' : (typeof value['image'] !== 'undefined')? value['image']:'http://placehold.it/180' } );
+              myThis.productCompleteList.push( { category: key, name: value['name'], path : value['productId'] } );
             });
             console.log(myThis.productCompleteList);
         });
@@ -414,6 +413,11 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 			//$(".behind-product").css("background-image", "url('img/" + this.curSelected.img_path[($("#versoBtn").hasClass('active') == true?1:0)] + "')");
 			this.curSelectedSize = this.curSelected.sizes[0];*/
 		};
+
+    this.addDesign = function() {
+      console.log('addDesign'+this.design_name+this.selectedColor+this.selectedProduct);
+    };
+
 	}])
 
 .controller("ModalEditProfileCtrl", ["$scope", "$modalInstance", "profileInfo",
