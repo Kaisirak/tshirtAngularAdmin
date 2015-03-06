@@ -308,9 +308,10 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       $http.get($scope.main.api_url+'/admin/designs/'+$routeParams.id).
       success(function(data, status, headers, config) {
         console.log(data);
-        myThis.setColor(data.color);
         myThis.selectedProduct = data.garment;
+        myThis.setColor(data.color);
         myThis.setJson(data.json);
+        myThis.design_name = data.name;
       }).
       error(function(data, status, headers, config) {
         console.log(data);
@@ -441,6 +442,18 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       //console.log($scope.getJSON());
       //console.log($scope.canvas__getThumbnail());
       $http.post($scope.main.api_url+'/admin/designs', {'name' : this.design_name, 'color' : this.selectedColor, 'garment' : this.selectedProduct,
+       'json' : $scope.getJSON(), 'thumbnail': $scope.canvas__getThumbnail() } ).
+        success(function(data, status, headers, config) {
+          console.log(data);
+        }).
+        error(function(data, status, headers, config) {
+          console.log(data);
+        });
+      };
+
+      this.saveDesign = function() {
+        console.log('saveDesign'+this.design_name+this.selectedColor+this.selectedProduct);
+        $http.put($scope.main.api_url+'/admin/designs/'+$routeParams.id, {'name' : this.design_name, 'color' : this.selectedColor, 'garment' : this.selectedProduct,
        'json' : $scope.getJSON(), 'thumbnail': $scope.canvas__getThumbnail() } ).
         success(function(data, status, headers, config) {
           console.log(data);
