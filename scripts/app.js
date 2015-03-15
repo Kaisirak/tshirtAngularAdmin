@@ -39,6 +39,7 @@ angular.module("app", ["ngRoute", "ngAnimate", "ngCookies", "ui.bootstrap", "eas
     .when("/reviews", {templateUrl: "views/reviews.html"})
     .when("/files", {templateUrl: "views/files.html"})
     .when("/products/list", {templateUrl: "views/products/list/index.html"})
+    .when("/products/add", {templateUrl: "views/products/list/add.html"})
     .when("/products/categories", {templateUrl: "views/products/categories.html"})
     .when("/reviews", {templateUrl: "views/reviews/index.html"})
     .when("/category/:param", {templateUrl: "views/category.html"})
@@ -111,7 +112,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
   var apiurl = '';
 
   if ($location.host() == 'admin.local')
-      apiurl = 'http://tshirt.local';
+      apiurl = 'http://api.garment.local';
   else
       apiurl = 'http://api.shirtnexus.com';
 

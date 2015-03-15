@@ -1,6 +1,6 @@
 <div class="page page-table">
 
-  <section class="panel panel-default table-dynamic" ng-controller="TablesCtrl" ng-init="setTableName('images'); setContent('admin/images','','yes'); setAllProperties([ 'name','path','keywords','active','image_url']); setEditableProperties([{name: 'name', type: 'text'},{name: 'keywords', type: 'text'},{name:'active', type: 'select', options: [0,1]}]);">
+  <section class="panel panel-default table-dynamic" ng-controller="TablesCtrl" ng-init="setTableName('images'); setContent('admin/images','','yes'); setAllProperties([ 'name','path','keywords','active','image_url']); setEditableProperties([{name: 'name', type: 'text'},{name: 'keywords', type: 'text'},{name:'active', type: 'select', options: [0,1]},{name: 'Image', type : 'file_upload'} ]);">
     <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> {{tableName}}</strong></div>
     <dynamic-table></dynamic-table>
   </section>

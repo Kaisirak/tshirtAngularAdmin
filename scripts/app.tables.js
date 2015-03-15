@@ -15,6 +15,7 @@ angular.module("app.tables", [])
   $scope.content =  [];
   $scope.displayOnly = false;
   $scope.customOrder = false;
+  $scope.modelRoute = "";
 
   // *** END GET DATA FROM API CALL ***/
 
@@ -37,6 +38,10 @@ angular.module("app.tables", [])
     }
     hiddenElement.target = '_blank';
     hiddenElement.click();
+  };
+
+  $scope.setModelRoute = function(route) {
+    $scope.modelRoute = route;
   };
 
   $scope.convertToCSV = function(objArray){
@@ -116,10 +121,15 @@ angular.module("app.tables", [])
     else if (myproperty == 'internal_link')
       return ("<a href='category/" + mystore['categoryId'] + "'>" + mystore['categoryId'] + "</a>");
     else if (myproperty == 'edit')
-      return ("<a class='btn btn-info' href='/artworks/designs/edit/"+ mystore['id']+"'>Edit</a> <a class='btn btn-warning'>Delete</a>");
+      return ("<a class='btn btn-info' href='/artworks/designs/edit/"+ mystore['id']+"'>Edit</a> <a ng-cli2ck='deleteEntry("+mystore['id']+")' class='btn btn-warning 2'>Delete</a>");
     else
       return (mystore[myproperty]);
   };
+
+  $scope.deleteEntry = function(id) {
+
+  };
+
   $scope.setDisplayOnly = function(){
       $scope.displayOnly = true;
   };
