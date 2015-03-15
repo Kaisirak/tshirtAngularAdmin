@@ -263,7 +263,7 @@ a {
 	transition: all 0.4s ease-in-out;
 }
 
-.lower-canvas:hover{
+.canvas-container:hover .lower-canvas{
   border: 2px solid #FFF;
 }
 

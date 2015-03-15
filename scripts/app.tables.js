@@ -14,6 +14,7 @@ angular.module("app.tables", [])
   $scope.editableProperties = [{}];
   $scope.content =  [];
   $scope.displayOnly = false;
+  $scope.disableDelete = false;
   $scope.customOrder = false;
   $scope.modelRoute = "";
 
@@ -103,7 +104,7 @@ angular.module("app.tables", [])
   $scope.setTableName = function(name) {
     $scope.tableName = name;
   };
-  $scope.displayContent = function(mystore, myproperty){  
+  $scope.displayContent = function(mystore, myproperty){
     if (typeof mystore[myproperty] !== 'undefined')
       mystore[myproperty] = mystore[myproperty].toString();
     if (myproperty == 'date_modified' || myproperty == 'date_created')
@@ -132,6 +133,10 @@ angular.module("app.tables", [])
 
   $scope.setDisplayOnly = function(){
       $scope.displayOnly = true;
+  };
+
+  $scope.setDisableDelete = function(){
+      $scope.disableDelete = true;
   };
 
   $scope.setCustomOrder = function(){
