@@ -100,6 +100,10 @@
 
 
              <tags-input ng-model="tagsvalue" class="ui-tags-input" id="keywords-focus"></tags-input>
+
+
+            <input type="text" ng-model="selected" typeahead="item for item in items | filter:$viewValue | limitTo:8" class="form-control"  placeholder="Search">                    
+
 <!--
             <div class="form-group">
               <div class="checkbox-nice">
