@@ -39,9 +39,19 @@
             </div>
 
 
-            <!-- categories  -->
+            <div class="form-group">
+              <label for="meta-focus" class="col-sm-3">Categories</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control"></input>
+              </div>
+            </div>
 
-            <!-- keywords  -->
+           <div class="form-group">
+              <label for="meta-focus" class="col-sm-3">Keyworkds</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control"></input>
+              </div>
+            </div>
 
             <div class="form-group">
               <label for="meta-focus" class="col-sm-3">Meta Description</label>
@@ -58,11 +68,115 @@
             </div>
 
             <div class="form-group">
-              <label for="meta-focus" class="col-sm-3"> </label>
+              <label for="meta-focus" class="col-sm-3">Main Images</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control"></input>
+                <img src="http://placehold.it/125x90"></img>
               </div>
             </div>
+
+            <div class="form-group">
+              <label for="meta-focus" class="col-sm-3">Other Images</label>
+              <div class="col-sm-9">
+                <img src="http://placehold.it/125x90"></img>
+                <img src="http://placehold.it/125x90"></img>
+                <img src="http://placehold.it/125x90"></img>
+                <img src="http://placehold.it/125x90"></img>
+                <img src="http://placehold.it/125x90"></img>
+                <img src="http://placehold.it/125x90"></img>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="meta-focus" class="col-sm-3">Status</label>
+              <div class="col-sm-9">
+                <select class="form-control">
+                  <option value="1">Active</option>
+                  <option value="2">Not ready (yet)</option>
+                  <option value="3">Disabled (for now)</option>
+                  <option value="4">Removed</option>
+                </select>
+              </div>
+            </div>
+
+
+            <div class="tags" ng-class="{focused: hasFocus}"><ul class="tag-list"><!-- ngRepeat: tag in tagList.items track by track(tag) --><li class="tag-item ng-scope" ng-repeat="tag in tagList.items track by track(tag)" ng-class="{ selected: tag == tagList.selected }"><span ng-bind="getDisplayText(tag)" class="ng-binding">foo</span> <a class="remove-button ng-binding" ng-click="tagList.remove($index)" ng-bind="options.removeTagSymbol">×</a></li><!-- end ngRepeat: tag in tagList.items track by track(tag) --><li class="tag-item ng-scope" ng-repeat="tag in tagList.items track by track(tag)" ng-class="{ selected: tag == tagList.selected }"><span ng-bind="getDisplayText(tag)" class="ng-binding">bar</span> <a class="remove-button ng-binding" ng-click="tagList.remove($index)" ng-bind="options.removeTagSymbol">×</a></li><!-- end ngRepeat: tag in tagList.items track by track(tag) --></ul><input class="input ng-pristine ng-valid" ng-model="newTag.text" ng-change="newTagChange()" ng-trim="false" ng-class="{'invalid-tag': newTag.invalid}" ti-bind-attrs="{type: options.type, placeholder: options.placeholder, tabindex: options.tabindex}" ti-autosize="" type="text" placeholder="Add a tag" style="width: 65px;"><span class="input" style="visibility: hidden; width: auto; white-space: pre; display: none;">Add a tag</span></div>
+<!--
+            <div class="form-group">
+              <div class="checkbox-nice">
+              <label for="meta-focus" class="col-sm-3"> Active</label>
+                <div class="col-sm-9">
+                  <input type="checkbox" id="checkbox-1" checked="checked">
+                </div>
+              </div>
+            </div>
+-->
+
+          <h4>Product Variants</h4>
+          <div class="row">
+          <div class="col-lg-12">
+<div class="main-box clearfix">
+<header class="main-box-header clearfix">
+<h2>New products</h2>
+</header>
+<div class="main-box-body clearfix">
+<div class="table-responsive">
+<table class="table table-products table-hover">
+<tbody>
+<tr>
+<td>
+<img src="img/samples/ipad.png" alt="">
+</td>
+<td>
+<span class="name">
+iPad mini 32GB WiFi Black&amp;Slate
+</span>
+<span class="price">
+<i class="fa fa-money"></i> $320,00
+</span>
+<span class="warranty">
+<i class="fa fa-certificate"></i> Warranty: 2 years
+</span>
+</td>
+</tr>
+<tr>
+<td>
+<img src="img/samples/ipad.png" alt="">
+</td>
+<td>
+<span class="name">
+iPad mini 32GB WiFi Cellular Black&amp;Slate
+</span>
+<span class="price">
+<i class="fa fa-money"></i> $447,29
+</span>
+<span class="warranty">
+<i class="fa fa-certificate"></i> Warranty: 4 years
+</span>
+</td>
+</tr>
+<tr>
+<td>
+<img src="img/samples/ipad.png" alt="">
+</td>
+<td>
+<span class="name">
+iPad mini 32GB WiFi Black&amp;Slate
+</span>
+<span class="price">
+<i class="fa fa-money"></i> $320,00
+</span>
+<span class="warranty">
+<i class="fa fa-certificate"></i> Warranty: 2 years
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+          </div>
 
 
           </div>
