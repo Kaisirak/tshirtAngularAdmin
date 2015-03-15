@@ -8,7 +8,7 @@
         </strong>
         <div class="row">
           <div class="col-sm-10 col-sm-offset-1">
-            
+
             <h4>Product Parent</h4>
 
             <div class="form-group">
@@ -17,7 +17,7 @@
                 <input type="text" class="form-control"></input>
               </div>
             </div>
-            
+
             <div class="form-group">
               <label for="meta-focus" class="col-sm-3">Page Title</label>
               <div class="col-sm-9">
@@ -99,7 +99,7 @@
             </div>
 
 
-            <div class="tags" ng-class="{focused: hasFocus}"><ul class="tag-list"><!-- ngRepeat: tag in tagList.items track by track(tag) --><li class="tag-item ng-scope" ng-repeat="tag in tagList.items track by track(tag)" ng-class="{ selected: tag == tagList.selected }"><span ng-bind="getDisplayText(tag)" class="ng-binding">foo</span> <a class="remove-button ng-binding" ng-click="tagList.remove($index)" ng-bind="options.removeTagSymbol">×</a></li><!-- end ngRepeat: tag in tagList.items track by track(tag) --><li class="tag-item ng-scope" ng-repeat="tag in tagList.items track by track(tag)" ng-class="{ selected: tag == tagList.selected }"><span ng-bind="getDisplayText(tag)" class="ng-binding">bar</span> <a class="remove-button ng-binding" ng-click="tagList.remove($index)" ng-bind="options.removeTagSymbol">×</a></li><!-- end ngRepeat: tag in tagList.items track by track(tag) --></ul><input class="input ng-pristine ng-valid" ng-model="newTag.text" ng-change="newTagChange()" ng-trim="false" ng-class="{'invalid-tag': newTag.invalid}" ti-bind-attrs="{type: options.type, placeholder: options.placeholder, tabindex: options.tabindex}" ti-autosize="" type="text" placeholder="Add a tag" style="width: 65px;"><span class="input" style="visibility: hidden; width: auto; white-space: pre; display: none;">Add a tag</span></div>
+             <tags-input ng-model="tagsvalue" class="ui-tags-input" id="keywords-focus"></tags-input>
 <!--
             <div class="form-group">
               <div class="checkbox-nice">
@@ -184,7 +184,7 @@ iPad mini 32GB WiFi Black&amp;Slate
         </div>
       </div>
       <div class="panel-body">
-      <button type="submit" class="btn btn-primary btn-lg pull-right" ><i class="fa fa-spin fa-spinner" ng-show="loading"></i> Save Product</button>    
+      <button type="submit" class="btn btn-primary btn-lg pull-right" ><i class="fa fa-spin fa-spinner" ng-show="loading"></i> Save Product</button>
       </div>
     </form>
   </section>
