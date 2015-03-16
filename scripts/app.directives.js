@@ -236,7 +236,7 @@ angular.module("app.directives", [])
             scope.doToggleBorder = function()
             {
               borderInner.opacity = borderInner.opacity > 0?0:1;
-              borderOutter.opacity = borderInner.opacity > 0?0:1;
+              borderOutter.opacity = borderOutter.opacity > 0?0:1;
               canvas.renderAll();
             };
 
