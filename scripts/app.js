@@ -372,7 +372,6 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 
     this.setShirtBorder = function(datop, daleft, dawidth, daheight){
       $scope.canvas_setBorder(datop, daleft, dawidth, daheight);
-      console.log("outerfdsfsd");
     };
 
     this.setJson = function(json) {

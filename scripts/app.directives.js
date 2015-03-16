@@ -232,7 +232,6 @@ angular.module("app.directives", [])
 						};
 
             scope.canvas_setBorder = function(mytop, myleft, mywidth, myheight){
-              console.log("oiuiouooiuo");
               var myBorder = new fabric.Rect({ top: mytop - 1, left: myleft - 1, width: mywidth + 2, height: myheight + 2, selectable: false, fill: 'transparent', strokeWidth: 1, stroke: '#fff', perPixelTargetFind: true });
               canvas.add(myBorder);
               var myExtraBorder = new fabric.Rect({ top: mytop, left: myleft, width: mywidth, height: myheight, selectable: false, fill: 'transparent', strokeWidth: 1, stroke: '#333', perPixelTargetFind: true});
