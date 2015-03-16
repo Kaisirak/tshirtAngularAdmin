@@ -44,6 +44,13 @@
                   </ul>
               </div>
 
+              <div class="form-group">
+                <label>Color Selectable</label>
+                  <ul class="color-container">
+                    <li ng-repeat="color in designerCtrl.colors | orderBy:'hsl.l'" ng-click="designerCtrl.togglePossibleColor(color.id)" class="color-preview" ng-class="{selectedColorBorder: possibleColors[color.id]}" title="{{color.name}}" style="background-color:{{color.value}};"></li>
+                  </ul>
+              </div>
+
               <div class="checkbox">
                 <label><input id="btnBack" type="checkbox" name="back" value="back" ng-model="designerCtrl.isBackDesign" ng-click="designerCtrl.showFront()"> <b>Design Back</b></label>
               </div>

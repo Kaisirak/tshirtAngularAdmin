@@ -300,6 +300,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 		this.sizes = [];
 		this.selectedColor = 0;
 		this.possibleSizes = [];
+    this.possibleColors = {};
     this.productCompleteList = [];
 		//var mainProductList = [ 'Hoodies','Short Sleeve Shirts','Long Sleeve Shirts','Mugs','Phone cases','Sweatshirts' ];
 		//console.log('Params: '+$routeParams.product);
@@ -381,6 +382,10 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 		this.showFront = function() {
 			$(".behind-product").css("background-image", "url('img/" + this.curSelected.img_path[0] + "')");
 		};
+
+    this.togglePossibleColor = function(id){
+      this.possibleColors[id] = !this.possibleColors[id];
+    };
 
 		this.showBack = function() {
 			$(".behind-product").css("background-image", "url('img/" + this.curSelected.img_path[1] + "')");
