@@ -253,9 +253,10 @@ angular.module("app.directives", [])
 							//canvas.setOverlayImage('../img/overlayRound.png', function(){
 							//		canvas.setOverlayImage('../img/overlay.png', canvas.renderAll.bind(canvas));		// Preload Both Overlay Images
 							//	});
-              var myrect = new fabric.Rect({width: 300});
+              var myrect = new fabric.Rect({width: canvas.width});
               canvas.add(myrect);
               canvas.renderAll();
+              console.log(myrect);
 
 							$("#onlinedesigner").on('click', '#crtBtn', function() {
 								var addedTxt = new fabric.IText('edit text', {
