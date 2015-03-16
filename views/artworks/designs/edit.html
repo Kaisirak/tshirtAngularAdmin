@@ -78,10 +78,10 @@
             <div id="widget" ><!--class="behind-product"-->
               <!-- <img id="preloadFront" src="" width="1" height="1"/>
               <img id="preloadBack" src="" width="1" height="1"/> -->
-              <canvas id="c" width="225" height="430" fabric-canvas ng-init="designerCtrl.setShirtBorder(100, 150, 200, 400)"></canvas>
+              <canvas id="c" width="225" height="430" fabric-canvas></canvas>
             </div>
             <div class="btn-group btn-side">
-              <button type="button" id="rectoBtn" ng-click="designerCtrl.showFront()" class="btn btn-info active">FRONT</button>
+              <button type="button" id="rectoBtn" ng-init="designerCtrl.setShirtBorder(100, 150, 200, 400)" ng-click="designerCtrl.showFront()" class="btn btn-info active">FRONT</button>
               <button ng-show="designerCtrl.isBackDesign" ng-click="designerCtrl.showBack()" type="button" id="versoBtn" class="btn btn-info">BACK</button>
             </div>
           </div>
