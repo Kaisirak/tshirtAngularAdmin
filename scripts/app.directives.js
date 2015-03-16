@@ -254,11 +254,12 @@ angular.module("app.directives", [])
 							//		canvas.setOverlayImage('../img/overlay.png', canvas.renderAll.bind(canvas));		// Preload Both Overlay Images
 							//	});
 
-              var myBorder = new fabric.Rect({ top: 100, left: 160, width: 200, height: 400, selectable: false, fill: 'transparent', strokeWidth: 2, stroke: '#fff' })
+              var myBorder = new fabric.Rect({ top: 100, left: 160, width: 200, height: 400, selectable: false, fill: 'transparent', strokeWidth: 3, stroke: '#f22' })
               canvas.add(myBorder);
-              myBorder.strokeWidth = 1;
-              myBorder.stroke = '#333';
-              canvas.add(myBorder);
+              var myExtraBorder = myBorder;
+              myExtraBorder.strokeWidth = 1;
+              myExtraBorder.stroke = '#333';
+              canvas.add(myExtraBorder);
 
 							$("#onlinedesigner").on('click', '#crtBtn', function() {
 								var addedTxt = new fabric.IText('edit text', {
