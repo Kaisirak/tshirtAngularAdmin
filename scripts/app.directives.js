@@ -254,7 +254,7 @@ angular.module("app.directives", [])
 							//		canvas.setOverlayImage('../img/overlay.png', canvas.renderAll.bind(canvas));		// Preload Both Overlay Images
 							//	});
 
-              var myrecti = new fabric.Rect({ top: 100, left: 150, width: 200, height: 400, selectable: false, fill: 'none', strokeWidth: 1, stroke: '#333' })
+              var myrecti = new fabric.Rect({ top: 100, left: 150, width: 200, height: 400, selectable: false, fill: 'transparent', strokeWidth: 1, stroke: '#333' })
               canvas.add(myrecti);
               canvas.renderAll();
 
