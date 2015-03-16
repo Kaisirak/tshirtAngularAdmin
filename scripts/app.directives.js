@@ -258,7 +258,7 @@ angular.module("app.directives", [])
               canvas.add(myBorder);
               myBorder.strokeWidth = 1;
               myBorder.stroke = '#333';
-              cavans.add(myBorder);
+              canvas.add(myBorder);
 
 							$("#onlinedesigner").on('click', '#crtBtn', function() {
 								var addedTxt = new fabric.IText('edit text', {
