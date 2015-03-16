@@ -197,9 +197,9 @@ a {
 	margin-top: -75px;
 }
 
-.upper-canvas:hover {
+/*.upper-canvas:hover {
 	border: 1px solid #333;
-}
+}*/
 
 .navbar-inverse {
 	background-color: #222;
@@ -263,9 +263,9 @@ a {
 	transition: all 0.4s ease-in-out;
 }
 
-.canvas-container:hover .lower-canvas{
+/*.canvas-container:hover .lower-canvas{
   border: 2px solid #FFF;
-}
+}*/
 
 .thumbnail:hover .over-title{
 	opacity: 1.0;
