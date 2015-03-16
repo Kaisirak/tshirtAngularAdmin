@@ -235,8 +235,7 @@ angular.module("app.directives", [])
 
             scope.lelou = function()
             {
-              
-              console.log("FFDFSD345");
+              console.log(borderInner);
             };
 
             scope.canvas_setBorder = function(mytop, myleft, mywidth, myheight){
