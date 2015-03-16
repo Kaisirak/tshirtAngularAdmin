@@ -253,10 +253,10 @@ angular.module("app.directives", [])
 							//canvas.setOverlayImage('../img/overlayRound.png', function(){
 							//		canvas.setOverlayImage('../img/overlay.png', canvas.renderAll.bind(canvas));		// Preload Both Overlay Images
 							//	});
-              var myrecti = new fabric.Rect({ top: 100, left: 100, width: 200, height: 400 })
+
+              var myrecti = new fabric.Rect({ top: 100, left: 140, width: 200, height: 400, selectable: false, strokeWidth: 10, stroke: '#4f4' })
               canvas.add(myrecti).setActiveObject(myrecti);
               canvas.renderAll();
-              console.log("myrecti");
 
 							$("#onlinedesigner").on('click', '#crtBtn', function() {
 								var addedTxt = new fabric.IText('edit text', {
