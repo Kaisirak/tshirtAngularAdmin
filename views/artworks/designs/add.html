@@ -47,7 +47,7 @@
               <div class="form-group">
                 <label>Color Selectable</label>
                   <ul class="color-container">
-                    <li ng-repeat="color in designerCtrl.colors | orderBy:'hsl.l'" ng-click="designerCtrl.togglePossibleColor(color.id)" class="color-preview" ng-class="{selectedColorBorder: possibleColors[color.id]}" title="{{color.name}}" style="background-color:{{color.value}};"></li>
+                    <li ng-repeat="color in designerCtrl.colors | orderBy:'hsl.l'" ng-click="designerCtrl.togglePossibleColor(color.id)" class="color-preview" ng-class="{selectedColorBorder: designerCtrl.possibleColors[color.id]}" title="{{color.name}}" style="background-color:{{color.value}};"></li>
                   </ul>
               </div>
 
