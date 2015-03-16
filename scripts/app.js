@@ -370,6 +370,11 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 			this.setSizes(hex, 'front');
 		};
 
+    this.setShirtBorder = function(datop, daleft, dawidth, daheight){
+      $scope.canvas_setBorder(datop, daleft, dawidth, daheight);
+      console.log("outerfdsfsd");
+    };
+
     this.setJson = function(json) {
       $scope.canvas_setJSON(json);
     }
@@ -487,5 +492,3 @@ function($scope, taskStorage, filterFilter) {
   $scope.$on("order:changed", function(event, count) {return $scope.ordersCount = count })
 }
 ])
-
-
