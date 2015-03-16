@@ -254,9 +254,9 @@ angular.module("app.directives", [])
 							//		canvas.setOverlayImage('../img/overlay.png', canvas.renderAll.bind(canvas));		// Preload Both Overlay Images
 							//	});
 
-              var myBorder = new fabric.Rect({ top: 99, left: 159, width: 202, height: 402, draggable: false, fill: 'transparent', strokeWidth: 1, stroke: '#fff' });
+              var myBorder = new fabric.Rect({ top: 99, left: 159, width: 202, height: 402, selectable: false, fill: 'transparent', strokeWidth: 1, stroke: '#fff', perPixelTargetFind: true });
               canvas.add(myBorder);
-              var myExtraBorder = new fabric.Rect({ top: 100, left: 160, width: 200, height: 400, draggable: false, fill: 'transparent', strokeWidth: 1, stroke: '#333'});
+              var myExtraBorder = new fabric.Rect({ top: 100, left: 160, width: 200, height: 400, selectable: false, fill: 'transparent', strokeWidth: 1, stroke: '#333', perPixelTargetFind: true});
               canvas.add(myExtraBorder);
 
 							$("#onlinedesigner").on('click', '#crtBtn', function() {
