@@ -253,11 +253,12 @@ angular.module("app.directives", [])
 							//canvas.setOverlayImage('../img/overlayRound.png', function(){
 							//		canvas.setOverlayImage('../img/overlay.png', canvas.renderAll.bind(canvas));		// Preload Both Overlay Images
 							//	});
-              var myrect = new fabric.Rect({
+              var addedTxt = new fabric.IText('ZOOB', {
                 left: canvas.getWidth() / 2,
                 top: canvas.getHeight() / 2,
-                fill: '#990000'});
-              canvas.add(myrect);
+                fill: '#000000'
+              });
+              canvas.add(addedTxt).setActiveObject(addedTxt);
               canvas.renderAll();
               console.log("myrect");
 
