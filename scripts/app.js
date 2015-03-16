@@ -385,6 +385,8 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 
     this.togglePossibleColor = function(id){
       this.possibleColors[id] = !this.possibleColors[id];
+      console.log("toggled");
+      console.log(this.possibleColors[id]);
     };
 
 		this.showBack = function() {
