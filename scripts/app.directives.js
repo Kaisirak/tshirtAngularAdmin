@@ -233,12 +233,11 @@ angular.module("app.directives", [])
 
 						};
 
-            scope.lelou = function()
+            scope.doToggleBorder = function()
             {
-              borderInner.opacity = 0;
-              borderOutter.opacity = 0;
+              borderInner.opacity = borderInner.opacity > 0?0:1;
+              borderOutter.opacity = borderInner.opacity > 0?0:1;
               canvas.renderAll();
-              console.log(borderInner);
             };
 
             scope.canvas_setBorder = function(mytop, myleft, mywidth, myheight){

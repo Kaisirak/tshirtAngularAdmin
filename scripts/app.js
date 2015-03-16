@@ -383,10 +383,9 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 			$(".behind-product").css("background-image", "url('img/" + this.curSelected.img_path[0] + "')");
 		};
 
-    this.leloul = function()
+    this.toggleBorder = function()
     {
-      $scope.lelou();
-      console.log("outtter");
+      $scope.doToggleBorder();
     };
 
     this.togglePossibleColor = function(id){
