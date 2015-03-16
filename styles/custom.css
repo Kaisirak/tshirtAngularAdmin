@@ -19,7 +19,7 @@ fieldset.item-border {
 }
 
 .selectedColorBorder {
-  border: 3px solid blue !important;
+  border: 3px solid red !important;
 }
 
 legend.item-border {
