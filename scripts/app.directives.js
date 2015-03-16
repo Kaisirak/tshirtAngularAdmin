@@ -253,14 +253,10 @@ angular.module("app.directives", [])
 							//canvas.setOverlayImage('../img/overlayRound.png', function(){
 							//		canvas.setOverlayImage('../img/overlay.png', canvas.renderAll.bind(canvas));		// Preload Both Overlay Images
 							//	});
-              var addedTxt = new fabric.IText('ZOOB', {
-                left: canvas.getWidth() / 2,
-                top: canvas.getHeight() / 2,
-                fill: '#000000'
-              });
-              canvas.add(addedTxt).setActiveObject(addedTxt);
+              var myrecti = new fabric.Rect({ top: 100, left: 100, width: 50, height: 50, fill: '#f55' })
+              canvas.add(myrecti).setActiveObject(myrecti);
               canvas.renderAll();
-              console.log("myrect");
+              console.log("myrecti");
 
 							$("#onlinedesigner").on('click', '#crtBtn', function() {
 								var addedTxt = new fabric.IText('edit text', {
