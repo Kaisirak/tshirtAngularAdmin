@@ -235,6 +235,9 @@ angular.module("app.directives", [])
 
             scope.lelou = function()
             {
+              borderInner.opacity = 0;
+              borderOutter.opacity = 0;
+              canvas.renderAll();
               console.log(borderInner);
             };
 
