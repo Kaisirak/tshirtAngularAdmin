@@ -256,7 +256,7 @@ angular.module("app.directives", [])
               var myrect = new fabric.Rect({width: canvas.width});
               canvas.add(myrect);
               canvas.renderAll();
-              console.log(myrect);
+              console.log("myrect");
 
 							$("#onlinedesigner").on('click', '#crtBtn', function() {
 								var addedTxt = new fabric.IText('edit text', {
