@@ -17,7 +17,7 @@
                   <input type="text" class="form-control" id="title-focus" placeholder="Design Name" ng-model="designerCtrl.design_name" disabled>
                 </div>
               </div>
-              
+
               <label for="title-focus" class="col-sm-2">Garment</label>
               <div class="form-group">
                 <div class="col-sm-12">
@@ -26,7 +26,7 @@
                   </select>
                 </div>
               </div>
-              
+
               <div class="form-group">
                 <div class="input-file-container btn btn-lg btn-primary" style="width:100%"><i class="fa fa-file-picture-o"></i> Add Image<input id="imgLoader" type="file"/></div>
               </div>
@@ -43,7 +43,7 @@
                     <li ng-repeat="color in designerCtrl.colors | orderBy:'hsl.l'" ng-click="designerCtrl.setColor(color.id)" class="color-preview" title="{{color.name}}" style="background-color:{{color.value}};"></li>
                   </ul>
               </div>
-              
+
               <div class="checkbox">
                 <label><input id="btnBack" type="checkbox" name="back" value="back" ng-model="designerCtrl.isBackDesign" ng-click="designerCtrl.showFront()"> <b>Design Back</b></label>
               </div>
@@ -72,6 +72,7 @@
                 <button type="button" id="stbBtn" data-toggle="tooltip" tooltip-append-to-body="true" title="Send Backward" class="btn btn-default btn-tooltip" disabled><i class="fa fa-angle-double-up"></i></button>
                 <button type="button" id="stfBtn" data-toggle="tooltip" tooltip-append-to-body="true" title="Bring Forward" class="btn btn-default btn-tooltip" disabled><i class="fa fa-angle-double-down"></i></button>
                 <button type="button" id="mkCpy" data-toggle="tooltip" tooltip-append-to-body="true" title="Clone Object" class="btn btn-default btn-tooltip" disabled><i class="fa fa-copy"></i></button>
+                <button ng-click="designerCtrl.setShirtBorder(100, 100, 200, 400)">KAKA</button>
               </div>
             </div>
             <div id="widget" ><!--class="behind-product"-->
@@ -88,6 +89,6 @@
     <button type="submit" class="btn btn-success btn-lg pull-right" ><i class="fa fa-spin fa-spinner" ng-show="loading"></i> Save Design</button>
   </form>
   </section>
-                
-        
+
+
 </div>
