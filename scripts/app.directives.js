@@ -203,6 +203,8 @@ angular.module("app.directives", [])
 						var versoJSON = -1;
 						var imgArray = new Array();
 						var grid = 1.0;
+            var borderInner;
+            var borderOutter;
 						var fontSelect = $("#fontSelector");
 						var fontList = ["Andale Mono", "Amaranth", "American Typewriter", "Apple Chancery", "Arial", "Arial Black", "Baskerville", "Big Caslon", "Bookman Old Style", "Brush Script", "Charter", "Century", "Century Gothic", "Clean", "Comic Sans MS", "Copperplate", "Courier", "Courier New", "cursive",
 						"Fantasy", "Fixed", "Futura", "Georgia", "Gentium", "Herculanum", "Helvetica", "Impact", "Lucida", "Lucida Console", "Lucida Sans Unicode", "Marlett", "Marker Felt", "Minion Web", "Modena", "monospace", "New Century Schoolbook", "Optima", "Papyrus",
@@ -231,11 +233,17 @@ angular.module("app.directives", [])
 
 						};
 
+            scope.lelou = function()
+            {
+              
+              console.log("FFDFSD345");
+            };
+
             scope.canvas_setBorder = function(mytop, myleft, mywidth, myheight){
-              var myBorder = new fabric.Rect({ top: mytop - 1, left: myleft - 1, width: mywidth + 2, height: myheight + 2, selectable: false, fill: 'transparent', strokeWidth: 1, stroke: '#fff', perPixelTargetFind: true });
-              canvas.add(myBorder);
-              var myExtraBorder = new fabric.Rect({ top: mytop, left: myleft, width: mywidth, height: myheight, selectable: false, fill: 'transparent', strokeWidth: 1, stroke: '#333', perPixelTargetFind: true});
-              canvas.add(myExtraBorder);
+              borderInner = new fabric.Rect({ top: mytop - 1, left: myleft - 1, width: mywidth + 2, height: myheight + 2, selectable: false, fill: 'transparent', strokeWidth: 1, stroke: '#fff', perPixelTargetFind: true });
+              canvas.add(borderInner);
+              borderOutter = new fabric.Rect({ top: mytop, left: myleft, width: mywidth, height: myheight, selectable: false, fill: 'transparent', strokeWidth: 1, stroke: '#333', perPixelTargetFind: true});
+              canvas.add(borderOutter);
             };
 
 						scope.canvas__getThumbnail = function () {
