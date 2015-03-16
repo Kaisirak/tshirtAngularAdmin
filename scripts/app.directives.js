@@ -210,13 +210,13 @@ angular.module("app.directives", [])
 						"Utopia", "Verdana", "Verona", "Webdings"];
 
 						d = new Detector();			// Font checker
-						
+
 						scope.getJSON = function() {
 							return JSON.stringify(canvas.toJSON());
 						};
 
 						scope.canvas_setJSON = function(json) {
-							    canvas.loadFromJSON(json, canvas.renderAll.bind(canvas));	
+							    canvas.loadFromJSON(json, canvas.renderAll.bind(canvas));
 						}
 
 						scope.canvas_setBackgroundColor = function(hex) {
@@ -228,11 +228,11 @@ angular.module("app.directives", [])
 							  originX: 'left',
 							  originY: 'top'
 							});
-							
+
 						};
 
 						scope.canvas__getThumbnail = function () {
-							return canvas.toDataURL({ 
+							return canvas.toDataURL({
 								format: 'png',
 							    left: 0,
 							    top: 0,
@@ -253,6 +253,9 @@ angular.module("app.directives", [])
 							//canvas.setOverlayImage('../img/overlayRound.png', function(){
 							//		canvas.setOverlayImage('../img/overlay.png', canvas.renderAll.bind(canvas));		// Preload Both Overlay Images
 							//	});
+
+              canvas.add(rect);
+              rect.set('fill', 'red');
 
 							$("#onlinedesigner").on('click', '#crtBtn', function() {
 								var addedTxt = new fabric.IText('edit text', {
