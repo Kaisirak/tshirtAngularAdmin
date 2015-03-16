@@ -253,7 +253,7 @@ angular.module("app.directives", [])
 							//canvas.setOverlayImage('../img/overlayRound.png', function(){
 							//		canvas.setOverlayImage('../img/overlay.png', canvas.renderAll.bind(canvas));		// Preload Both Overlay Images
 							//	});
-              var myrect = new fabric.Rect();
+              var myrect = new fabric.Rect({width: 300});
               canvas.add(myrect);
               canvas.renderAll();
 
