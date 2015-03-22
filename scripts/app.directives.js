@@ -236,14 +236,12 @@ angular.module("app.directives", [])
             scope.doToggleBorder = function()
             {
             if (borderInner) {
-            	alert('defined');
             	borderInner.remove();
             	borderOutter.remove();
             	borderInner = null;
             	borderOutter = null;
             }
             else {
-            	alert('undefined');
             	borderInner = new fabric.Rect({ top: canvas_mytop - 1, left: canvas_myleft - 1, width: canvas_mywidth + 2, height: canvas_myheight + 2, selectable: false, fill: 'transparent', strokeWidth: 1, stroke: '#fff', perPixelTargetFind: true });
               	canvas.add(borderInner);
               	borderOutter = new fabric.Rect({ top: canvas_mytop, left: canvas_myleft, width: canvas_mywidth, height: canvas_myheight, selectable: false, fill: 'transparent', strokeWidth: 1, stroke: '#333', perPixelTargetFind: true});
