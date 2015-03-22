@@ -460,6 +460,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       $scope.doToggleBorder();
 
       var thumbnail_1 = $scope.canvas__getThumbnail();
+      
       var json = $scope.getJSON();
 
       $scope.doToggleBorder();
