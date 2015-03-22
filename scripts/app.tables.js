@@ -283,9 +283,8 @@ angular.module("app.tables", [])
       void 0
     };
     $scope.removeElem = function(idToRemove){
-      $http.delete('/api/' + $scope.tableName + '/' + idToRemove).then(
+      $http.delete($scope.main.api_url+'/admin/'+$scope.tableName+'/'+idToRemove).then(
         function(response) {
-
           var indexToRemove = 0;
           for (var i = 0; i < $scope.content.length && idToRemove != $scope.content[i].id; i++) {
             indexToRemove++;
