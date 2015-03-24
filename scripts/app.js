@@ -415,9 +415,11 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       $http.get($scope.main.api_url+'/products/'+this.selectedProduct).
       success(function(data, status, headers, config) {
         angular.forEach(data.colors, function(color, key) {
-          myThis.colors.push( { name : color.name, id : color.hex, value: '#'+color.hex, hsl : rgbToHsl(color.hex) } );
-          if (!myThis.selectedColor)
-            myThis.setColor(color.hex);
+          if (color.hex != '') {
+            myThis.colors.push( { name : color.name, id : color.hex, value: '#'+color.hex, hsl : rgbToHsl(color.hex) } );
+            if (!myThis.selectedColor)
+              myThis.setColor(color.hex);  
+          }
         });
       }).
       error(function(data, status, headers, config) {
