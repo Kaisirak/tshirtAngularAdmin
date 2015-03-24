@@ -122,7 +122,7 @@ angular.module("app.tables", [])
     else if (myproperty == 'internal_link')
       return ("<a href='category/" + mystore['categoryId'] + "'>" + mystore['categoryId'] + "</a>");
     else if (myproperty == 'edit')
-      return ("<a class='btn btn-info' href='/artworks/designs/edit/"+ mystore['id']+"'>Edit</a> <a ng-cli2ck='deleteEntry("+mystore['id']+")' class='btn btn-warning 2'>Delete</a>");
+      return ("<a class='btn btn-info' href='/artworks/designs/edit/"+ mystore['id']+"'>Edit</a>");
     else
       return (mystore[myproperty]);
   };
@@ -283,9 +283,8 @@ angular.module("app.tables", [])
       void 0
     };
     $scope.removeElem = function(idToRemove){
-      $http.delete('/api/' + $scope.tableName + '/' + idToRemove).then(
+      $http.delete($scope.main.api_url+'/admin/'+$scope.tableName+'/'+idToRemove).then(
         function(response) {
-
           var indexToRemove = 0;
           for (var i = 0; i < $scope.content.length && idToRemove != $scope.content[i].id; i++) {
             indexToRemove++;

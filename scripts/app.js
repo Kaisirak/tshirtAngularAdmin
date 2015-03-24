@@ -377,6 +377,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 
     this.setJson = function(json) {
       $scope.canvas_setJSON(json);
+      $scope.canvas_setBorder(100, 150, 200, 400);
     }
 
 		this.showFront = function() {
@@ -458,12 +459,22 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       angular.element(document.querySelector("#canvas"));
       //console.log($scope.getJSON());
       //console.log($scope.canvas__getThumbnail());
+      $scope.doToggleBorder();
+
+      var thumbnail_1 = $scope.canvas__getThumbnail();
+      
+      var json = $scope.getJSON();
+
+      $scope.doToggleBorder();
+
       $http.post($scope.main.api_url+'/admin/designs', {'name' : this.design_name, 'color' : this.selectedColor, 'garment' : this.selectedProduct,
-       'json' : $scope.getJSON(), 'thumbnail': $scope.canvas__getThumbnail() } ).
+       'json' : json, 'thumbnail': thumbnail_1 } ).
         success(function(data, status, headers, config) {
-          console.log(data);
+          alert('Saved!');
+          document.location.href = 'http://'+document.location.hostname+'/'+'artworks/designs/edit/'+data.id;
         }).
         error(function(data, status, headers, config) {
+          alert('An error occurred! Check your console log!');
           console.log(data);
         });
       };
