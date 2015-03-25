@@ -486,14 +486,21 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       //console.log($scope.canvas__getThumbnail());
       $scope.doToggleBorder();
 
-      var thumbnail_1 = $scope.canvas__getThumbnail();
-      
-      var json = $scope.getJSON();
+        var thumbnail_1 = $scope.canvas__getThumbnail();
+        /* Loop thru selected color */
+        var thumbnail_colors = [];
+        for (var k in this.possibleColors){
+          if (this.possibleColors[k] == true)
+            thumbnail_colors.push( { hex : k, thumbnail : $scope.canvas__color_getThumbnail(k) } );
+        }
+        console.log(thumbnail_colors);
 
-      $scope.doToggleBorder();
+        var json = $scope.getJSON();
+
+        $scope.doToggleBorder();
 
       $http.post($scope.main.api_url+'/admin/designs', {'name' : this.design_name, 'color' : this.selectedColor, 'garment' : this.selectedProduct,
-       'json' : json, 'thumbnail': thumbnail_1 } ).
+       'json' : json, 'thumbnail': thumbnail_1, 'colors' : thumbnail_colors } ).
         success(function(data, status, headers, config) {
           alert('Saved!');
           document.location.href = 'http://'+document.location.hostname+'/'+'artworks/designs/edit/'+data.id;
@@ -527,7 +534,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
         success(function(data, status, headers, config) {
           console.log(data);
           alert('Saved!');
-          //location.reload();
+          location.reload();
         }).
         error(function(data, status, headers, config) {
           console.log(data);
