@@ -115,72 +115,125 @@
             </div>
 -->
 
-          <h4>Product Variants</h4>
-          <div class="row">
-          <div class="col-lg-12">
-<div class="main-box clearfix">
-<header class="main-box-header clearfix">
-<h2>New products</h2>
-</header>
-<div class="main-box-body clearfix">
-<div class="table-responsive">
-<table class="table table-products table-hover">
-<tbody>
-<tr>
-<td>
-<img src="img/samples/ipad.png" alt="">
-</td>
-<td>
-<span class="name">
-iPad mini 32GB WiFi Black&amp;Slate
-</span>
-<span class="price">
-<i class="fa fa-money"></i> $320,00
-</span>
-<span class="warranty">
-<i class="fa fa-certificate"></i> Warranty: 2 years
-</span>
-</td>
-</tr>
-<tr>
-<td>
-<img src="img/samples/ipad.png" alt="">
-</td>
-<td>
-<span class="name">
-iPad mini 32GB WiFi Cellular Black&amp;Slate
-</span>
-<span class="price">
-<i class="fa fa-money"></i> $447,29
-</span>
-<span class="warranty">
-<i class="fa fa-certificate"></i> Warranty: 4 years
-</span>
-</td>
-</tr>
-<tr>
-<td>
-<img src="img/samples/ipad.png" alt="">
-</td>
-<td>
-<span class="name">
-iPad mini 32GB WiFi Black&amp;Slate
-</span>
-<span class="price">
-<i class="fa fa-money"></i> $320,00
-</span>
-<span class="warranty">
-<i class="fa fa-certificate"></i> Warranty: 2 years
-</span>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-          </div>
+          
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Product Variants</strong></div>
+
+        <div class="table-filters">
+            <div class="row">
+                <div class="col-sm-4 col-xs-6">
+                    <form class="ng-pristine ng-valid">
+                        <input type="text" placeholder="search" class="form-control ng-pristine ng-valid" data-ng-model="searchKeywords" data-ng-keyup="search()">
+                    </form>
+                </div>
+                <div class="col-sm-3 col-xs-6 filter-result-info">
+                    <span class="ng-binding">
+                        Showing 25/25 entries
+                    </span>              
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th><div class="th">
+                        Store Name
+                        <span class="glyphicon glyphicon-chevron-up" data-ng-click=" order('name') " data-ng-class="{active: row == 'name'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down" data-ng-click=" order('-name') " data-ng-class="{active: row == '-name'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Price
+                        <span class="glyphicon glyphicon-chevron-up" data-ng-click=" order('price') " data-ng-class="{active: row == 'price'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down" data-ng-click=" order('-price') " data-ng-class="{active: row == '-price'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Sales (in 30 days)
+                        <span class="glyphicon glyphicon-chevron-up" data-ng-click=" order('sales') " data-ng-class="{active: row == 'sales'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down" data-ng-click=" order('-sales') " data-ng-class="{active: row == '-sales'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Rating
+                        <span class="glyphicon glyphicon-chevron-up" data-ng-click=" order('rating') " data-ng-class="{active: row == 'rating'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down" data-ng-click=" order('-rating') " data-ng-class="{active: row == '-rating'}"></span>
+                    </div></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ngRepeat: store in currentPageStores --><tr data-ng-repeat="store in currentPageStores" class="ng-scope">
+                    <td class="ng-binding">Nijiya Market</td>
+                    <td class="ng-binding">$$</td>
+                    <td class="ng-binding">292</td>
+                    <td class="ng-binding">4</td>
+                </tr><!-- end ngRepeat: store in currentPageStores --><tr data-ng-repeat="store in currentPageStores" class="ng-scope">
+                    <td class="ng-binding">Eat On Monday Truck</td>
+                    <td class="ng-binding">$</td>
+                    <td class="ng-binding">119</td>
+                    <td class="ng-binding">4.3</td>
+                </tr><!-- end ngRepeat: store in currentPageStores --><tr data-ng-repeat="store in currentPageStores" class="ng-scope">
+                    <td class="ng-binding">Tea Era</td>
+                    <td class="ng-binding">$</td>
+                    <td class="ng-binding">874</td>
+                    <td class="ng-binding">4</td>
+                </tr><!-- end ngRepeat: store in currentPageStores --><tr data-ng-repeat="store in currentPageStores" class="ng-scope">
+                    <td class="ng-binding">Rogers Deli</td>
+                    <td class="ng-binding">$</td>
+                    <td class="ng-binding">347</td>
+                    <td class="ng-binding">4.2</td>
+                </tr><!-- end ngRepeat: store in currentPageStores --><tr data-ng-repeat="store in currentPageStores" class="ng-scope">
+                    <td class="ng-binding">MoBowl</td>
+                    <td class="ng-binding">$$$</td>
+                    <td class="ng-binding">24</td>
+                    <td class="ng-binding">4.6</td>
+                </tr><!-- end ngRepeat: store in currentPageStores --><tr data-ng-repeat="store in currentPageStores" class="ng-scope">
+                    <td class="ng-binding">The Milk Pail Market</td>
+                    <td class="ng-binding">$</td>
+                    <td class="ng-binding">543</td>
+                    <td class="ng-binding">4.5</td>
+                </tr><!-- end ngRepeat: store in currentPageStores --><tr data-ng-repeat="store in currentPageStores" class="ng-scope">
+                    <td class="ng-binding">Nob Hill Foods</td>
+                    <td class="ng-binding">$$</td>
+                    <td class="ng-binding">874</td>
+                    <td class="ng-binding">4</td>
+                </tr><!-- end ngRepeat: store in currentPageStores --><tr data-ng-repeat="store in currentPageStores" class="ng-scope">
+                    <td class="ng-binding">Scratch</td>
+                    <td class="ng-binding">$$$</td>
+                    <td class="ng-binding">643</td>
+                    <td class="ng-binding">3.6</td>
+                </tr><!-- end ngRepeat: store in currentPageStores --><tr data-ng-repeat="store in currentPageStores" class="ng-scope">
+                    <td class="ng-binding">Gochi Japanese Fusion Tapas</td>
+                    <td class="ng-binding">$$$</td>
+                    <td class="ng-binding">56</td>
+                    <td class="ng-binding">4.1</td>
+                </tr><!-- end ngRepeat: store in currentPageStores --><tr data-ng-repeat="store in currentPageStores" class="ng-scope">
+                    <td class="ng-binding">Cost Plus World Market</td>
+                    <td class="ng-binding">$$</td>
+                    <td class="ng-binding">79</td>
+                    <td class="ng-binding">4</td>
+                </tr><!-- end ngRepeat: store in currentPageStores -->
+            </tbody>
+        </table>
+
+        <footer class="table-footer">
+            <div class="row">
+                <div class="col-md-6 page-num-info">
+                    <span>
+                        Show 
+                        <select data-ng-model="numPerPage" data-ng-options="num for num in numPerPageOpt" data-ng-change="onNumPerPageChange()" class="ng-pristine ng-valid"><option value="0" label="3">3</option><option value="1" label="5">5</option><option value="2" selected="selected" label="10">10</option><option value="3" label="20">20</option></select> 
+                        entries per page
+                    </span>
+                </div>
+                <div class="col-md-6 text-right pagination-container">
+                    <ul class="pagination-sm pagination ng-isolate-scope ng-pristine ng-valid" ng-model="currentPage" total-items="filteredStores.length" max-size="4" ng-change="select(currentPage)" items-per-page="numPerPage" rotate="false" boundary-links="true">
+  <!-- ngIf: boundaryLinks --><li ng-if="boundaryLinks" ng-class="{disabled: noPrevious()}" class="ng-scope disabled"><a href="" ng-click="selectPage(1)" class="ng-binding">First</a></li><!-- end ngIf: boundaryLinks -->
+  <!-- ngIf: directionLinks --><li ng-if="directionLinks" ng-class="{disabled: noPrevious()}" class="ng-scope disabled"><a href="" ng-click="selectPage(page - 1)" class="ng-binding">Previous</a></li><!-- end ngIf: directionLinks -->
+  <!-- ngRepeat: page in pages track by $index --><li ng-repeat="page in pages track by $index" ng-class="{active: page.active}" class="ng-scope active"><a href="" ng-click="selectPage(page.number)" class="ng-binding">1</a></li><!-- end ngRepeat: page in pages track by $index --><li ng-repeat="page in pages track by $index" ng-class="{active: page.active}" class="ng-scope"><a href="" ng-click="selectPage(page.number)" class="ng-binding">2</a></li><!-- end ngRepeat: page in pages track by $index --><li ng-repeat="page in pages track by $index" ng-class="{active: page.active}" class="ng-scope"><a href="" ng-click="selectPage(page.number)" class="ng-binding">3</a></li><!-- end ngRepeat: page in pages track by $index -->
+  <!-- ngIf: directionLinks --><li ng-if="directionLinks" ng-class="{disabled: noNext()}" class="ng-scope"><a href="" ng-click="selectPage(page + 1)" class="ng-binding">Next</a></li><!-- end ngIf: directionLinks -->
+  <!-- ngIf: boundaryLinks --><li ng-if="boundaryLinks" ng-class="{disabled: noNext()}" class="ng-scope"><a href="" ng-click="selectPage(totalPages)" class="ng-binding">Last</a></li><!-- end ngIf: boundaryLinks -->
+</ul>
+                </div>
+            </div>
+        </footer>
+    
 
 
           </div>

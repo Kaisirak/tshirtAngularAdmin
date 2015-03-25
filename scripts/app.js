@@ -111,10 +111,15 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
   var tasks;
   var apiurl = '';
 
-  if ($location.host() == 'admin.local')
+  if ($location.host() == 'admin.local') {
+      //
       apiurl = 'http://api.garment.local';
-  else
+      cdnurl = 'http://cdn.local/design_thumbnails';
+  }
+  else {
       apiurl = 'http://api.shirtnexus.com';
+      cdnurl = 'http://cdn.shirtnexus.com/design_thumbnails';
+  }
 
   $scope.main = {
       brand: "ShirtNexus",
@@ -125,7 +130,8 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       currentsite: "",
       firstname: "",
       lastname: "",
-      api_url: apiurl
+      api_url: apiurl,
+      cdn_url: cdnurl
   };
 
   /*
@@ -306,6 +312,20 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 		//console.log('Params: '+$routeParams.product);
 		var myThis = this;
 
+    $scope.myInterval = 5000;
+    var slides = $scope.slides = [];
+    $scope.addSlide = function(url, text) {
+      var newWidth = 600 + slides.length + 1;
+      slides.push({
+        image: url,
+        text: text
+      });
+    };
+    //for (var i=0; i<4; i++) {
+      //$scope.addSlide();
+    //}
+
+
     if (typeof $routeParams.id !== 'undefined') {
       $http.get($scope.main.api_url+'/admin/designs/'+$routeParams.id).
       success(function(data, status, headers, config) {
@@ -314,6 +334,11 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
         myThis.setColor(data.color);
         myThis.setJson(data.json);
         myThis.design_name = data.name;
+        var obj_colors = angular.fromJson(data.colors);
+        for (obj in obj_colors) {
+          $scope.addSlide($scope.main.cdn_url+'/'+obj_colors[obj].path, '#'+obj_colors[obj].hex);  
+        }
+        
       }).
       error(function(data, status, headers, config) {
         console.log(data);
@@ -481,10 +506,28 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 
       this.saveDesign = function() {
         console.log('saveDesign'+this.design_name+this.selectedColor+this.selectedProduct);
+
+        $scope.doToggleBorder();
+
+        var thumbnail_1 = $scope.canvas__getThumbnail();
+        /* Loop thru selected color */
+        var thumbnail_colors = [];
+        for (var k in this.possibleColors){
+          if (this.possibleColors[k] == true)
+            thumbnail_colors.push( { hex : k, thumbnail : $scope.canvas__color_getThumbnail(k) } );
+        }
+        console.log(thumbnail_colors);
+
+        var json = $scope.getJSON();
+
+        $scope.doToggleBorder();
+
         $http.put($scope.main.api_url+'/admin/designs/'+$routeParams.id, {'name' : this.design_name, 'color' : this.selectedColor, 'garment' : this.selectedProduct,
-       'json' : $scope.getJSON(), 'thumbnail': $scope.canvas__getThumbnail() } ).
+       'json' : json, 'thumbnail': thumbnail_1, 'colors' : thumbnail_colors } ).
         success(function(data, status, headers, config) {
           console.log(data);
+          alert('Saved!');
+          //location.reload();
         }).
         error(function(data, status, headers, config) {
           console.log(data);

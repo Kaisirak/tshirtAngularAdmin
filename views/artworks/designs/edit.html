@@ -86,15 +86,32 @@
               <img id="preloadBack" src="" width="1" height="1"/> -->
               <canvas id="c" width="225" height="430" fabric-canvas></canvas>
             </div>
+           
             <div class="btn-group btn-side">
               <button type="button" id="rectoBtn" ng-init="designerCtrl.setShirtBorder(100, 150, 200, 400)" ng-click="designerCtrl.showFront()" class="btn btn-info active">FRONT</button>
               <button ng-show="designerCtrl.isBackDesign" ng-click="designerCtrl.showBack()" type="button" id="versoBtn" class="btn btn-info">BACK</button>
             </div>
+
+
+
+
           </div>
     </div>
     <button type="submit" class="btn btn-success btn-lg pull-right" ><i class="fa fa-spin fa-spinner" ng-show="loading"></i> Save Design</button>
+    <div style="height: 305px;width: 500px;" class="row">
+    <carousel interval="myInterval">
+      <slide ng-repeat="slide in slides" active="slide.active">
+        <img ng-src="{{slide.image}}" style="margin:auto;">
+        <div class="carousel-caption">
+          
+        </div>
+      </slide>
+    </carousel>
+  </div>  
   </form>
+
   </section>
+
 
 
 </div>

@@ -272,7 +272,16 @@ angular.module("app.directives", [])
 							    height: 320
 							});
 						}
-
+						scope.canvas__color_getThumbnail = function (hex) {
+							canvas.setBackgroundColor('#'+hex, canvas.renderAll.bind(canvas));
+							return canvas.toDataURL({
+								format: 'png',
+							    left: 0,
+							    top: 0,
+							    width: 530,
+							    height: 320
+							});
+						}
 
 						for (var i = 0; i < fontList.length; i++)
 						{
