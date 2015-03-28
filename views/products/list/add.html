@@ -102,7 +102,7 @@
              <tags-input ng-model="tagsvalue" class="ui-tags-input" id="keywords-focus"></tags-input>
 
 
-            <input type="text" ng-model="selected" typeahead="item for item in items | filter:$viewValue | limitTo:8" class="form-control"  placeholder="Search">                    
+            <!-- <input  type="text" ng-model="selected" typeahead="item for item in items | filter:$viewValue | limitTo:8" class="form-control"  placeholder="Search">  -->                  
 
 <!--
             <div class="form-group">
@@ -115,8 +115,10 @@
             </div>
 -->
 
-          
-        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Product Variants</strong></div>
+          <button style="margin-top:20px;" type="submit" class="btn btn-primary btn-lg pull-right" ><i class="fa fa-spin fa-spinner" ng-show="loading"></i> Save Product</button>
+
+        <div style="margin-top: 50px;" class="panel-heading">
+        <strong><span class="glyphicon glyphicon-th"></span> Product Variants</strong></div>
 
         <div class="table-filters">
             <div class="row">
@@ -224,12 +226,12 @@
                 </div>
                 <div class="col-md-6 text-right pagination-container">
                     <ul class="pagination-sm pagination ng-isolate-scope ng-pristine ng-valid" ng-model="currentPage" total-items="filteredStores.length" max-size="4" ng-change="select(currentPage)" items-per-page="numPerPage" rotate="false" boundary-links="true">
-  <!-- ngIf: boundaryLinks --><li ng-if="boundaryLinks" ng-class="{disabled: noPrevious()}" class="ng-scope disabled"><a href="" ng-click="selectPage(1)" class="ng-binding">First</a></li><!-- end ngIf: boundaryLinks -->
-  <!-- ngIf: directionLinks --><li ng-if="directionLinks" ng-class="{disabled: noPrevious()}" class="ng-scope disabled"><a href="" ng-click="selectPage(page - 1)" class="ng-binding">Previous</a></li><!-- end ngIf: directionLinks -->
-  <!-- ngRepeat: page in pages track by $index --><li ng-repeat="page in pages track by $index" ng-class="{active: page.active}" class="ng-scope active"><a href="" ng-click="selectPage(page.number)" class="ng-binding">1</a></li><!-- end ngRepeat: page in pages track by $index --><li ng-repeat="page in pages track by $index" ng-class="{active: page.active}" class="ng-scope"><a href="" ng-click="selectPage(page.number)" class="ng-binding">2</a></li><!-- end ngRepeat: page in pages track by $index --><li ng-repeat="page in pages track by $index" ng-class="{active: page.active}" class="ng-scope"><a href="" ng-click="selectPage(page.number)" class="ng-binding">3</a></li><!-- end ngRepeat: page in pages track by $index -->
-  <!-- ngIf: directionLinks --><li ng-if="directionLinks" ng-class="{disabled: noNext()}" class="ng-scope"><a href="" ng-click="selectPage(page + 1)" class="ng-binding">Next</a></li><!-- end ngIf: directionLinks -->
-  <!-- ngIf: boundaryLinks --><li ng-if="boundaryLinks" ng-class="{disabled: noNext()}" class="ng-scope"><a href="" ng-click="selectPage(totalPages)" class="ng-binding">Last</a></li><!-- end ngIf: boundaryLinks -->
-</ul>
+                    <!-- ngIf: boundaryLinks --><li ng-if="boundaryLinks" ng-class="{disabled: noPrevious()}" class="ng-scope disabled"><a href="" ng-click="selectPage(1)" class="ng-binding">First</a></li><!-- end ngIf: boundaryLinks -->
+                    <!-- ngIf: directionLinks --><li ng-if="directionLinks" ng-class="{disabled: noPrevious()}" class="ng-scope disabled"><a href="" ng-click="selectPage(page - 1)" class="ng-binding">Previous</a></li><!-- end ngIf: directionLinks -->
+                    <!-- ngRepeat: page in pages track by $index --><li ng-repeat="page in pages track by $index" ng-class="{active: page.active}" class="ng-scope active"><a href="" ng-click="selectPage(page.number)" class="ng-binding">1</a></li><!-- end ngRepeat: page in pages track by $index --><li ng-repeat="page in pages track by $index" ng-class="{active: page.active}" class="ng-scope"><a href="" ng-click="selectPage(page.number)" class="ng-binding">2</a></li><!-- end ngRepeat: page in pages track by $index --><li ng-repeat="page in pages track by $index" ng-class="{active: page.active}" class="ng-scope"><a href="" ng-click="selectPage(page.number)" class="ng-binding">3</a></li><!-- end ngRepeat: page in pages track by $index -->
+                    <!-- ngIf: directionLinks --><li ng-if="directionLinks" ng-class="{disabled: noNext()}" class="ng-scope"><a href="" ng-click="selectPage(page + 1)" class="ng-binding">Next</a></li><!-- end ngIf: directionLinks -->
+                    <!-- ngIf: boundaryLinks --><li ng-if="boundaryLinks" ng-class="{disabled: noNext()}" class="ng-scope"><a href="" ng-click="selectPage(totalPages)" class="ng-binding">Last</a></li><!-- end ngIf: boundaryLinks -->
+                    </ul>
                 </div>
             </div>
         </footer>
@@ -241,7 +243,7 @@
         </div>
       </div>
       <div class="panel-body">
-      <button type="submit" class="btn btn-primary btn-lg pull-right" ><i class="fa fa-spin fa-spinner" ng-show="loading"></i> Save Product</button>
+      
       </div>
     </form>
   </section>
