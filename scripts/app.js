@@ -332,15 +332,14 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
   }
   /* Add */
   else {
-    self.status = 2;
+    self.product.status = 2;
     $http.get($scope.main.api_url+'/admin/designs').success(function(data, status, headers, config) {
-      self.design_options = data;
+      self.product.design_options = data;
       console.log(data);
     }).
     error(function(data, status, headers, config) {
       console.log(data);
     });
-    alert('Add');
   }
 
 
@@ -360,7 +359,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       $http.post($scope.main.api_url+'/admin/products', this.product ).success(function(data, status, headers, config) {
         console.log(data);
         alert('Saved!');
-        location.reload();
+        document.location.href = 'http://'+document.location.hostname+'/'+'products/add/'+data.id;
       }).error(function(data, status, headers, config) {
         console.log(data);
       });
