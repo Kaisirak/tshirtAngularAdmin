@@ -40,6 +40,7 @@ angular.module("app", ["ngRoute", "ngAnimate", "ngCookies", "ui.bootstrap", "eas
     .when("/files", {templateUrl: "views/files.html"})
     .when("/products/list", {templateUrl: "views/products/list/index.html"})
     .when("/products/add", {templateUrl: "views/products/list/add.html"})
+    .when("/products/add/:id", {templateUrl: "views/products/list/add.html"})
     .when("/products/categories", {templateUrl: "views/products/categories.html"})
     .when("/reviews", {templateUrl: "views/reviews/index.html"})
     .when("/category/:param", {templateUrl: "views/category.html"})
@@ -295,6 +296,79 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 }
 ])
 
+
+/*
+  Product Controller  API_URL/admin/produts
+*/
+.controller('ProductController',  ["$http", "$routeParams", "$scope", function($http,$routeParams,$scope) {
+  var self = this;
+  self.product = {};
+  /* Edit - Get on a Api - Change TLC */
+  if (typeof $routeParams.id !== 'undefined') {
+      $http.get($scope.main.api_url+'/admin/products/'+$routeParams.id).success(function(data, status, headers, config) {
+        self.product.name = data.name;
+        self.product.title = data.page_title;
+        self.product.subtitle = data.page_subtitle;
+        self.product.description = data.description;
+        self.product.categories = data.categories;
+        self.product.keywords = data.keywords;
+        self.product.meta_description = data.meta_description;
+        self.product.design_thumbnail = data.design.thumbnail;
+        self.product.design_images = angular.fromJson(data.design.colors);
+        self.product.slug_url = data.slug_url;
+        self.product.status = data.status;
+
+        $http.get($scope.main.api_url+'/admin/designs').success(function(data2, status, headers, config) {
+          self.product.design_options = data2;
+          self.product.design_id = data.design_id;
+        }).
+        error(function(data, status, headers, config) {
+          console.log(data);
+        });
+      }).
+      error(function(data, status, headers, config) {
+        console.log(data);
+      });
+  }
+  /* Add */
+  else {
+    self.status = 2;
+    $http.get($scope.main.api_url+'/admin/designs').success(function(data, status, headers, config) {
+      self.design_options = data;
+      console.log(data);
+    }).
+    error(function(data, status, headers, config) {
+      console.log(data);
+    });
+    alert('Add');
+  }
+
+
+
+  this.addProduct = function() {
+    console.log(this.product);
+    /* Edit - PUT on api */
+    if (typeof $routeParams.id !== 'undefined') {
+      $http.put($scope.main.api_url+'/admin/products/'+$routeParams.id, this.product ).success(function(data, status, headers, config) {
+        location.reload();
+      }).error(function(data, status, headers, config) {
+        console.log(data);
+      });
+    }
+    /* Add - POST on api */
+    else { 
+      $http.post($scope.main.api_url+'/admin/products', this.product ).success(function(data, status, headers, config) {
+        console.log(data);
+        alert('Saved!');
+        location.reload();
+      }).error(function(data, status, headers, config) {
+        console.log(data);
+      });
+    }
+  };
+
+}])
+
 .controller('DesignerController', ["$http", "$routeParams", "$scope", function($http,$routeParams,$scope) {
 
     this.selectedProduct = "american-apparel-50-50-t-shirt";
@@ -308,8 +382,6 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 		this.possibleSizes = [];
     this.possibleColors = {};
     this.productCompleteList = [];
-		//var mainProductList = [ 'Hoodies','Short Sleeve Shirts','Long Sleeve Shirts','Mugs','Phone cases','Sweatshirts' ];
-		//console.log('Params: '+$routeParams.product);
 		var myThis = this;
 
     $scope.myInterval = 5000;
@@ -321,10 +393,6 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
         text: text
       });
     };
-    //for (var i=0; i<4; i++) {
-      //$scope.addSlide();
-    //}
-
 
     if (typeof $routeParams.id !== 'undefined') {
       $http.get($scope.main.api_url+'/admin/designs/'+$routeParams.id).
@@ -345,7 +413,6 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       });
     }
 
-
     $http.get($scope.main.api_url+'/products').
       success(function(data, status, headers, config) {
           var products = angular.fromJson(data);
@@ -355,7 +422,6 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
                 console.log('Url undefined');
               myThis.productCompleteList.push( { category: key, name: value['name'], path : value['productId'] } );
             });
-            //console.log(myThis.productCompleteList);
         });
       }).
       error(function(data, status, headers, config) {
@@ -365,7 +431,6 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 
 		$http.get($scope.main.api_url+'/products/'+this.selectedProduct).
 			success(function(data, status, headers, config) {
-				//console.log(data);
 				angular.forEach(data.colors, function(color, key) {
 					myThis.colors.push( { name : color.name, id : color.hex, value: '#'+color.hex, hsl : rgbToHsl(color.hex) } );
 					myThis.images[color.hex] = [];
@@ -379,8 +444,6 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 						myThis.possibleSizes = color.sizes;
 				});
 				myThis.selectedDescription = data.description;
-				//console.log(myThis.sizes);
-				//console.log(myThis.possibleSizes);
 			}).
 			error(function(data, status, headers, config) {
 			 	console.log(data);
@@ -392,7 +455,6 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       $scope.canvas_setBackgroundImage('images/crew_front.png');
       $scope.canvas_setBackgroundColor(hex);
 			this.selectedColor = hex;
-			//this.setImage(hex, 'front');
 			this.setSizes(hex, 'front');
 		};
 
@@ -437,7 +499,6 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 
 		this.update = function() {
       this.colors = [];
-			//console.log(this.selectedProduct);
       $http.get($scope.main.api_url+'/products/'+this.selectedProduct).
       success(function(data, status, headers, config) {
         angular.forEach(data.colors, function(color, key) {
@@ -451,52 +512,22 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       error(function(data, status, headers, config) {
         console.log(data);
       });
-			/*
-			this.curSelected = queryProd(this.types, this.curSelectedId);
-			if ($("#versoBtn").hasClass('active') == false) {
-				$("#preloadFront").one('load', function() {
-					$(".behind-product").css("background-image", "url('" + $(this).attr('src') + "')");
-					$("#preloadBack").attr('src', $(this).attr('src').replace('_front', '_back'));
-		       	})
-		    	.attr('src', "img/" + this.curSelected.img_path[0]) //Set the source so it caches
-		        .each(function() {
-		        	if(this.complete)
-		        		$(this).trigger('load');
-				});
-			}
-			else {
-				$("#preloadFront").one('load', function() {
-					$(".behind-product").css("background-image", "url('" + $(this).attr('src') + "')");
-					$("#preloadFront").attr('src', $(this).attr('src').replace('_back', '_front'));
-		        })
-		        .attr('src', "img/" + this.curSelected.img_path[1]) //Set the source so it caches
-		        .each(function() {
-		        if(this.complete)
-		        	$(this).trigger('load');
-				});
-			}
-			//$(".behind-product").css("background-image", "url('img/" + this.curSelected.img_path[($("#versoBtn").hasClass('active') == true?1:0)] + "')");
-			this.curSelectedSize = this.curSelected.sizes[0];*/
 		};
 
     this.addDesign = function() {
       console.log('addDesign'+this.design_name+this.selectedColor+this.selectedProduct);
       angular.element(document.querySelector("#canvas"));
-      //console.log($scope.getJSON());
-      //console.log($scope.canvas__getThumbnail());
       $scope.doToggleBorder();
-
-        var thumbnail_1 = $scope.canvas__getThumbnail();
-        /* Loop thru selected color */
+      var thumbnail_1 = $scope.canvas__getThumbnail();
+        
+        /* Loop thru selected colors */
         var thumbnail_colors = [];
         for (var k in this.possibleColors){
           if (this.possibleColors[k] == true)
             thumbnail_colors.push( { hex : k, thumbnail : $scope.canvas__color_getThumbnail(k) } );
         }
         console.log(thumbnail_colors);
-
         var json = $scope.getJSON();
-
         $scope.doToggleBorder();
 
       $http.post($scope.main.api_url+'/admin/designs', {'name' : this.design_name, 'color' : this.selectedColor, 'garment' : this.selectedProduct,
@@ -515,18 +546,14 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
         console.log('saveDesign'+this.design_name+this.selectedColor+this.selectedProduct);
 
         $scope.doToggleBorder();
-
         var thumbnail_1 = $scope.canvas__getThumbnail();
-        /* Loop thru selected color */
+        /* Loop thru selected colors */
         var thumbnail_colors = [];
         for (var k in this.possibleColors){
           if (this.possibleColors[k] == true)
             thumbnail_colors.push( { hex : k, thumbnail : $scope.canvas__color_getThumbnail(k) } );
         }
-        console.log(thumbnail_colors);
-
         var json = $scope.getJSON();
-
         $scope.doToggleBorder();
 
         $http.put($scope.main.api_url+'/admin/designs/'+$routeParams.id, {'name' : this.design_name, 'color' : this.selectedColor, 'garment' : this.selectedProduct,

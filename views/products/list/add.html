@@ -1,7 +1,7 @@
 <div class="page">
-  <a class="btn btn-warning" href="/artworks/designs">Back to product list</a>
-  <section class="panel panel-default" id="onlinedesigner" ng-controller="DesignerController as designerCtrl">
-    <form ng-submit="designerCtrl.addDesign()" class="form-horizontal">
+  <a class="btn btn-warning" href="/products/list">Back to product list</a>
+  <section class="panel panel-default" id="onlinedesigner" ng-controller="ProductController as productCtrl">
+    <form  ng-submit="productCtrl.addProduct()" class="form-horizontal">
       <div class="panel-heading">
         <strong>
           <span class="glyphicon glyphicon-th"></span> New Product
@@ -14,27 +14,36 @@
             <div class="form-group">
               <label for="meta-focus" class="col-sm-3">Product Name</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control"></input>
+                <input ng-model="productCtrl.product.name" type="text" class="form-control"></input>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="meta-focus" class="col-sm-3">Design ID</label>
+              <div class="col-sm-9">
+                <select ng-model="productCtrl.product.design_id" class="form-control">
+                    <option ng-repeat="design in productCtrl.product.design_options" value="{{design.id}}">{{design.name}}</option>
+                </select>
               </div>
             </div>
 
             <div class="form-group">
               <label for="meta-focus" class="col-sm-3">Page Title</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control"></input>
+                <input ng-model="productCtrl.product.title" type="text" class="form-control"></input>
               </div>
             </div>
 
             <div class="form-group">
               <label for="meta-focus" class="col-sm-3">Page Subtitle</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control"></input>
+                <input ng-model="productCtrl.product.subtitle" type="text" class="form-control"></input>
               </div>
             </div>
             <div class="form-group">
               <label for="meta-focus" class="col-sm-3">Description</label>
               <div class="col-sm-9">
-                <textarea class="form-control"></textarea>
+                <textarea ng-model="productCtrl.product.description" class="form-control"></textarea>
               </div>
             </div>
 
@@ -42,54 +51,49 @@
             <div class="form-group">
               <label for="meta-focus" class="col-sm-3">Categories</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control"></input>
+                <input ng-model="productCtrl.product.categories" type="text" class="form-control"></input>
               </div>
             </div>
 
            <div class="form-group">
-              <label for="meta-focus" class="col-sm-3">Keyworkds</label>
+              <label for="meta-focus" class="col-sm-3">Keywords</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control"></input>
+                <input ng-model="productCtrl.product.keywords" type="text" class="form-control"></input>
               </div>
             </div>
 
             <div class="form-group">
               <label for="meta-focus" class="col-sm-3">Meta Description</label>
               <div class="col-sm-9">
-                <textarea class="form-control"></textarea>
+                <textarea ng-model="productCtrl.product.meta_description" class="form-control"></textarea>
               </div>
             </div>
 
             <div class="form-group">
               <label for="meta-focus" class="col-sm-3">Slug URL</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control"></input>
+                <input ng-model="productCtrl.product.slug_url" type="text" class="form-control"></input>
               </div>
             </div>
 
             <div class="form-group">
               <label for="meta-focus" class="col-sm-3">Main Images</label>
               <div class="col-sm-9">
-                <img src="http://placehold.it/125x90"></img>
+                <img  src="{{ productCtrl.product.design_thumbnail }}"></img>
               </div>
             </div>
 
             <div class="form-group">
               <label for="meta-focus" class="col-sm-3">Other Images</label>
               <div class="col-sm-9">
-                <img src="http://placehold.it/125x90"></img>
-                <img src="http://placehold.it/125x90"></img>
-                <img src="http://placehold.it/125x90"></img>
-                <img src="http://placehold.it/125x90"></img>
-                <img src="http://placehold.it/125x90"></img>
-                <img src="http://placehold.it/125x90"></img>
+                <img style="width:125px;" ng-repeat="image in productCtrl.product.design_images" src="{{ main.cdn_url+'/'+image.path }}"></img>
               </div>
             </div>
 
             <div class="form-group">
               <label for="meta-focus" class="col-sm-3">Status</label>
               <div class="col-sm-9">
-                <select class="form-control">
+                <select ng-model="productCtrl.product.status" class="form-control">
                   <option value="1">Active</option>
                   <option value="2">Not ready (yet)</option>
                   <option value="3">Disabled (for now)</option>
