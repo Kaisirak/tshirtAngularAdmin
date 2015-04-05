@@ -121,14 +121,19 @@ angular.module("app.tables", [])
       return("<img class='img-responsive' src='" + mystore[myproperty] + "' width='200'>");
     else if (myproperty == 'internal_link')
       return ("<a href='category/" + mystore['categoryId'] + "'>" + mystore['categoryId'] + "</a>");
-    else if (myproperty == 'edit')
-      return ("<a class='btn btn-info' href='/artworks/designs/edit/"+ mystore['id']+"'>Edit</a>");
+    else if (myproperty == 'edit') {
+      return ("<a class='btn btn-info' href='"+$scope.editRoute+'/'+ mystore['id']+"'>Edit</a>");
+    }
     else
       return (mystore[myproperty]);
   };
 
   $scope.deleteEntry = function(id) {
 
+  };
+
+  $scope.setEditRoute = function(path){
+      $scope.editRoute = path;
   };
 
   $scope.setDisplayOnly = function(){
