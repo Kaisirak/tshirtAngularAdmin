@@ -121,8 +121,12 @@
 
           <button style="margin-top:20px;" type="submit" class="btn btn-primary btn-lg pull-right" ><i class="fa fa-spin fa-spinner" ng-show="loading"></i> Save Product</button>
 
-        <div style="margin-top: 50px;" class="panel-heading">
+          <button style="margin-top:20px;margin-bottom: 10px;" ng-click="productCtrl.generateVariants(); $event.preventDefault(); $event.stopPropagation();" class="btn btn-info btn-lg" >Generate Variants</button>
+
+        <div style="margin-top: 20px;" class="panel-heading">
         <strong><span class="glyphicon glyphicon-th"></span> Product Variants</strong></div>
+        
+        
 
         <div class="table-filters">
             <div class="row">

@@ -366,6 +366,24 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
     }
   };
 
+  this.generateVariants = function() {
+    var price = prompt("Please enter a price", "20.00");
+    if (price != null) {
+        if (typeof $routeParams.id !== 'undefined') {
+          $http.post($scope.main.api_url+'/admin/products/create_variants', { 'id' : $routeParams.id, 'price' : price } ).success(function(data, status, headers, config) {
+            console.log(data);
+            alert('Saved!');
+          }).error(function(data, status, headers, config) {
+            console.log(data);
+          });
+        }
+        else {
+          alert('First Save Your Product!');
+        }
+    }
+    
+  }
+
 }])
 
 .controller('DesignerController', ["$http", "$routeParams", "$scope", function($http,$routeParams,$scope) {
@@ -430,19 +448,22 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 
 		$http.get($scope.main.api_url+'/products/'+this.selectedProduct).
 			success(function(data, status, headers, config) {
+        console.log(data);
 				angular.forEach(data.colors, function(color, key) {
 					myThis.colors.push( { name : color.name, id : color.hex, value: '#'+color.hex, hsl : rgbToHsl(color.hex) } );
 					myThis.images[color.hex] = [];
-					myThis.sizes[color.hex] = color.sizes;
+					//myThis.sizes[color.hex] = color.sizes;
+          myThis.sizes.push( { hex : color.hex, size : color.sizes, name : color.name } );
 					angular.forEach(color.images, function(image, key) {
 						myThis.images[color.hex][angular.lowercase(image.label)] = image.url;
 					});
 					if (!myThis.selectedColor)
 						myThis.setColor(color.hex);
-					if (!myThis.possibleSizes.length)
-						myThis.possibleSizes = color.sizes;
+					//if (!myThis.possibleSizes.length)
+					//	myThis.possibleSizes = color.sizes;
 				});
 				myThis.selectedDescription = data.description;
+        //console.log(myThis.sizes);
 			}).
 			error(function(data, status, headers, config) {
 			 	console.log(data);
@@ -530,7 +551,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
         $scope.doToggleBorder();
 
       $http.post($scope.main.api_url+'/admin/designs', {'name' : this.design_name, 'color' : this.selectedColor, 'garment' : this.selectedProduct,
-       'json' : json, 'thumbnail': thumbnail_1, 'colors' : thumbnail_colors } ).
+       'json' : json, 'thumbnail': thumbnail_1, 'colors' : thumbnail_colors, 'sizes' : this.sizes } ).
         success(function(data, status, headers, config) {
           alert('Saved!');
           document.location.href = 'http://'+document.location.hostname+'/'+'artworks/designs/edit/'+data.id;
@@ -543,7 +564,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 
       this.saveDesign = function() {
         console.log('saveDesign'+this.design_name+this.selectedColor+this.selectedProduct);
-
+        console.log(this.sizes);
         $scope.doToggleBorder();
         var thumbnail_1 = $scope.canvas__getThumbnail();
         /* Loop thru selected colors */
@@ -556,7 +577,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
         $scope.doToggleBorder();
 
         $http.put($scope.main.api_url+'/admin/designs/'+$routeParams.id, {'name' : this.design_name, 'color' : this.selectedColor, 'garment' : this.selectedProduct,
-       'json' : json, 'thumbnail': thumbnail_1, 'colors' : thumbnail_colors } ).
+       'json' : json, 'thumbnail': thumbnail_1, 'colors' : thumbnail_colors, 'sizes' : this.sizes } ).
         success(function(data, status, headers, config) {
           console.log(data);
           alert('Saved!');
