@@ -481,7 +481,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 
     this.setObjectType = function(){
       console.log(myThis.selectedProduct);
-      if (myThis.selectedProduct.indexOf("V-Neck") < 0)
+      if (myThis.selectedProduct.indexOf("v-neck") < 0)
         $scope.canvas_setBackgroundImage('images/crew_front.png');
       else
         $scope.canvas_setBackgroundImage('images/vneck3.png');
