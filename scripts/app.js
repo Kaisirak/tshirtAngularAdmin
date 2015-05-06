@@ -417,7 +417,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
         console.log(data);
         myThis.selectedProduct = data.garment;
         myThis.setColor(data.color);
-        myThis.setObjectType(1);
+        myThis.setObjectType();
         myThis.setJson(data.json);
         myThis.design_name = data.name;
         var obj_colors = angular.fromJson(data.colors);
@@ -460,7 +460,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 					});
 					if (!myThis.selectedColor)
 						myThis.setColor(color.hex);
-          myThis.setObjectType(1);
+          myThis.setObjectType();
 					//if (!myThis.possibleSizes.length)
 					//	myThis.possibleSizes = color.sizes;
 				});
@@ -479,10 +479,10 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 			this.setSizes(hex, 'front');
 		};
 
-    this.setObjectType = function(type){
-      if (type == 0)
+    this.setObjectType = function(){
+      if (myThis.selectedProduct.indexOf("V-Neck") < 0)
         $scope.canvas_setBackgroundImage('images/crew_front.png');
-      else if (type == 1)
+      else
         $scope.canvas_setBackgroundImage('images/vneck3.png');
     };
 
@@ -534,7 +534,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
             myThis.colors.push( { name : color.name, id : color.hex, value: '#'+color.hex, hsl : rgbToHsl(color.hex) } );
             if (!myThis.selectedColor)
               myThis.setColor(color.hex);
-              myThis.setObjectType(1);
+              myThis.setObjectType();
           }
         });
       }).
