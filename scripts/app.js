@@ -484,8 +484,8 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       if (myThis.selectedProduct.indexOf("v-neck") < 0)
         $scope.canvas_setBackgroundImage('images/crew_front.png');
       else
-        $scope.canvas_setBackgroundImage('images/vneck3.png');
-      $scope.canvas_setBorder(100, 150, 200, 400);
+        $scope.canvas_setBackgroundImage('images/vneck.png');
+      $scope.canvas_setBorder(100, 150, 400, 800);
     };
 
     this.setShirtBorder = function(datop, daleft, dawidth, daheight){
