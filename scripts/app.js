@@ -485,6 +485,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
         $scope.canvas_setBackgroundImage('images/crew_front.png');
       else
         $scope.canvas_setBackgroundImage('images/vneck3.png');
+      $scope.canvas_setBorder(100, 150, 200, 400);
     };
 
     this.setShirtBorder = function(datop, daleft, dawidth, daheight){
