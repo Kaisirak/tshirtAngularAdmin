@@ -480,6 +480,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 		};
 
     this.setObjectType = function(){
+      console.log(myThis.selectedProduct);
       if (myThis.selectedProduct.indexOf("V-Neck") < 0)
         $scope.canvas_setBackgroundImage('images/crew_front.png');
       else
@@ -534,7 +535,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
             myThis.colors.push( { name : color.name, id : color.hex, value: '#'+color.hex, hsl : rgbToHsl(color.hex) } );
             if (!myThis.selectedColor)
               myThis.setColor(color.hex);
-              myThis.setObjectType();
+            myThis.setObjectType();
           }
         });
       }).
