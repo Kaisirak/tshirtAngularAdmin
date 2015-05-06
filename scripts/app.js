@@ -355,7 +355,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       });
     }
     /* Add - POST on api */
-    else { 
+    else {
       $http.post($scope.main.api_url+'/admin/products', this.product ).success(function(data, status, headers, config) {
         console.log(data);
         alert('Saved!');
@@ -381,7 +381,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
           alert('First Save Your Product!');
         }
     }
-    
+
   }
 
 }])
@@ -417,13 +417,14 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
         console.log(data);
         myThis.selectedProduct = data.garment;
         myThis.setColor(data.color);
+        myThis.setObjectType(0);
         myThis.setJson(data.json);
         myThis.design_name = data.name;
         var obj_colors = angular.fromJson(data.colors);
         for (obj in obj_colors) {
-          $scope.addSlide($scope.main.cdn_url+'/'+obj_colors[obj].path, '#'+obj_colors[obj].hex);  
+          $scope.addSlide($scope.main.cdn_url+'/'+obj_colors[obj].path, '#'+obj_colors[obj].hex);
         }
-        
+
       }).
       error(function(data, status, headers, config) {
         console.log(data);
@@ -459,6 +460,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 					});
 					if (!myThis.selectedColor)
 						myThis.setColor(color.hex);
+          myThis.setObjectType(0);
 					//if (!myThis.possibleSizes.length)
 					//	myThis.possibleSizes = color.sizes;
 				});
@@ -472,11 +474,17 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 		this.designerImgUrl = "";
 
 		this.setColor = function(hex) {
-      $scope.canvas_setBackgroundImage('images/crew_front.png');
       $scope.canvas_setBackgroundColor(hex);
 			this.selectedColor = hex;
 			this.setSizes(hex, 'front');
 		};
+
+    this.setObjectType = function(type){
+      if (type == 0)
+        $scope.canvas_setBackgroundImage('images/crew_front.png');
+      else if (type == 1)
+        $scope.canvas_setBackgroundImage('images/vneck3.png');
+    };
 
     this.setShirtBorder = function(datop, daleft, dawidth, daheight){
       $scope.canvas_setBorder(datop, daleft, dawidth, daheight);
@@ -525,7 +533,8 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
           if (color.hex != '') {
             myThis.colors.push( { name : color.name, id : color.hex, value: '#'+color.hex, hsl : rgbToHsl(color.hex) } );
             if (!myThis.selectedColor)
-              myThis.setColor(color.hex);  
+              myThis.setColor(color.hex);
+              myThis.setObjectType(0);
           }
         });
       }).
@@ -539,7 +548,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       angular.element(document.querySelector("#canvas"));
       $scope.doToggleBorder();
       var thumbnail_1 = $scope.canvas__getThumbnail();
-        
+
         /* Loop thru selected colors */
         var thumbnail_colors = [];
         for (var k in this.possibleColors){
