@@ -417,7 +417,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
         console.log(data);
         myThis.selectedProduct = data.garment;
         myThis.setColor(data.color);
-        myThis.setObjectType(0);
+        myThis.setObjectType(1);
         myThis.setJson(data.json);
         myThis.design_name = data.name;
         var obj_colors = angular.fromJson(data.colors);
@@ -460,7 +460,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 					});
 					if (!myThis.selectedColor)
 						myThis.setColor(color.hex);
-          myThis.setObjectType(0);
+          myThis.setObjectType(1);
 					//if (!myThis.possibleSizes.length)
 					//	myThis.possibleSizes = color.sizes;
 				});
@@ -534,7 +534,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
             myThis.colors.push( { name : color.name, id : color.hex, value: '#'+color.hex, hsl : rgbToHsl(color.hex) } );
             if (!myThis.selectedColor)
               myThis.setColor(color.hex);
-              myThis.setObjectType(0);
+              myThis.setObjectType(1);
           }
         });
       }).
