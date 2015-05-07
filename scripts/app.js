@@ -484,7 +484,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       if (myThis.selectedProduct.indexOf("v-neck") < 0)
         $scope.canvas_setBackgroundImage('images/crew_front.png');
       else {
-        $scope.canvas_setBackgroundImage('images/vneck2.png');
+        $scope.canvas_setBackgroundImage('images/vneckvneckcleaner.png');
 
       }
     };
@@ -563,7 +563,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
         $scope.doToggleBorder();
 
       $http.post($scope.main.api_url+'/admin/designs', {'name' : this.design_name, 'color' : this.selectedColor, 'garment' : this.selectedProduct,
-       'json' : json, 'thumbnail': thumbnail_1, 'colors' : thumbnail_colors, 'sizes' : this.sizes } ).
+       'json' : json, 'thumbnail': thumbnail_1, 'colors' : thumbnail_colors, 'sizes' : this.sizes, 'artwork_image' : $scope.canvas__getDesign() } ).
         success(function(data, status, headers, config) {
           alert('Saved!');
           document.location.href = 'http://'+document.location.hostname+'/'+'artworks/designs/edit/'+data.id;
@@ -589,7 +589,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
         $scope.doToggleBorder();
 
         $http.put($scope.main.api_url+'/admin/designs/'+$routeParams.id, {'name' : this.design_name, 'color' : this.selectedColor, 'garment' : this.selectedProduct,
-       'json' : json, 'thumbnail': thumbnail_1, 'colors' : thumbnail_colors, 'sizes' : this.sizes } ).
+       'json' : json, 'thumbnail': thumbnail_1, 'colors' : thumbnail_colors, 'sizes' : this.sizes, 'artwork_image' : $scope.canvas__getDesign() } ).
         success(function(data, status, headers, config) {
           console.log(data);
           alert('Saved!');

@@ -282,6 +282,17 @@ angular.module("app.directives", [])
 							    height: 320
 							});
 						}
+            scope.canvas__getDesign = function () {
+              canvas.backgroundImage = false;
+              canvas.setBackgroundColor('', canvas.renderAll.bind(canvas));
+							return canvas.toDataURL({
+								format: 'png',
+							    left: 0,
+							    top: 0,
+							    width: 530,
+							    height: 320
+							});
+						}
 
 						for (var i = 0; i < fontList.length; i++)
 						{
@@ -340,7 +351,7 @@ angular.module("app.directives", [])
 												left: canvas.width / 100,
 												top: canvas.height / 20,
 												scaleY: canvas.width / image.width,
-    											scaleX: canvas.width / image.width,
+    										scaleX: canvas.width / image.width,
 												angle: 0,
 												padding: 0,
 												cornersize: 0
