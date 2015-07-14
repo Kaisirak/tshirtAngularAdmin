@@ -1,6 +1,6 @@
 <div class="page page-table">
 	<a class="btn btn-success" href="/products/add">Create a new Product</a>
-  <section class="panel panel-default table-dynamic" ng-controller="TablesCtrl" ng-init="setModelRoute('products');setTableName('Products'); setContent('admin/products','','yes'); setAllProperties(['id', 'name','date_created','date_modified','edit']); setDisplayOnly();setEditRoute('products/add');">
+  <section class="panel panel-default table-dynamic" ng-controller="TablesCtrl" ng-init="setModelRoute('products');setTableName('products'); setContent('admin/products','','yes'); setAllProperties(['product_parent.id', 'product_parent.name','date_created','date_modified','edit']); setDisplayOnly();setEditRoute('products/add');">
     <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> {{tableName}}</strong></div>
     <dynamic-table></dynamic-table>
   </section>
