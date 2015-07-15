@@ -484,7 +484,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       if (myThis.selectedProduct.indexOf("v-neck") < 0)
         $scope.canvas_setBackgroundImage('images/crew_front.png');
       else {
-        $scope.canvas_setBackgroundImage('images/vneckcleaner.png');
+        $scope.canvas_setBackgroundImage('images/vneck2transparentnohead.png');
 
       }
     };
