@@ -585,7 +585,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
         var thumbnail_colors = [];
         for (var k in this.possibleColors){
           if (this.possibleColors[k] == true)
-            thumbnail_colors.push( { hex : k, name : this.HexToName[k)], thumbnail : $scope.canvas__color_getThumbnail(k) } );
+            thumbnail_colors.push( { hex : k, name : this.HexToName[k], thumbnail : $scope.canvas__color_getThumbnail(k) } );
             console.log(k);
         }
         console.log('thumbnail_colors');
