@@ -589,7 +589,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
         }
         var json = $scope.getJSON();
         $scope.doToggleBorder();
-
+        console.log(thumbnail_colors);
         $http.put($scope.main.api_url+'/admin/designs/'+$routeParams.id, {'name' : this.design_name, 'color' : this.selectedColor, 'garment' : this.selectedProduct,
        'json' : json, 'thumbnail': thumbnail_1, 'colors' : thumbnail_colors, 'sizes' : this.sizes, 'artwork_image' : $scope.canvas__getDesign() } ).
         success(function(data, status, headers, config) {
