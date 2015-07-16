@@ -466,7 +466,6 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 					//if (!myThis.possibleSizes.length)
 					//	myThis.possibleSizes = color.sizes;
 				});
-        console.log(myThis.HexToName);
 				myThis.selectedDescription = data.description;
         //console.log(myThis.sizes);
 			}).
@@ -586,7 +585,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
         var thumbnail_colors = [];
         for (var k in this.possibleColors){
           if (this.possibleColors[k] == true)
-            thumbnail_colors.push( { hex : k, thumbnail : $scope.canvas__color_getThumbnail(k), name : this.HexToName[k] } );
+            thumbnail_colors.push( { hex : k, thumbnail : $scope.canvas__color_getThumbnail(k), name : this.HexToName[k.substring(1)] } );
         }
         var json = $scope.getJSON();
         $scope.doToggleBorder();
