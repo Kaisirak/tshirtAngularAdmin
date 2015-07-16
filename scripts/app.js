@@ -466,6 +466,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 					//if (!myThis.possibleSizes.length)
 					//	myThis.possibleSizes = color.sizes;
 				});
+        console.log(myThis.HexToName);
 				myThis.selectedDescription = data.description;
         //console.log(myThis.sizes);
 			}).
