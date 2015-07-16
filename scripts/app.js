@@ -393,6 +393,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 		this.productsSameCategory = [];
 		this.selectedDescription = "";
 		this.colors = [];
+    this.HexToName = [];
 		this.images = [];
 		this.sizes = [];
 		this.selectedColor = 0;
@@ -452,6 +453,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
         console.log(data);
 				angular.forEach(data.colors, function(color, key) {
 					myThis.colors.push( { name : color.name, id : color.hex, value: '#'+color.hex, hsl : rgbToHsl(color.hex) } );
+          myThis.HexToName[color.hex] = color.name;
 					myThis.images[color.hex] = [];
 					//myThis.sizes[color.hex] = color.sizes;
           myThis.sizes.push( { hex : color.hex, size : color.sizes, name : color.name } );
@@ -556,7 +558,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
         var thumbnail_colors = [];
         for (var k in this.possibleColors){
           if (this.possibleColors[k] == true)
-            thumbnail_colors.push( { hex : k, thumbnail : $scope.canvas__color_getThumbnail(k) } );
+            thumbnail_colors.push( { hex : k, thumbnail : $scope.canvas__color_getThumbnail(k), name : this.HexToName[k] } );
         }
         console.log(thumbnail_colors);
         var json = $scope.getJSON();
@@ -576,14 +578,14 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 
       this.saveDesign = function() {
         console.log('saveDesign'+this.design_name+this.selectedColor+this.selectedProduct);
-        console.log(this.sizes);
+        console.log(this.possibleColors);
         $scope.doToggleBorder();
         var thumbnail_1 = $scope.canvas__getThumbnail();
         /* Loop thru selected colors */
         var thumbnail_colors = [];
         for (var k in this.possibleColors){
           if (this.possibleColors[k] == true)
-            thumbnail_colors.push( { hex : k, thumbnail : $scope.canvas__color_getThumbnail(k) } );
+            thumbnail_colors.push( { hex : k, thumbnail : $scope.canvas__color_getThumbnail(k), name : this.HexToName[k] } );
         }
         var json = $scope.getJSON();
         $scope.doToggleBorder();
