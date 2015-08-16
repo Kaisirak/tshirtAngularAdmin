@@ -417,7 +417,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       success(function(data, status, headers, config) {
         console.log(data);
         myThis.selectedProduct = data.garment;
-        this.getColorOptions();
+        myThis.getColorOptions();
         myThis.setColor(data.color);
         myThis.setObjectType();
         myThis.setJson(data.json);
