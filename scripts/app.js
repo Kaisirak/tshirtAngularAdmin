@@ -447,7 +447,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
         console.log(data);
     });
 
-
+    alert(this.selectedProduct);
 		$http.get($scope.main.api_url+'/products/'+this.selectedProduct).
 			success(function(data, status, headers, config) {
         console.log(data);
@@ -558,9 +558,8 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
         var thumbnail_colors = [];
         for (var k in this.possibleColors){
           if (this.possibleColors[k] == true)
-            thumbnail_colors.push( { hex : k, thumbnail : $scope.canvas__color_getThumbnail(k), name : this.HexToName[k] } );
+            thumbnail_colors.push( { hex : k, name : this.HexToName[k], thumbnail : $scope.canvas__color_getThumbnail(k) } );
         }
-        console.log(thumbnail_colors);
         var json = $scope.getJSON();
         $scope.doToggleBorder();
 
@@ -586,11 +585,8 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
         for (var k in this.possibleColors){
           if (this.possibleColors[k] == true)
             thumbnail_colors.push( { hex : k, name : this.HexToName[k], thumbnail : $scope.canvas__color_getThumbnail(k) } );
-            console.log(k);
         }
-        console.log('thumbnail_colors');
-        console.log(thumbnail_colors);
-        console.log(this.HexToName);
+        
 
         var json = $scope.getJSON();
         $scope.doToggleBorder();
