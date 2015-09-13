@@ -576,12 +576,22 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       $http.get($scope.main.api_url+'/products/'+this.selectedProduct).
         success(function(data, status, headers, config) {
           console.log(data);
-
+          
+          angular.forEach(myThis.available_vneck_colors, function(color, key) {
+            myThis.HexToName[color.hex] = color.name;
+          });
+          
           angular.forEach(data.colors, function(color, key) {
+            angular.forEach(color.images, function(image, key) {
+              myThis.images[color.hex][angular.lowercase(image.label)] = image.url;
+            });
+          };
+          
+         /*angular.forEach(data.colors, function(color, key) {
             
             myThis.colors.push( { name : color.name, id : color.hex, value: '#'+color.hex, hsl : rgbToHsl(color.hex) } );
 
-            myThis.HexToName[color.hex] = color.name;
+            //myThis.HexToName[color.hex] = color.name;
             myThis.images[color.hex] = [];
             //myThis.sizes[color.hex] = color.sizes;
             myThis.sizes.push( { hex : color.hex, size : color.sizes, name : color.name } );
@@ -594,7 +604,8 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
             //if (!myThis.possibleSizes.length)
             //  myThis.possibleSizes = color.sizes;
 
-        });
+         });*/
+
         myThis.selectedDescription = data.description;
         //console.log(myThis.sizes);
       }).
