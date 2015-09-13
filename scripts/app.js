@@ -580,7 +580,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
           angular.forEach(myThis.available_vneck_colors, function(color, key) {
             myThis.HexToName[color.hex] = color.name;
           });
-          
+          console.log(myThis.HexToName);
           angular.forEach(data.colors, function(color, key) {
             angular.forEach(color.images, function(image, key) {
               myThis.images[color.hex] = [];
