@@ -570,7 +570,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 
 		this.setColor = function(hex) {
       //$scope.canvas_setBackgroundColor(hex);
-      $scope.canvas_setBackgroundPattern('images/vneck_colors/vintage_black.jpg');
+      $scope.canvas_setBackgroundPattern('images/vneck_colors/brown.jpg');
 			this.selectedColor = hex;
 			this.setSizes(hex, 'front');
 		};
