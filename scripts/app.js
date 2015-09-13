@@ -392,88 +392,35 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
     $scope.available_vneck_colors = [
       { 
         'name'          : 'red',
-        'hex'           : '',
-        'pattern_path'  : 'images/vneck_colors/red.jpg'
+        'hex'           : 'ba0c2f'
       },
-      { 
+      {
         'name'          : 'canvas red',
-        'hex'           : '',
-        'pattern_path'  : 'images/vneck_colors/canvas_red.jpg'
+        'hex'           : ''
       },
-      { 
+      {
         'name'          : 'ash',
-        'hex'           : '',
-        'pattern_path'  : 'images/vneck_colors/ash.jpg'
+        'hex'           : ''
       },
-      { 
+      {
         'name'          : 'deep teal',
-        'hex'           : '',
-        'pattern_path'  : 'images/vneck_colors/deep_teal.jpg'
+        'hex'           : ''
       },
       { 
         'name'          : 'dark grey',
-        'hex'           : '',
-        'pattern_path'  : 'images/vneck_colors/dark_grey.jpg'
+        'hex'           : ''
       },
       { 
         'name'          : 'vintage black',
-        'hex'           : '',
-        'pattern_path'  : 'images/vneck_colors/vintage_black.jpg'
+        'hex'           : ''
       },
       { 
         'name'          : 'brown',
-        'hex'           : '',
-        'pattern_path'  : 'images/vneck_colors/brown.jpg'
+        'hex'           : ''
       },
       { 
         'name'          : 'red',
-        'hex'           : '',
-        'pattern_path'  : 'images/vneck_colors/red.jpg'
-      },
-      { 
-        'name'          : 'red',
-        'hex'           : '',
-        'pattern_path'  : 'images/vneck_colors/red.jpg'
-      },
-      { 
-        'name'          : 'red',
-        'hex'           : '',
-        'pattern_path'  : 'images/vneck_colors/red.jpg'
-      },
-      { 
-        'name'          : 'red',
-        'hex'           : '',
-        'pattern_path'  : 'images/vneck_colors/red.jpg'
-      },
-      { 
-        'name'          : 'red',
-        'hex'           : '',
-        'pattern_path'  : 'images/vneck_colors/red.jpg'
-      },
-      { 
-        'name'          : 'red',
-        'hex'           : '',
-        'pattern_path'  : 'images/vneck_colors/red.jpg'
-      },
-      { 
-        'name'          : 'red',
-        'hex'           : '',
-        'pattern_path'  : 'images/vneck_colors/red.jpg'
-      },
-      { 
-        'name'          : 'red',
-        'hex'           : '',
-        'pattern_path'  : 'images/vneck_colors/red.jpg'
-      },
-      { 
-        'name'          : 'red',
-        'hex'           : '',
-        'pattern_path'  : 'images/vneck_colors/red.jpg'
-      },
-      { 
-        'name'          : 'red',
-        'hex'           : '',
-        'pattern_path'  : 'images/vneck_colors/red.jpg'
+        'hex'           : ''
       }
     ];
 
@@ -569,8 +516,8 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 		this.designerImgUrl = "";
 
 		this.setColor = function(hex) {
-      //$scope.canvas_setBackgroundColor(hex);
-      $scope.canvas_setBackgroundPattern('images/vneck_colors/brown.jpg');
+      $scope.canvas_setBackgroundColor('ba0c2f');
+      //$scope.canvas_setBackgroundPattern('images/vneck_colors/brown.jpg');
 			this.selectedColor = hex;
 			this.setSizes(hex, 'front');
 		};
