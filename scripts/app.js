@@ -583,6 +583,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
           
           angular.forEach(data.colors, function(color, key) {
             angular.forEach(color.images, function(image, key) {
+              myThis.images[color.hex] = [];
               myThis.images[color.hex][angular.lowercase(image.label)] = image.url;
             });
           });
