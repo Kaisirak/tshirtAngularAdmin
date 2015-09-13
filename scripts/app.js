@@ -389,7 +389,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 .controller('DesignerController', ["$http", "$routeParams", "$scope", function($http,$routeParams,$scope) {
 
 
-    $scope.available_vneck_colors = [
+    this.available_vneck_colors = [
       { 
         'name'          : 'red',
         'id'            : 'ba0c2f',
@@ -404,109 +404,109 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       },
       {
         'name'          : 'deep teal',
-        'hex'           : '004f71',
+        'id'           : '004f71',
         'value'         : '#004f71',
         'hsl'           : rgbToHsl('004f71')
       },
       { 
         'name'          : 'dark grey',
-        'hex'           : '25282a',
+        'id'           : '25282a',
         'value'         : '#25282a',
         'hsl'           : rgbToHsl('25282a')
       },
       { 
         'name'          : 'vintage black',
-        'hex'           : '212322',
+        'id'           : '212322',
         'value'         : '#212322',
         'hsl'           : rgbToHsl('212322')
       },
       { 
         'name'          : 'brown',
-        'hex'           : '382e2c',
+        'id'           : '382e2c',
         'value'         : '#382e2c',
         'hsl'           : rgbToHsl('382e2c')
       },
       { 
         'name'          : 'orange',
-        'hex'           : 'ff6a39',
+        'id'           : 'ff6a39',
         'value'         : '#ff6a39',
         'hsl'           : rgbToHsl('ff6a39')
       },
       { 
         'name'          : 'black',
-        'hex'           : '2d2926',
+        'id'           : '2d2926',
         'value'         : '#2d2926',
         'hsl'           : rgbToHsl('2d2926')
       },
       { 
         'name'          : 'neon yellow',
-        'hex'           : 'ecf166',
+        'id'           : 'ecf166',
         'value'         : '#ecf166',
         'hsl'           : rgbToHsl('ecf166')
       },
       { 
         'name'          : 'white',
-        'hex'           : 'FFFFFF',
+        'id'           : 'FFFFFF',
         'value'         : '#FFFFFF',
         'hsl'           : rgbToHsl('FFFFFF')
       },
       { 
         'name'          : 'neon green',
-        'hex'           : '44d62c',
+        'id'           : '44d62c',
         'value'         : '#44d62c',
         'hsl'           : rgbToHsl('44d62c')
       },
       { 
         'name'          : 'kelly',
-        'hex'           : '007a53',
+        'id'           : '007a53',
         'value'         : '#007a53',
         'hsl'           : rgbToHsl('007a53')
       },
       { 
         'name'          : 'neon blue',
-        'hex'           : '00bce3',
+        'id'           : '00bce3',
         'value'         : '#00bce3',
         'hsl'           : rgbToHsl('00bce3')
       },
       { 
         'name'          : 'steel blue',
-        'hex'           : '5b7f95',
+        'id'           : '5b7f95',
         'value'         : '#5b7f95',
         'hsl'           : rgbToHsl('5b7f95')
       },
       { 
         'name'          : 'silver',
-        'hex'           : 'c7c9c7',
+        'id'           : 'c7c9c7',
         'value'         : '#c7c9c7',
         'hsl'           : rgbToHsl('c7c9c7')
       },
       { 
         'name'          : 'asphalt',
-        'hex'           : '54585a',
+        'id'           : '54585a',
         'value'         : '#54585a',
         'hsl'           : rgbToHsl('54585a')
       },
       { 
         'name'          : 'true royal',
-        'hex'           : '385e9d',
+        'id'           : '385e9d',
         'value'         : '#385e9d',
         'hsl'           : rgbToHsl('385e9d')
       },
       { 
         'name'          : 'navy',
-        'hex'           : '1f2a44',
+        'id'           : '1f2a44',
         'value'         : '#1f2a44',
         'hsl'           : rgbToHsl('1f2a44')
       },
       { 
         'name'          : 'team purple',
-        'hex'           : '2e1a47',
+        'id'           : '2e1a47',
         'value'         : '#2e1a47',
         'hsl'           : rgbToHsl('2e1a47')
       },
       { 
         'name'          : 'neon pink',
-        'hex'           : 'ff85bd',
+        'id'           : 'ff85bd',
         'value'         : '#ff85bd',
         'hsl'           : rgbToHsl('ff85bd')
       }
