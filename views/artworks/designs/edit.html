@@ -40,14 +40,14 @@
               <div class="form-group">
                 <label>Color</label>
                   <ul class="color-container">
-                    <li ng-repeat="color in designerCtrl.colors | orderBy:'hsl.l'" ng-click="designerCtrl.setColor(color.id)" class="color-preview" title="{{color.name}}" style="background-color:{{color.value}};"></li>
+                    <li ng-repeat="color in designerCtrl.available_vneck_colors | orderBy:'hsl.l'" ng-click="designerCtrl.setColor(color.id)" class="color-preview" title="{{color.name}}" style="background-color:{{color.value}};"></li>
                   </ul>
               </div>
 
               <div class="form-group">
                 <label>Color Selectable</label>
                   <ul class="color-container">
-                    <li ng-repeat="color in designerCtrl.colors | orderBy:'hsl.l'" ng-click="designerCtrl.togglePossibleColor(color.id)" class="color-preview" ng-class="{selectedColorBorder: designerCtrl.possibleColors[color.id]}" title="{{color.name}}" style="background-color:{{color.value}};"></li>
+                    <li ng-repeat="color in designerCtrl.available_vneck_colors | orderBy:'hsl.l'" ng-click="designerCtrl.togglePossibleColor(color.id)" class="color-preview" ng-class="{selectedColorBorder: designerCtrl.possibleColors[color.id]}" title="{{color.name}}" style="background-color:{{color.value}};"></li>
                   </ul>
               </div>
 
