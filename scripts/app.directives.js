@@ -221,6 +221,10 @@ angular.module("app.directives", [])
 							    canvas.loadFromJSON(json, canvas.renderAll.bind(canvas));
 						}
 
+						scope.canvas_setBackgroundPattern = function(path) {
+							canvas.backgroundColor = new fabric.Pattern({source: path})
+						}
+
 						scope.canvas_setBackgroundColor = function(hex) {
 							canvas.setBackgroundColor('#'+hex, canvas.renderAll.bind(canvas));
 						};

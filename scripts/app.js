@@ -388,6 +388,15 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 
 .controller('DesignerController', ["$http", "$routeParams", "$scope", function($http,$routeParams,$scope) {
 
+
+    $scope.available_vneck_colors = [
+      { 
+        'name'          : 'red',
+        'hex'           : '',
+        'pattern_path'  : 'images/red.jpg'
+      }
+    ];
+
     this.selectedProduct = "american-apparel-50-50-t-shirt";
     this.status = {isopen: true};
 		this.productsSameCategory = [];
@@ -480,7 +489,8 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 		this.designerImgUrl = "";
 
 		this.setColor = function(hex) {
-      $scope.canvas_setBackgroundColor(hex);
+      //$scope.canvas_setBackgroundColor(hex);
+      $scope.canvas_setBackgroundPattern('images/red.jpg');
 			this.selectedColor = hex;
 			this.setSizes(hex, 'front');
 		};
