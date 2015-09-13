@@ -393,7 +393,87 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
       { 
         'name'          : 'red',
         'hex'           : '',
-        'pattern_path'  : 'images/red.jpg'
+        'pattern_path'  : 'images/vneck_colors/red.jpg'
+      },
+      { 
+        'name'          : 'canvas red',
+        'hex'           : '',
+        'pattern_path'  : 'images/vneck_colors/canvas_red.jpg'
+      },
+      { 
+        'name'          : 'ash',
+        'hex'           : '',
+        'pattern_path'  : 'images/vneck_colors/ash.jpg'
+      },
+      { 
+        'name'          : 'deep teal',
+        'hex'           : '',
+        'pattern_path'  : 'images/vneck_colors/deep_teal.jpg'
+      },
+      { 
+        'name'          : 'dark grey',
+        'hex'           : '',
+        'pattern_path'  : 'images/vneck_colors/dark_grey.jpg'
+      },
+      { 
+        'name'          : 'vintage black',
+        'hex'           : '',
+        'pattern_path'  : 'images/vneck_colors/vintage_black.jpg'
+      },
+      { 
+        'name'          : 'brown',
+        'hex'           : '',
+        'pattern_path'  : 'images/vneck_colors/brown.jpg'
+      },
+      { 
+        'name'          : 'red',
+        'hex'           : '',
+        'pattern_path'  : 'images/vneck_colors/red.jpg'
+      },
+      { 
+        'name'          : 'red',
+        'hex'           : '',
+        'pattern_path'  : 'images/vneck_colors/red.jpg'
+      },
+      { 
+        'name'          : 'red',
+        'hex'           : '',
+        'pattern_path'  : 'images/vneck_colors/red.jpg'
+      },
+      { 
+        'name'          : 'red',
+        'hex'           : '',
+        'pattern_path'  : 'images/vneck_colors/red.jpg'
+      },
+      { 
+        'name'          : 'red',
+        'hex'           : '',
+        'pattern_path'  : 'images/vneck_colors/red.jpg'
+      },
+      { 
+        'name'          : 'red',
+        'hex'           : '',
+        'pattern_path'  : 'images/vneck_colors/red.jpg'
+      },
+      { 
+        'name'          : 'red',
+        'hex'           : '',
+        'pattern_path'  : 'images/vneck_colors/red.jpg'
+      },
+      { 
+        'name'          : 'red',
+        'hex'           : '',
+        'pattern_path'  : 'images/vneck_colors/red.jpg'
+      },
+      { 
+        'name'          : 'red',
+        'hex'           : '',
+        'pattern_path'  : 'images/vneck_colors/red.jpg'
+      },
+      { 
+        'name'          : 'red',
+        'hex'           : '',
+        'pattern_path'  : 'images/vneck_colors/red.jpg'
       }
     ];
 
@@ -490,7 +570,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 
 		this.setColor = function(hex) {
       //$scope.canvas_setBackgroundColor(hex);
-      $scope.canvas_setBackgroundPattern('images/vneck_colors/red.jpg');
+      $scope.canvas_setBackgroundPattern('images/vneck_colors/navy_marble.jpg');
 			this.selectedColor = hex;
 			this.setSizes(hex, 'front');
 		};
