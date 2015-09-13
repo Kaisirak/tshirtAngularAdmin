@@ -578,7 +578,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
           console.log(data);
           
           angular.forEach(myThis.available_vneck_colors, function(color, key) {
-            console.log(color);
+            //console.log(color);
             myThis.HexToName[color.id] = color.name;
           });
           console.log(myThis.HexToName);
