@@ -392,35 +392,123 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
     $scope.available_vneck_colors = [
       { 
         'name'          : 'red',
-        'hex'           : 'ba0c2f'
+        'id'            : 'ba0c2f',
+        'value'         : '#ba0c2f',
+        'hsl'           : rgbToHsl('ba0c2f')
       },
       {
         'name'          : 'canvas red',
-        'hex'           : ''
-      },
-      {
-        'name'          : 'ash',
-        'hex'           : ''
+        'id'            : '9d2235',
+        'value'         : '#9d2235',
+        'hsl'           : rgbToHsl('9d2235')
       },
       {
         'name'          : 'deep teal',
-        'hex'           : ''
+        'hex'           : '004f71',
+        'value'         : '#004f71',
+        'hsl'           : rgbToHsl('004f71')
       },
       { 
         'name'          : 'dark grey',
-        'hex'           : ''
+        'hex'           : '25282a',
+        'value'         : '#25282a',
+        'hsl'           : rgbToHsl('25282a')
       },
       { 
         'name'          : 'vintage black',
-        'hex'           : ''
+        'hex'           : '212322',
+        'value'         : '#212322',
+        'hsl'           : rgbToHsl('212322')
       },
       { 
         'name'          : 'brown',
-        'hex'           : ''
+        'hex'           : '382e2c',
+        'value'         : '#382e2c',
+        'hsl'           : rgbToHsl('382e2c')
       },
       { 
-        'name'          : 'red',
-        'hex'           : ''
+        'name'          : 'orange',
+        'hex'           : 'ff6a39',
+        'value'         : '#ff6a39',
+        'hsl'           : rgbToHsl('ff6a39')
+      },
+      { 
+        'name'          : 'black',
+        'hex'           : '2d2926',
+        'value'         : '#2d2926',
+        'hsl'           : rgbToHsl('2d2926')
+      },
+      { 
+        'name'          : 'neon yellow',
+        'hex'           : 'ecf166',
+        'value'         : '#ecf166',
+        'hsl'           : rgbToHsl('ecf166')
+      },
+      { 
+        'name'          : 'white',
+        'hex'           : 'FFFFFF',
+        'value'         : '#FFFFFF',
+        'hsl'           : rgbToHsl('FFFFFF')
+      },
+      { 
+        'name'          : 'neon green',
+        'hex'           : '44d62c',
+        'value'         : '#44d62c',
+        'hsl'           : rgbToHsl('44d62c')
+      },
+      { 
+        'name'          : 'kelly',
+        'hex'           : '007a53',
+        'value'         : '#007a53',
+        'hsl'           : rgbToHsl('007a53')
+      },
+      { 
+        'name'          : 'neon blue',
+        'hex'           : '00bce3',
+        'value'         : '#00bce3',
+        'hsl'           : rgbToHsl('00bce3')
+      },
+      { 
+        'name'          : 'steel blue',
+        'hex'           : '5b7f95',
+        'value'         : '#5b7f95',
+        'hsl'           : rgbToHsl('5b7f95')
+      },
+      { 
+        'name'          : 'silver',
+        'hex'           : 'c7c9c7',
+        'value'         : '#c7c9c7',
+        'hsl'           : rgbToHsl('c7c9c7')
+      },
+      { 
+        'name'          : 'asphalt',
+        'hex'           : '54585a',
+        'value'         : '#54585a',
+        'hsl'           : rgbToHsl('54585a')
+      },
+      { 
+        'name'          : 'true royal',
+        'hex'           : '385e9d',
+        'value'         : '#385e9d',
+        'hsl'           : rgbToHsl('385e9d')
+      },
+      { 
+        'name'          : 'navy',
+        'hex'           : '1f2a44',
+        'value'         : '#1f2a44',
+        'hsl'           : rgbToHsl('1f2a44')
+      },
+      { 
+        'name'          : 'team purple',
+        'hex'           : '2e1a47',
+        'value'         : '#2e1a47',
+        'hsl'           : rgbToHsl('2e1a47')
+      },
+      { 
+        'name'          : 'neon pink',
+        'hex'           : 'ff85bd',
+        'value'         : '#ff85bd',
+        'hsl'           : rgbToHsl('ff85bd')
       }
     ];
 
@@ -486,22 +574,26 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 
     this.getColorOptions = function () {
       $http.get($scope.main.api_url+'/products/'+this.selectedProduct).
-      success(function(data, status, headers, config) {
-        console.log(data);
-        angular.forEach(data.colors, function(color, key) {
-          myThis.colors.push( { name : color.name, id : color.hex, value: '#'+color.hex, hsl : rgbToHsl(color.hex) } );
-          myThis.HexToName[color.hex] = color.name;
-          myThis.images[color.hex] = [];
-          //myThis.sizes[color.hex] = color.sizes;
-          myThis.sizes.push( { hex : color.hex, size : color.sizes, name : color.name } );
-          angular.forEach(color.images, function(image, key) {
-            myThis.images[color.hex][angular.lowercase(image.label)] = image.url;
-          });
-          if (!myThis.selectedColor)
-            myThis.setColor(color.hex);
-          myThis.setObjectType();
-          //if (!myThis.possibleSizes.length)
-          //  myThis.possibleSizes = color.sizes;
+        success(function(data, status, headers, config) {
+          console.log(data);
+
+          angular.forEach(data.colors, function(color, key) {
+            
+            myThis.colors.push( { name : color.name, id : color.hex, value: '#'+color.hex, hsl : rgbToHsl(color.hex) } );
+
+            myThis.HexToName[color.hex] = color.name;
+            myThis.images[color.hex] = [];
+            //myThis.sizes[color.hex] = color.sizes;
+            myThis.sizes.push( { hex : color.hex, size : color.sizes, name : color.name } );
+            angular.forEach(color.images, function(image, key) {
+              myThis.images[color.hex][angular.lowercase(image.label)] = image.url;
+            });
+            if (!myThis.selectedColor)
+              myThis.setColor(color.hex);
+            myThis.setObjectType();
+            //if (!myThis.possibleSizes.length)
+            //  myThis.possibleSizes = color.sizes;
+
         });
         myThis.selectedDescription = data.description;
         //console.log(myThis.sizes);
@@ -516,7 +608,7 @@ function($rootScope, $scope, $location, $http, $rootScope, $route, $cookieStore,
 		this.designerImgUrl = "";
 
 		this.setColor = function(hex) {
-      $scope.canvas_setBackgroundColor('ba0c2f');
+      $scope.canvas_setBackgroundColor(hex);
       //$scope.canvas_setBackgroundPattern('images/vneck_colors/brown.jpg');
 			this.selectedColor = hex;
 			this.setSizes(hex, 'front');
